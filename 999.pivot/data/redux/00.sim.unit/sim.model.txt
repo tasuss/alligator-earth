@@ -1,0 +1,8 @@
+import {{=it.title}} from "./fce/{{=it.title}}.interface";
+import {{=it.bitTitle}} from "./fce/{{=it.nom}}.interface";
+
+export class {{=it.title}}Model implements {{=it.title}} {
+  //idx:string;
+  //{{=it.bitNom}}List: {{=it.bitTitle}}[] = [];
+  //{{=it.bitNom}}s: any = {};
+}

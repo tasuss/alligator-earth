@@ -1,0 +1,18 @@
+import { Action } from "../99.core/interface/action.interface";
+import  {{=it.bitTitle}}  from "./fce/{{=it.nom}}.bit";
+
+// {{=it.title}} actions
+
+export const {{=it.initActionKey}} = "[{{=it.actionLabel}} action] {{=it.initTitle}}";
+export class {{=it.initActionFunction}} implements Action {
+  readonly type = {{=it.initActionKey}};
+  constructor(public bale: {{=it.bitTitle}}) {}
+}
+
+export const {{=it.updateActionKey}} = "[{{=it.actionLabel}} action] {{=it.updateTitle}}";
+export class {{=it.updateActionFunction}} implements Action {
+  readonly type = {{=it.updateActionKey}};
+  constructor(public bale: {{=it.bitTitle}}) {}
+}
+
+export type Actions = | {{=it.initActionFunction}} | {{=it.updateActionFunction}} ;

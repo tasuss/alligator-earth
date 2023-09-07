@@ -1,0 +1,13 @@
+export const init{{=it.title}} = (cpy: {{=it.title}}Model, bal:{{=it.bitTitle}}, ste: State) => {
+  debugger
+  return cpy;
+};
+
+export const update{{=it.title}} = (cpy: {{=it.title}}Model, bal:{{=it.bitTitle}}, ste: State) => {
+  return cpy;
+};
+
+
+import { {{=it.title}}Model } from "../{{=it.nom}}.model";
+import {{=it.title}}Bit from "../fce/{{=it.nom}}.bit";
+import State from "../../99.core/state";

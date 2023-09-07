@@ -1,0 +1,13 @@
+export const INIT_VURT = "[Vurt action] Init Vurt";
+export const DELAY_VURT = "[Vurt action] Delay Vurt";
+export const TEST_CLOUD_VURT = "[Vurt action] Test Cloud Vurt";
+export const FETCH_VURT = "[Vurt action] Fetch Vurt";
+export const UPDATE_VURT = "[Vurt action] Update Vurt";
+export const REPLACE_VURT = "[Vurt action] Replace Vurt";
+export const UNIT_VURT = "[Vurt action] Unit Vurt";
+export const COUNT_VURT = "[Vurt action] Count Vurt";
+export const LIST_PIVOT_VURT = "[Vurt action] List Pivot Vurt";
+export const LIST_UNIT_VURT = "[Vurt action] List Unit Vurt";
+export const CONTAINS_VURT = "[Contains action] Contains Vurt";
+export const BUNDLE_VURT = "[Bundle action] Bundle Vurt";
+export const VALUE_VURT = "[Value action] Value Vurt";

@@ -1,0 +1,16 @@
+{
+  "extends": "../tsconfig-base.json",
+  "compilerOptions": {
+    // compiler options
+    "outDir": "../dist/{{=it.pivot}}",
+    "composite": true,
+    "skipLibCheck": true
+  },
+  "include": [
+    "**/*"
+  ],
+  "exclude": [
+    "**/node_modules"
+  ]
+}
+

@@ -1,0 +1,38 @@
+{
+  "name": "999.pivot",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BrockHerion/ultimate-typescript-monorepo.git"
+  },
+  "author": "T>A>S>U>S>S",
+  "license": "None",
+  "bugs": {
+    "url": "https://github.com/BrockHerion/ultimate-typescript-monorepo/issues"
+  },
+  "homepage": "https://github.com/BrockHerion/ultimate-typescript-monorepo#readme",
+  "workspaces": [
+    "000.title/*",
+    "998.terminal/*",
+    "999.pivot/*"
+  ],
+  "prettier": {
+    "printWidth": 80,
+    "trailingComma": "all",
+    "singleQuote": true
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.21",
+    "prettier": "^2.5.1",
+    "prettier-config-standard": "^5.0.0",
+    "typescript": "^4.6.2"
+  },
+  "dependencies": {
+    "npm-run-all": "^4.1.5"
+  }
+}

@@ -1,0 +1,15 @@
+{
+ "extends": "../tsconfig-base.json",
+ "compilerOptions": {
+ "outDir": "../dist/998.terminal",
+ "composite": true,
+ "skipLibCheck": true
+ },
+ "include": [
+ "**/*"
+ ],
+ "exclude": [
+ "**/node_modules"
+ ]
+}
+

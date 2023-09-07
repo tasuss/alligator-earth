@@ -1,0 +1,10 @@
+export const SPACE: string = "space";
+export const TIMELINE: string = "timeline";
+export const MENU_SINGLE: string = "menu_single";
+export const CLEAN: string = "clean";
+export const CYAN: string = "cyan";
+export const RED: string = "red";
+export const GREEN: string = "green";
+export const BLUE: string = "blue";
+export const YELLOW: string = "yellow";
+export const MAGENTA: string = "magenta";

@@ -1,0 +1,9 @@
+
+import  {{=it.bitTitle}}  from "./{{=it.nom}}.bit";
+
+export default interface {{=it.title}} {
+ // idx:string;
+ // {{=it.bitNom}}List: {{=it.bitTitle}}[];
+ // {{=it.bitNom}}s:any;
+
+}
