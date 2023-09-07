@@ -164,3 +164,5 @@ apps
 /packages/123.renpy/desktop.ini
 /998.terminal/*.ini
 /000.title/*.ini
+/000.aaads/000.aaads/*.ini
+/000.aaads/*.ini
