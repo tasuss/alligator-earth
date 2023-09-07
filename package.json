@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/BrockHerion/ultimate-typescript-monorepo#readme",
   "workspaces": [
-    "000.title/*",
+    "000.aaads/*",
     "998.terminal/*",
     "999.pivot/*"
   ],

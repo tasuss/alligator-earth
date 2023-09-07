@@ -1,4 +1,4 @@
 packages:
- - "000.title/**"
+ - "000.aaads/**"
  - "998.terminal/**"
  - "999.pivot/**"
