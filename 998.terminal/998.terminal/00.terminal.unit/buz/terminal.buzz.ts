@@ -12,7 +12,65 @@ export const initTerminal = async (cpy: TerminalModel, bal: TerminalBit, ste: St
 
   if (bal.dat != null) bit = await ste.hunt(ActBus.INIT_BUS, { idx: cpy.idx, lst: [ActTrm], dat: bal.dat, src: bal.src })
 
-  cpy.term = require("terminal-kit").terminal;
+  cpy.blessed = require('blessed');
+  cpy.contrib = require('blessed-contrib');
+  cpy.screen = cpy.blessed.screen();
+
+  var box = cpy.blessed.box({
+    left: 'center',
+    top: 'center',
+    bg: 'yellow',
+    width: '108',
+    height: '280'
+  });
+
+  
+  var val = 500 * 9 / 60
+  box.setContent( val + 'k' );
+
+  cpy.screen.append(box) //must append before setting data
+
+  var canvas = cpy.contrib.canvas( {
+    left: 'center',
+    top: 'center',
+    bg: 'yellow',
+    width: '720',
+    height: '720'
+  });
+
+  cpy.screen.append( canvas )
+  
+  var ctx;
+  if (canvas.ctx) ctx = canvas.ctx;
+
+  ctx.fillStyle = 'rgb(255,255,0)';
+  ctx.fill();
+  ctx.lineWidth = 13;
+  ctx.strokeStyle = "black";
+  ctx.stroke();
+
+  ctx.font = '60pt Calibri';
+  ctx.fillStyle = 'red';   
+  ctx.fillText("A>A>A>D>S", 15, 54)
+
+  var hmm = new Bezier(100,25 , 10,90 , 110,100 , 150,195);
+  var LUT = hmm.getLUT(222);
+  LUT.forEach( (a) =>{
+
+    ctx.fillRect( a.x, a.y, 1, 1 );
+  
+  } )
+
+  
+
+
+  cpy.screen.key(['escape', 'q', 'C-c'], function (ch, key) {
+    return process.exit(0);
+  });
+
+  cpy.screen.render()
+
+
 
   if (bal.val == 1) patch(ste, ActMnu.INIT_MENU, bal);
 
@@ -174,3 +232,6 @@ import { TerminalModel } from "../terminal.model";
 import TerminalBit from "../fce/terminal.bit";
 import State from "../../99.core/state";
 
+import {Canvg,presets} from 'canvg'
+import * as FS from 'fs-extra'
+import { Bezier } from "bezier-js";

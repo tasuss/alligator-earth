@@ -9,7 +9,7 @@ export const initAaads = async (cpy: AaadsModel, bal: AaadsBit, ste: State) => {
 
     if (bal.dat != null) bit = await ste.hunt(ActBus.INIT_BUS, { idx: cpy.idx, lst: [ActAaa], dat: bal.dat, src: bal.src })
 
-    if (bal.val == 1) patch(ste, ActMnu.INIT_MENU, bal);
+    //if (bal.val == 1) patch(ste, ActMnu.INIT_MENU, bal);
 
 
     if (bal.slv != null) bal.slv({ intBit: { idx: "init-aaads" } });

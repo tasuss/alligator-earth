@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "cd 000.aaads && node run.cjs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
