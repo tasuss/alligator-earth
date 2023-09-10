@@ -7,8 +7,8 @@ There are just lots of American Alligators.
 
 After the election of the first androgynous President, the Prediatrain movement caught fire in America.
 
-The demand for American Alligator meat skyrocketed
-Warhols where burned to ash while Polled Hereford Heifors fetched over a million kardanos a head in auction
+The demand for American Alligator meat skyrocketed.
+Warhols where burned to ash while Polled Hereford Heifors fetched over a million kardanos a head in auction.
 Googizon won the bid to construct for the military the most forward thinking alligator farm in existence
 It currently floats near the Okeenokee Snow Swamp.
 
