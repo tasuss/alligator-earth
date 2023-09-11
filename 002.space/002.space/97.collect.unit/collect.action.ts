@@ -76,7 +76,18 @@ export const EMPTY_COLLECT = "[Empty action] Empty Collect";
  constructor(public bale: CollectBit) {}
  }
 
+ 
+export const FORMAT_COLLECT = "[Format action] Format Collect";
+ export class FormatCollect implements Action {
+ readonly type = FORMAT_COLLECT;
+ constructor(public bale: CollectBit) {}
+ }
 
+ export const DOT_COLLECT = "[Format action] Dot Collect";
+ export class DotCollect implements Action {
+ readonly type = DOT_COLLECT;
+ constructor(public bale: CollectBit) {}
+ }
  
 export type Actions = | InitCollect | UpdateCollect 
 | ReadCollect
@@ -89,3 +100,5 @@ export type Actions = | InitCollect | UpdateCollect
 | ModelCollect
 | GetCollect
 | PutCollect
+| FormatCollect
+| DotCollect

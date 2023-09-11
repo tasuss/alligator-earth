@@ -43,6 +43,12 @@ export function reducer(model: CollectModel = new CollectModel(), act: Act.Actio
       case Act.PUT_COLLECT:
          return Buzz.putCollect(clone(model), act.bale, state);
 
+      case Act.FORMAT_COLLECT:
+         return Buzz.formatCollect(clone(model), act.bale, state);
+
+      case Act.DOT_COLLECT:
+         return Buzz.dotCollect(clone(model), act.bale, state);
+
       default:
          return model;
    }
