@@ -16,6 +16,12 @@ export function reducer(model: SceneModel = new SceneModel(), act: Act.Actions, 
 case Act.HUNT_SCENE:
  return Buzz.huntScene(clone(model), act.bale, state);
  
+case Act.TITLE_SCENE:
+ return Buzz.titleScene(clone(model), act.bale, state);
+ 
+case Act.PROLOGUE_SCENE:
+ return Buzz.prologueScene(clone(model), act.bale, state);
+ 
  default:
  return model;
  }

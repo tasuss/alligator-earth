@@ -13,6 +13,21 @@ export function reducer(model: CanvasModel = new CanvasModel(), act: Act.Actions
  case Act.INIT_CANVAS:
  return Buzz.initCanvas(clone(model), act.bale, state);
 
+case Act.READ_CANVAS:
+ return Buzz.readCanvas(clone(model), act.bale, state);
+ 
+case Act.WRITE_CANVAS:
+ return Buzz.writeCanvas(clone(model), act.bale, state);
+ 
+case Act.DELETE_CANVAS:
+ return Buzz.deleteCanvas(clone(model), act.bale, state);
+ 
+case Act.REMOVE_CANVAS:
+ return Buzz.removeCanvas(clone(model), act.bale, state);
+ 
+case Act.CREATE_CANVAS:
+ return Buzz.createCanvas(clone(model), act.bale, state);
+ 
  default:
  return model;
  }

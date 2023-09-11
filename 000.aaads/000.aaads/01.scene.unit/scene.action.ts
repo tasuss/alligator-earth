@@ -21,5 +21,19 @@ export const HUNT_SCENE = "[Hunt action] Hunt Scene";
  constructor(public bale: SceneBit) {}
  }
  
+export const TITLE_SCENE = "[Title action] Title Scene";
+ export class TitleScene implements Action {
+ readonly type = TITLE_SCENE;
+ constructor(public bale: SceneBit) {}
+ }
+ 
+export const PROLOGUE_SCENE = "[Prologue action] Prologue Scene";
+ export class PrologueScene implements Action {
+ readonly type = PROLOGUE_SCENE;
+ constructor(public bale: SceneBit) {}
+ }
+ 
 export type Actions = | InitScene | UpdateScene 
 | HuntScene
+| TitleScene
+| PrologueScene
