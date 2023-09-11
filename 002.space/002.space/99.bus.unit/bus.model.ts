@@ -1,4 +1,4 @@
-import Bus from "./fce/Bus.interface";
+import Bus from "./fce/bus.interface";
 import BusBit from "./fce/bus.interface";
 
 export class BusModel implements Bus {

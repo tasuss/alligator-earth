@@ -1,4 +1,4 @@
-import Hexmap from "./fce/Hexmap.interface";
+import Hexmap from "./fce/hexmap.interface";
 import HexmapBit from "./fce/hexmap.bit";
 import HoneycombCollection from "./fce/honeycomb-collection.bit";
 import SpotBit from "002.space/01.focus.unit/fce/spot.bit";

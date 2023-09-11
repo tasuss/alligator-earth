@@ -1,4 +1,3 @@
 cd..
-cd..
 cd code
-start Code.exe ../packages/002.space
+start Code.exe ../002.space

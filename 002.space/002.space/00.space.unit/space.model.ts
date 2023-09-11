@@ -1,4 +1,4 @@
-import Space from "./fce/Space.interface";
+import Space from "./fce/space.interface";
 import SpaceBit from "./fce/space.interface";
 
 export class SpaceModel implements Space {

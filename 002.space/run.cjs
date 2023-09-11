@@ -28,7 +28,7 @@ var bit;
 
 var open = async (prt) => {
 
-  require("../998.work/work/999.vurt");
+  require("../998.terminal/998.terminal/000.quest.terminal");
   require("../002.space/002.space/000.quest.space");
 
   const MQTT = require("async-mqtt");
@@ -40,7 +40,7 @@ var open = async (prt) => {
   var remoteBit = { idx: 'remote', src: 'ws://gatorsocket.herokuapp.com/' }
 
 
-  bit = await VURT.hunt(VURT.ActVrt.INIT_VURT, { dat: MQTT, src: local });
+  bit = await TERMINAL.hunt(TERMINAL.ActTrm.INIT_TERMINAL, { dat: MQTT, src: local });
   //bit = await SPACE.hunt(SPACE.ActSpc.INIT_SPACE, { val: 1, dat: MQTT, src:  [localBit, remoteBit] });
   bit = await SPACE.hunt(SPACE.ActSpc.INIT_SPACE, { val: 1, dat: MQTT, src:  [localBit] });
 
