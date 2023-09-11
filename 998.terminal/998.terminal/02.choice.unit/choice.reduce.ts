@@ -16,6 +16,9 @@ export function reducer(model: ChoiceModel = new ChoiceModel(), act: Act.Actions
 case Act.OPEN_CHOICE:
  return Buzz.openChoice(clone(model), act.bale, state);
  
+case Act.KEY_CHOICE:
+ return Buzz.keyChoice(clone(model), act.bale, state);
+ 
  default:
  return model;
  }

@@ -21,5 +21,12 @@ export const OPEN_CHOICE = "[Open action] Open Choice";
  constructor(public bale: ChoiceBit) {}
  }
  
+export const KEY_CHOICE = "[Key action] Key Choice";
+ export class KeyChoice implements Action {
+ readonly type = KEY_CHOICE;
+ constructor(public bale: ChoiceBit) {}
+ }
+ 
 export type Actions = | InitChoice | UpdateChoice 
 | OpenChoice
+| KeyChoice
