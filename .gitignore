@@ -166,3 +166,4 @@ apps
 /000.title/*.ini
 /000.aaads/000.aaads/*.ini
 /000.aaads/*.ini
+/002.space/*.ini
