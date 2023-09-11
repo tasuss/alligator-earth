@@ -17,6 +17,7 @@ export const initTerminal = async (cpy: TerminalModel, bal: TerminalBit, ste: St
   cpy.screen = cpy.blessed.screen();
 
   var box = cpy.blessed.box({
+    parent: cpy.screen,
     left: 'center',
     top: 'center',
     bg: 'yellow',
@@ -25,10 +26,10 @@ export const initTerminal = async (cpy: TerminalModel, bal: TerminalBit, ste: St
   });
 
   
-  var val = 500 * 9 / 60
-  box.setContent( val + 'k' );
+  //var val = 500 * 9 / 60
+  //box.setContent( val + 'k' );
 
-  cpy.screen.append(box) //must append before setting data
+  //cpy.screen.append(box) //must append before setting data
 
   var canvas = cpy.contrib.canvas( {
     left: 'center',
@@ -43,25 +44,51 @@ export const initTerminal = async (cpy: TerminalModel, bal: TerminalBit, ste: St
   var ctx;
   if (canvas.ctx) ctx = canvas.ctx;
 
-  ctx.fillStyle = 'rgb(255,255,0)';
-  ctx.fill();
-  ctx.lineWidth = 13;
-  ctx.strokeStyle = "black";
-  ctx.stroke();
+  ctx.strokeStyle=[255,0,0];
 
-  ctx.font = '60pt Calibri';
-  ctx.fillStyle = 'red';   
-  ctx.fillText("A>A>A>D>S", 15, 54)
+  
+
+  //ctx.font = '60pt Calibri';
+  //ctx.fillStyle = 'red';   
+  //ctx.fillText("A>A>A>D>S", 15, 54)
 
   var hmm = new Bezier(100,25 , 10,90 , 110,100 , 150,195);
-  var LUT = hmm.getLUT(222);
-  LUT.forEach( (a) =>{
+  var LUT = hmm.getLUT(22);
 
-    ctx.fillRect( a.x, a.y, 1, 1 );
   
+  ctx.beginPath();
+  ctx.moveTo(0, 0);
+
+  LUT.forEach( (a) =>{
+    
+    ctx
+    
+    ctx.lineTo( a.x, a.y);
+
+    //ctx.fillRect( a.x, a.y, 1, 1 );
   } )
 
-  
+  ctx.moveTo(110, 0);
+
+  LUT.forEach( (a) =>{
+    ctx
+    ctx.lineTo( a.x + 40, a.y);
+
+    //ctx.fillRect( a.x, a.y, 1, 1 );
+  } )
+
+  ctx.moveTo(150, 0);
+
+  LUT.forEach( (a) =>{
+    ctx
+    ctx.lineTo( a.x + 90, a.y);
+
+    //ctx.fillRect( a.x, a.y, 1, 1 );
+  } )
+
+
+
+  ctx.stroke();
 
 
   cpy.screen.key(['escape', 'q', 'C-c'], function (ch, key) {
@@ -232,6 +259,4 @@ import { TerminalModel } from "../terminal.model";
 import TerminalBit from "../fce/terminal.bit";
 import State from "../../99.core/state";
 
-import {Canvg,presets} from 'canvg'
-import * as FS from 'fs-extra'
 import { Bezier } from "bezier-js";
