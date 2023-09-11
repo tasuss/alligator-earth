@@ -1,3 +1,5 @@
+import * as ActScn from "../../01.scene.unit/scene.action";
+
 import * as ActMnu from "../../98.menu.unit/menu.action";
 import * as ActBus from "../../99.bus.unit/bus.action";
 
@@ -11,17 +13,9 @@ export const initAaads = async (cpy: AaadsModel, bal: AaadsBit, ste: State) => {
 
     //if (bal.val == 1) patch(ste, ActMnu.INIT_MENU, bal);
 
+    patch(ste, ActAaa.OPEN_AAADS, bal);
 
     if (bal.slv != null) bal.slv({ intBit: { idx: "init-aaads" } });
-
-    return cpy;
-};
-
-export const updateAaads = (cpy: AaadsModel, bal: AaadsBit, ste: State) => {
-
-
-    if (bal.slv != null) bal.slv({ aaaBit: { idx: "update-aaads" } });
-
 
     return cpy;
 };
@@ -29,7 +23,20 @@ export const updateAaads = (cpy: AaadsModel, bal: AaadsBit, ste: State) => {
 
 export const openAaads = async (cpy: AaadsModel, bal: AaadsBit, ste: State) => {
 
+
+    bit = await ste.hunt( ActScn.HUNT_SCENE, {} );
+
     if (bal.slv != null) bal.slv({ aaaBit: { idx: "open-aaads" } });
+
+    return cpy;
+};
+
+
+export const updateAaads = (cpy: AaadsModel, bal: AaadsBit, ste: State) => {
+
+
+    if (bal.slv != null) bal.slv({ aaaBit: { idx: "update-aaads" } });
+
 
     return cpy;
 };

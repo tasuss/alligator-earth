@@ -20,10 +20,8 @@ export const initTerminal = async (cpy: TerminalModel, bal: TerminalBit, ste: St
   let screen = cpy.screen = cpy.blessed.screen();
 
 
-  bit = await ste.hunt(ActChc.OPEN_CHOICE, { dat: screen, lst: ['alligator0', 'alligator1', 'alligator2', 'alligator3', 'alligator4', 'alligator5'] })
-  debugger
-
-  bit = await ste.hunt(ActPut.OPEN_INPUT, { dat: screen })
+  //bit = await ste.hunt(ActChc.OPEN_CHOICE, { dat: screen, lst: ['alligator0', 'alligator1', 'alligator2', 'alligator3', 'alligator4', 'alligator5'] })
+  //bit = await ste.hunt(ActPut.OPEN_INPUT, { dat: screen })
 
 
   cpy.screen.key(['escape', 'q', 'C-c'], function (ch, key) {

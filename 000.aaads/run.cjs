@@ -36,7 +36,9 @@ var open = async ( prt ) =>{
 
  var localBit = { idx: 'local', src: local }
 
+ debugger
  bit = await TERMINAL.hunt(TERMINAL.ActTrm.INIT_TERMINAL , {dat: MQTT, src:local} );
+ debugger
  bit = await AAADS.hunt( AAADS.ActAaa.INIT_AAADS , { val: 1, dat: MQTT, src:  [localBit]  });
  
 }
