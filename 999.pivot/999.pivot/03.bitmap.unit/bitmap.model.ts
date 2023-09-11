@@ -1,4 +1,4 @@
-import Bitmap from "./fce/Bitmap.interface";
+import Bitmap from "./fce/bitmap.interface";
 import BitmapBit from "./fce/bitmap.interface";
 
 export class BitmapModel implements Bitmap {
