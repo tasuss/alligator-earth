@@ -1,14 +1,41 @@
 import * as ActCol from "../../97.collect.unit/collect.action";
-import * as ActCvs from "../../03.canvas.unit/canvas.action";
+import * as ActCvs from "../../02.canvas.unit/canvas.action";
 
-var lst, bit
+var lst, bit, dat;
 
 export const initCanvas = (cpy: CanvasModel, bal: CanvasBit, ste: State) => {
     debugger
     return cpy;
 };
 
-export const updateCanvas = (cpy: CanvasModel, bal: CanvasBit, ste: State) => {
+export const updateCanvas = async (cpy: CanvasModel, bal: CanvasBit, ste: State) => {
+
+    bit = await ste.hunt(ActCvs.READ_CANVAS, { idx: bal.idx })
+    dat = bit.cvsBit.dat
+    //runtime type checking
+  
+    //var graphic: PIXI.Graphics = dat.bit;
+    //graphic.clear();
+
+  //switch (dat.frm) {
+    //case GRAPHIC.CIRCLE:
+    //  graphic.beginFill(dat.clr); // Red
+    //  graphic.drawCircle(dat.x, dat.y, dat.w); //
+    //  break;
+
+    //case GRAPHIC.RECTANGLE:
+    //  graphic.beginFill(dat.clr);
+    //  graphic.lineStyle(3, dat.clr);
+    //  graphic.drawRect(dat.x, dat.y, dat.w, dat.h);
+    //  break;
+
+   // case GRAPHIC.ROUNDED_RECTANGLE:
+   //   graphic.beginFill(dat.clr);
+   //   graphic.lineStyle(3, dat.clr);
+    //  graphic.drawRoundedRect(dat.x, dat.y, dat.w, dat.h, dat.crv);
+    //  break;
+ // }
+ 
     return cpy;
 };
 
@@ -25,6 +52,7 @@ export const readCanvas = async (cpy: CanvasModel, bal: CanvasBit, ste: State) =
 export const writeCanvas = async (cpy: CanvasModel, bal: CanvasBit, ste: State) => {
     bit = await ste.hunt(ActCol.WRITE_COLLECT, { idx: bal.idx, src: bal.src, dat: bal.dat, bit: ActCvs.CREATE_CANVAS })
     ste.hunt(ActCvs.CREATE_CANVAS, { idx: bal.idx })
+    ste.hunt(ActCvs.UPDATE_CANVAS, { idx: bal.idx })
 
     if (bal.slv != null) bal.slv({ cvsBit: { idx: "write-canvas", dat: bit.clcBit.dat } });
 
@@ -56,7 +84,18 @@ export const removeCanvas = async (cpy: CanvasModel, bal: CanvasBit, ste: State)
 };
 export const createCanvas = (cpy: CanvasModel, bal: CanvasBit, ste: State) => {
 
+    debugger
+    let contrib = ste.value.terminal.contrib
+
     var dat:PixelBit = {idx:'hmm'}
+
+    var canvas = contrib.canvas( {
+        left: 'center',
+        top: 'center',
+        bg: 'yellow',
+        width: '720',
+        height: '720'
+      });
 
     for ( var key in bal.dat){dat[key] = bal.dat[key]}
 

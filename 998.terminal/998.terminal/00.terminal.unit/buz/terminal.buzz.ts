@@ -1,5 +1,6 @@
-import * as ActPut from "../../01.input.unit/input.action";
-import * as ActChc from "../../02.choice.unit/choice.action";
+import * as ActPut from "../../04.input.unit/input.action";
+import * as ActChc from "../../05.choice.unit/choice.action";
+import * as ActCvs from "../../02.canvas.unit/canvas.action";
 
 import * as ActMnu from "../../98.menu.unit/menu.action";
 import * as ActBus from "../../99.bus.unit/bus.action";
@@ -19,9 +20,12 @@ export const initTerminal = async (cpy: TerminalModel, bal: TerminalBit, ste: St
   let contrib = cpy.contrib = require('blessed-contrib');
   let screen = cpy.screen = cpy.blessed.screen();
 
+  //var grid = new contrib.grid({rows: 12, cols: 12, screen: screen})
 
-  //bit = await ste.hunt(ActChc.OPEN_CHOICE, { dat: screen, lst: ['alligator0', 'alligator1', 'alligator2', 'alligator3', 'alligator4', 'alligator5'] })
-  //bit = await ste.hunt(ActPut.OPEN_INPUT, { dat: screen })
+  bit =  await ste.hunt(ActCvs.WRITE_CANVAS, { dat: screen })
+
+  bit = await ste.hunt(ActChc.OPEN_CHOICE, { dat: screen, lst: ['alligator0', 'alligator1', 'alligator2', 'alligator3', 'alligator4', 'alligator5'] })
+  bit = await ste.hunt(ActPut.OPEN_INPUT, { dat: screen })
 
 
   cpy.screen.key(['escape', 'q', 'C-c'], function (ch, key) {
