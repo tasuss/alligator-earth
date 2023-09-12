@@ -8,16 +8,47 @@ export const initCanvas = (cpy: CanvasModel, bal: CanvasBit, ste: State) => {
     return cpy;
 };
 
+export const createCanvas = (cpy: CanvasModel, bal: CanvasBit, ste: State) => {
+
+    let contrib = ste.value.terminal.contrib
+
+    var dat: FrameBit = { idx: 'hmm' }
+
+    for (var key in bal.dat) {
+        dat[key] = bal.dat[key]
+    }
+
+    dat.canLst = [];
+    dat.gphLst = [];
+    dat.txtLst = [];
+    dat.sprLst = [];
+
+    var canvas = contrib.canvas({
+        left: 'center',
+        top: 'center',
+        bg: 'yellow',
+        width: '720',
+        height: '720'
+    });
+
+    for (var key in bal.dat) { dat[key] = bal.dat[key] }
+
+    if (bal.slv != null) bal.slv({ cvsBit: { idx: "create-canvas", dat } });
+
+    return cpy;
+};
+
+
 export const updateCanvas = async (cpy: CanvasModel, bal: CanvasBit, ste: State) => {
 
     bit = await ste.hunt(ActCvs.READ_CANVAS, { idx: bal.idx })
     dat = bit.cvsBit.dat
     //runtime type checking
-  
+
     //var graphic: PIXI.Graphics = dat.bit;
     //graphic.clear();
 
-  //switch (dat.frm) {
+    //switch (dat.frm) {
     //case GRAPHIC.CIRCLE:
     //  graphic.beginFill(dat.clr); // Red
     //  graphic.drawCircle(dat.x, dat.y, dat.w); //
@@ -29,13 +60,13 @@ export const updateCanvas = async (cpy: CanvasModel, bal: CanvasBit, ste: State)
     //  graphic.drawRect(dat.x, dat.y, dat.w, dat.h);
     //  break;
 
-   // case GRAPHIC.ROUNDED_RECTANGLE:
-   //   graphic.beginFill(dat.clr);
-   //   graphic.lineStyle(3, dat.clr);
+    // case GRAPHIC.ROUNDED_RECTANGLE:
+    //   graphic.beginFill(dat.clr);
+    //   graphic.lineStyle(3, dat.clr);
     //  graphic.drawRoundedRect(dat.x, dat.y, dat.w, dat.h, dat.crv);
     //  break;
- // }
- 
+    // }
+
     return cpy;
 };
 
@@ -60,6 +91,15 @@ export const writeCanvas = async (cpy: CanvasModel, bal: CanvasBit, ste: State) 
 };
 export const deleteCanvas = async (cpy: CanvasModel, bal: CanvasBit, ste: State) => {
 
+    //remove each type inside a visage
+    //dat.canLst.forEach(async (a) => ste.hunt(ActCan.REMOVE_CONTAINER, { idx: a }))
+    //dat.gphLst.forEach(async (a) => ste.hunt(ActGph.REMOVE_GRAPHIC, { idx: a }))
+    //dat.txtLst.forEach(async (a) => ste.hunt(ActTxt.REMOVE_TEXT, { idx: a }))
+    //dat.sprLst.forEach(async (a) => ste.hunt(ActSpr.REMOVE_SPRITE, { idx: a }))
+    //dat.hexLst.forEach(async (a) => ste.hunt(ActHex.REMOVE_HEXAGON, { idx: a }))
+    //dat.vidLst.forEach(async (a) => ste.hunt(ActVid.REMOVE_VIDEO, { idx: a }))
+    //dat.lopLst.forEach(async (a) => ste.hunt(ActLop.REMOVE_LOOP, { idx: a }))
+
     //if (typeof window != "object") return bal.slv({ fceBit: { idx: "error-delete-container", dat: {} } });
 
     //bit = await ste.hunt(ActCan.READ_CONTAINER, { idx: bal.idx })
@@ -82,31 +122,10 @@ export const removeCanvas = async (cpy: CanvasModel, bal: CanvasBit, ste: State)
     return cpy;
 
 };
-export const createCanvas = (cpy: CanvasModel, bal: CanvasBit, ste: State) => {
-
-    debugger
-    let contrib = ste.value.terminal.contrib
-
-    var dat:PixelBit = {idx:'hmm'}
-
-    var canvas = contrib.canvas( {
-        left: 'center',
-        top: 'center',
-        bg: 'yellow',
-        width: '720',
-        height: '720'
-      });
-
-    for ( var key in bal.dat){dat[key] = bal.dat[key]}
-
-    if (bal.slv != null) bal.slv({ cvsBit: { idx: "create-canvas", dat } });
-
-    return cpy;
-};
 
 
 
 import { CanvasModel } from "../canvas.model";
 import CanvasBit from "../fce/canvas.bit";
 import State from "../../99.core/state";
-import PixelBit from "../fce/pixel.bit";
+import FrameBit from "../fce/frame.bit";
