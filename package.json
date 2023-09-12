@@ -1,39 +1,81 @@
 {
-  "name": "999.pivot",
-  "version": "0.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "cd 000.aaads && node run.cjs",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/BrockHerion/ultimate-typescript-monorepo.git"
-  },
-  "author": "T>A>S>U>S>S",
-  "license": "None",
-  "bugs": {
-    "url": "https://github.com/BrockHerion/ultimate-typescript-monorepo/issues"
-  },
-  "homepage": "https://github.com/BrockHerion/ultimate-typescript-monorepo#readme",
-  "workspaces": [
-    "000.aaads/*",
-    "998.terminal/*",
-    "999.pivot/*"
-  ],
-  "prettier": {
-    "printWidth": 80,
-    "trailingComma": "all",
-    "singleQuote": true
-  },
-  "devDependencies": {
-    "@types/node": "^17.0.21",
-    "prettier": "^2.5.1",
-    "prettier-config-standard": "^5.0.0",
-    "typescript": "^4.6.2"
-  },
-  "dependencies": {
-    "npm-run-all": "^4.1.5"
-  }
+    "name": "@elliotbradley/root",
+    "version": "0.0.1",
+    "description": "all american alligator delivery system",
+    "private": true,
+    "author": "T>A>S>U>S>S",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/tasuss/a.a.a.d.s.git"
+    },
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/BrockHerion/ultimate-typescript-monorepo/issues"
+    },
+    "homepage": "https://github.com/BrockHerion/ultimate-typescript-monorepo#readme",
+    "scripts": {
+        "\n========== COMMIT >> ==========": "",
+        "commit": "pnpm run precommit && pnpm exec git-cz",
+        "cz": "pnpm exec git-cz",
+        "precommit": "pnpm run fix && pnpm run check && pnpm run commit:linted",
+        "commit:linted": "git add $(git diff HEAD --cached --name-only)",
+        "\n========== BUILD >> ==========": "",
+        "build": "pnpm -r build",
+        "build:self": "tsc --build",
+        "\n========== CODE STYLE >> ==========": "",
+        "lint": "cross-var eslint \"$npm_package_config_eslint_path.{$npm_package_config_eslint_extensions}\" -c $npm_package_config_eslint_config",
+        "prettier": "cross-var prettier {$npm_package_config_prettier_path}.{$npm_package_config_prettier_extensions} --ignore-path ./.gitignore",
+        "\n========== CHECK >> ==========": "",
+        "check": "pnpm -r check",
+        "check:self": "pnpm lint",
+        "\n========== FIX >> ==========": "",
+        "fix": "pnpm fix:self && pnpm -r fix",
+        "fix:self": "pnpm prettier --write",
+        "\n========== CLEAN >> ==========": "",
+        "clean": "pnpm -r clean",
+        "clean:self": "tsc --build --clean",
+        "\n========== UNINSTALL >> ==========": "",
+        "uninstall": "pnpm run clean && pnpm uninstall:list && pnpm run uninstall:rm && pnpm run uninstall:lock",
+        "uninstall:list": "find . -name 'node_modules' -type d -prune",
+        "uninstall:rm": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +",
+        "uninstall:lock": "rm -f pnpm-lock.yaml && rm -f packages/**/pnpm-lock.yaml",
+        "\n========== LIFECYCLE >> ==========": "",
+        "post:install": "pnpm run build",
+        "prepare": "husky install",
+        "\n========== TEST >> ==========": "",
+        "test": "tsc --build"
+    },
+    "devDependencies": {
+        "@changesets/cli": "^2.26.1",
+        "@commitlint/cli": "^17.6.3",
+        "@commitlint/config-conventional": "^17.6.3",
+        "@commitlint/cz-commitlint": "^17.5.0",
+        "@snailicide/build-config": "^0.2.5",
+        "@types/node": "^20.1.5",
+        "@typescript-eslint/eslint-plugin": "^6.7.0",
+        "commitizen": "^4.3.0",
+        "cross-var": "^1.1.0",
+        "eslint": "^8.49.0",
+        "husky": "^8.0.3",
+        "prettier": "^3.0.3",
+        "prettier-plugin-jsdoc": "^1.0.2",
+        "prettier-plugin-sh": "^0.13.1",
+        "typescript": "^5.0.4",
+        "vite": "^4.4.9"
+    },
+    "prettier": "@snailicide/build-config/prettier",
+    "config": {
+        "eslint": {
+            "extensions": "ts,js,cjs,mjs",
+            "path": "*",
+            "config": ".eslintrc.cjs"
+        },
+        "prettier": {
+            "extensions": "ts,js,cjs,mjs,cts,json,yaml,yml,graphql,md",
+            "path": "docs/**/*,*"
+        },
+        "commitizen": {
+            "path": "@commitlint/cz-commitlint"
+        }
+    }
 }
