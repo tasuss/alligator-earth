@@ -1,3 +1,4 @@
+import * as ActTrm from "../../00.terminal.unit/terminal.action";
 import * as ActCol from "../../97.collect.unit/collect.action";
 import * as ActCvs from "../../02.canvas.unit/canvas.action";
 
@@ -8,11 +9,15 @@ export const initCanvas = (cpy: CanvasModel, bal: CanvasBit, ste: State) => {
     return cpy;
 };
 
-export const createCanvas = (cpy: CanvasModel, bal: CanvasBit, ste: State) => {
+export const createCanvas = async (cpy: CanvasModel, bal: CanvasBit, ste: State) => {
+
+    let termMod:TerminalModel = ste.value.terminal;
 
     let contrib = ste.value.terminal.contrib
 
     var dat: FrameBit = { idx: 'hmm' }
+
+    if ( dat.clr == null ) dat.clr = COLOR.YELLOW
 
     for (var key in bal.dat) {
         dat[key] = bal.dat[key]
@@ -23,12 +28,50 @@ export const createCanvas = (cpy: CanvasModel, bal: CanvasBit, ste: State) => {
     dat.txtLst = [];
     dat.sprLst = [];
 
+    let filBit:GridFill = GRID[dat.fill]
+
+    let margin = 0;
+    let cols = termMod.cols;
+    let rows = termMod.rows;
+
+    dat;
+    
+    bit = await ste.hunt( ActTrm.LAYOUT_TERMINAL, {src:dat.fill }  )
+
+    let layoutDat:GridFill = bit.trmBit.dat;
+
+    var colNow = layoutDat.x;
+    var rowNow = layoutDat.y;
+
+    let colSpan =  layoutDat.xSpan;
+    let rowSpan =  layoutDat.ySpan;
+
+    let spacing = 0;
+
+    let cellWidth = ((100 - margin*2) / cols);
+    let cellHeight = ((100  - margin*2) / rows);
+
+    let top:any =  rowNow * cellHeight + margin;
+    let left:any = colNow * cellWidth + margin;
+
+    top = top + '%';
+    left = left + '%';
+    
+    let width = (cellWidth * colSpan - spacing) + '%';
+    let height = (cellHeight * rowSpan - spacing) + '%';
+    
+    //top = '44%'
+    //left = '22%'
+
+    //width = '88%'
+    //height = '44%'
+
     var canvas = contrib.canvas({
-        left: 'center',
-        top: 'center',
-        bg: COLOR.YELLOW,
-        width: '720',
-        height: '720'
+        left,
+        top,
+        bg: dat.clr,
+        width,
+        height
     });
 
     for (var key in bal.dat) { dat[key] = bal.dat[key] }
@@ -36,6 +79,8 @@ export const createCanvas = (cpy: CanvasModel, bal: CanvasBit, ste: State) => {
     let terminal: TerminalModel = ste.value.terminal;
     let screen = terminal.screen
     screen.append(canvas)
+
+    screen.render()
 
     if (bal.slv != null) bal.slv({ cvsBit: { idx: "create-canvas", dat } });
 
@@ -76,7 +121,7 @@ export const updateCanvas = async (cpy: CanvasModel, bal: CanvasBit, ste: State)
 
 
 export const readCanvas = async (cpy: CanvasModel, bal: CanvasBit, ste: State) => {
-
+    
     var slv = bal.slv;
     if (bal.idx == null) bal.idx = 'can00';
     bit = await ste.hunt(ActCol.READ_COLLECT, { idx: bal.idx, bit: ActCvs.CREATE_CANVAS })
@@ -85,8 +130,10 @@ export const readCanvas = async (cpy: CanvasModel, bal: CanvasBit, ste: State) =
     return cpy;
 };
 export const writeCanvas = async (cpy: CanvasModel, bal: CanvasBit, ste: State) => {
+    
+    
     bit = await ste.hunt(ActCol.WRITE_COLLECT, { idx: bal.idx, src: bal.src, dat: bal.dat, bit: ActCvs.CREATE_CANVAS })
-    ste.hunt(ActCvs.CREATE_CANVAS, { idx: bal.idx })
+    
     ste.hunt(ActCvs.UPDATE_CANVAS, { idx: bal.idx })
 
     if (bal.slv != null) bal.slv({ cvsBit: { idx: "write-canvas", dat: bit.clcBit.dat } });
@@ -135,3 +182,6 @@ import State from "../../99.core/state";
 import FrameBit from "../fce/frame.bit";
 import { TerminalModel } from "998.terminal/00.terminal.unit/terminal.model";
 import * as COLOR from '../../val/console-color'
+import { GridFill } from "998.terminal/val/grid";
+import * as GRID from '../../val/grid'
+

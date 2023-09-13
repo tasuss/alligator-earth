@@ -1,3 +1,4 @@
+
 import * as ActPut from "../../04.input.unit/input.action";
 import * as ActChc from "../../05.choice.unit/choice.action";
 import * as ActCvs from "../../02.canvas.unit/canvas.action";
@@ -22,10 +23,13 @@ export const initTerminal = async (cpy: TerminalModel, bal: TerminalBit, ste: St
 
   //var grid = new contrib.grid({rows: 12, cols: 12, screen: screen})
 
-  bit =  await ste.hunt(ActCvs.WRITE_CANVAS, { dat: screen })
+bit = await ste.hunt(ActCvs.WRITE_CANVAS, { idx:'cvs0', dat:{fill:Grid.TOP_FULL_IDX, clr:Color.CYAN }, })   
+bit = await ste.hunt(ActCvs.WRITE_CANVAS, { idx:'cvs1', dat:{fill:Grid.MID_FULL_IDX, clr:Color.CYAN }, })   
+bit = await ste.hunt(ActCvs.WRITE_CANVAS, { idx:'cvs2', dat:{fill:Grid.BOT_FULL_IDX, clr:Color.YELLOW }, })
 
-  bit = await ste.hunt(ActChc.OPEN_CHOICE, { dat: screen, lst: ['alligator0', 'alligator1', 'alligator2', 'alligator3', 'alligator4', 'alligator5'] })
-  bit = await ste.hunt(ActPut.OPEN_INPUT, { dat: screen })
+
+  //bit = await ste.hunt(ActChc.OPEN_CHOICE, { dat: screen, lst: ['alligator0', 'alligator1', 'alligator2', 'alligator3', 'alligator4', 'alligator5'] })
+  //bit = await ste.hunt(ActPut.OPEN_INPUT, { dat: screen })
 
 
   cpy.screen.key(['escape', 'q', 'C-c'], function (ch, key) {
@@ -34,7 +38,7 @@ export const initTerminal = async (cpy: TerminalModel, bal: TerminalBit, ste: St
 
   cpy.screen.render()
 
-  if (bal.val == 1) patch(ste, ActMnu.INIT_MENU, bal);
+  //if (bal.val == 1) patch(ste, ActMnu.INIT_MENU, bal);
 
 
   if (bal.slv != null) bal.slv({ intBit: { idx: "init-terminal" } });
@@ -188,10 +192,34 @@ export const inputTerminal = async (cpy: TerminalModel, bal: TerminalBit, ste: S
   return cpy;
 };
 
+export const layoutTerminal = (cpy: TerminalModel, bal: TerminalBit, ste: State) => {
+
+  let bit;
+
+  switch (bal.src) {
+
+    case Grid.BOT_FULL_IDX:
+      bit = Grid.BOT_FULL_BIT
+      break
+
+    case Grid.MID_FULL_IDX:
+      bit = Grid.MID_FULL_BIT
+      break
+
+    case Grid.TOP_FULL_IDX:
+      bit = Grid.TOP_FULL_BIT
+      break
+
+  }
+
+  bal.slv({ trmBit: { idx: "layout-terminal", dat: bit } });
+  return cpy;
+};
 
 
 import { TerminalModel } from "../terminal.model";
 import TerminalBit from "../fce/terminal.bit";
 import State from "../../99.core/state";
 
-import { Bezier } from "bezier-js";
+import * as Grid from '../../val/grid';
+import * as Color from '../../val/console-color';

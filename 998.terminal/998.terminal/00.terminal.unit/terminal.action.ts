@@ -51,6 +51,12 @@ export const INPUT_TERMINAL = "[Input action] Input Terminal";
  constructor(public bale: TerminalBit) {}
  }
  
+export const LAYOUT_TERMINAL = "[Layout action] Layout Terminal";
+ export class LayoutTerminal implements Action {
+ readonly type = LAYOUT_TERMINAL;
+ constructor(public bale: TerminalBit) {}
+ }
+ 
 export type Actions = | InitTerminal | UpdateTerminal 
 | RunTerminal
 | EditTerminal
@@ -58,3 +64,4 @@ export type Actions = | InitTerminal | UpdateTerminal
 | CloseTerminal
 | OptionTerminal
 | InputTerminal
+| LayoutTerminal

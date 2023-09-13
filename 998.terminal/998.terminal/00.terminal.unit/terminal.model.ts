@@ -11,6 +11,9 @@ export class TerminalModel implements Terminal {
     blessed: any;
     contrib: any;
     screen: any
+
+    cols:number = 12;
+    rows:number = 12;
 }
 
 

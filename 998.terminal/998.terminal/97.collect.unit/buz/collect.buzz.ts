@@ -54,6 +54,7 @@ export const writeCollect = async (cpy: CollectModel, bal: CollectBit, ste: Stat
 
       dat = null
 
+
       //let us check see if it exists 
       var type = bal.bit.split(' ').slice(-1).pop().toLowerCase();
 
@@ -62,6 +63,7 @@ export const writeCollect = async (cpy: CollectModel, bal: CollectBit, ste: Stat
       if ((bal.bit == null)) bal.slv({ rskBit: { idx: "write-collect-err", src: 'no-bit' } });
 
       var cabBit: CaboodleBit = cpy.caboodleBitList[cpy.caboodleBits[type]]
+
 
       if (cabBit.bits[bal.idx] == null) {
 
