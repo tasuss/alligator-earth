@@ -5,4 +5,5 @@ export class CanvasModel implements Canvas {
     //idx:string;
     //canvasBitList: CanvasBit[] = [];
     //canvasBits: any = {};
+    
 }

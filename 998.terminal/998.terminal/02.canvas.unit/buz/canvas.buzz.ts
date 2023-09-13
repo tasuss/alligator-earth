@@ -26,12 +26,16 @@ export const createCanvas = (cpy: CanvasModel, bal: CanvasBit, ste: State) => {
     var canvas = contrib.canvas({
         left: 'center',
         top: 'center',
-        bg: 'yellow',
+        bg: COLOR.YELLOW,
         width: '720',
         height: '720'
     });
 
     for (var key in bal.dat) { dat[key] = bal.dat[key] }
+
+    let terminal: TerminalModel = ste.value.terminal;
+    let screen = terminal.screen
+    screen.append(canvas)
 
     if (bal.slv != null) bal.slv({ cvsBit: { idx: "create-canvas", dat } });
 
@@ -129,3 +133,5 @@ import { CanvasModel } from "../canvas.model";
 import CanvasBit from "../fce/canvas.bit";
 import State from "../../99.core/state";
 import FrameBit from "../fce/frame.bit";
+import { TerminalModel } from "998.terminal/00.terminal.unit/terminal.model";
+import * as COLOR from '../../val/console-color'
