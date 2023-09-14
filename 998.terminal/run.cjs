@@ -1,8 +1,5 @@
-var path = require("path");
-var absolutePath = path.resolve("./vrt.wrk.bat");
-
-const spawn = require("child_process").spawn;
-const bat = spawn("cmd.exe", ["/c", absolutePath]);
+const {execSync} = require('child_process')
+execSync("pnpm run build")
 
 var FS = require('fs-extra');
 var value = FS.readFileSync("./data/count.txt").toString()
@@ -11,10 +8,6 @@ var val = Number( value )
 val += 1;
 
 FS.writeFileSync("./data/count.txt", String(val))
-
-bat.stdout.on("data", (data) => console.info(String.fromCharCode.apply(null, data)));
-bat.stderr.on("data", (data) => console.error(String.fromCharCode.apply(null, data)));
-bat.on("exit", (code) => process.nextTick(init));
 
 var init = async () => {
 
@@ -60,3 +53,4 @@ var command_line = () => {
 };
 
 
+process.nextTick(init)

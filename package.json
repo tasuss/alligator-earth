@@ -4,8 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "cd 000.aaads && node run.cjs",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "play": "cd 000.aaads && node run.cjs",
+    "build": "cd 999.pivot && cd data && cd hand && node 001.build.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-space": "cd 002.space && pnpm run build",
+    "build-terminal": "cd 998.terminal && pnpm run build",
+    "build-pivot": "cd 999.pivot && pnpm run build"
   },
   "repository": {
     "type": "git",

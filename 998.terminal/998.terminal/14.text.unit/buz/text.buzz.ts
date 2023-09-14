@@ -13,6 +13,8 @@ export const updateText = async (cpy: TextModel, bal: TextBit, ste: State) => {
 
     bit = await ste.hunt(ActTxt.READ_TEXT, { idx: bal.idx })
     let txtDat:LineBit = bit.txtBit.dat
+
+    
     
     bit = await ste.hunt(ActCvs.READ_CANVAS, { idx: txtDat.src })
     dat = bit.cvsBit.dat
@@ -39,6 +41,8 @@ export const updateText = async (cpy: TextModel, bal: TextBit, ste: State) => {
 };
 
 export const createText = async (cpy: TextModel, bal: TextBit, ste: State) => {
+
+
     var dat: LineBit = { idx: bal.idx, src:bal.src, typ: SHADE.TEXT };
 
     if ( bal.dat != null && bal.dat.src != null ) dat.src = bal.dat.src; 
@@ -65,12 +69,15 @@ export const createText = async (cpy: TextModel, bal: TextBit, ste: State) => {
 };
 
 export const writeText = async (cpy: TextModel, bal: TextBit, ste: State) => {
-    
+
     var slv = bal.slv;
     if (bal.idx == null) bal.idx = 'txt00';
     bit = await ste.hunt(ActCol.WRITE_COLLECT, { idx: bal.idx, src:bal.src, bit: ActTxt.CREATE_TEXT, dat:bal.dat })
-    
-    ste.hunt(ActTxt.UPDATE_TEXT, { idx: bal.idx })
+    var txtBit:LineBit =  bit.clcBit.dat 
+
+
+    ste.hunt(ActCvs.UPDATE_CANVAS, { idx: txtBit.src })
+    //ste.hunt(ActTxt.UPDATE_TEXT, { idx: bal.idx })
     
     if (slv != null) slv({ txtBit: { idx: "read-text", dat: bit.clcBit.dat } });
 

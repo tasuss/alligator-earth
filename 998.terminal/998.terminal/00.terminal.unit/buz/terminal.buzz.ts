@@ -16,7 +16,7 @@ var bit, val, idx, dex, lst, dat;
 
 export const initTerminal = async (cpy: TerminalModel, bal: TerminalBit, ste: State) => {
 
-  if (bal.dat != null) bit = await ste.hunt(ActBus.INIT_BUS, { idx: cpy.idx, lst: [ActTrm], dat: bal.dat, src: bal.src })
+  if (bal.dat != null) bit = await ste.hunt(ActBus.INIT_BUS, { idx: cpy.idx, lst: [ActTrm, ActTxt, ActCvs ], dat: bal.dat, src: bal.src })
 
   let blessed = cpy.blessed = require('blessed');
   let contrib = cpy.contrib = require('blessed-contrib');
@@ -24,22 +24,7 @@ export const initTerminal = async (cpy: TerminalModel, bal: TerminalBit, ste: St
 
   //var grid = new contrib.grid({rows: 12, cols: 12, screen: screen})
 
-  bit = await ste.hunt(ActCvs.WRITE_CANVAS, { idx: 'cvs0', dat: { fill: Grid.TOP_FULL_IDX, clr: Color.CYAN }, })
-  bit = await ste.hunt(ActCvs.WRITE_CANVAS, { idx: 'cvs1', dat: { fill: Grid.MID_FULL_IDX, clr: Color.CYAN }, })
-  bit = await ste.hunt(ActCvs.WRITE_CANVAS, { idx: 'cvs2', dat: { fill: Grid.BOT_FULL_IDX, clr: Color.YELLOW }, })
 
-  bit = await ste.hunt(ActTxt.WRITE_TEXT, { idx: 'txt0',  src:'cvs0', dat: { txt:"hello", clr: Color.BLACK, x:10 }, })
-
-  bit = await ste.hunt(ActTxt.WRITE_TEXT, { idx: 'txt1',  src:'cvs2', dat: { txt:"world", clr: Color.BLACK, x:10 }, })
-  
-  let xPos = 0
-
-  setInterval( async ()=>{
-
-    xPos += 1
-    bit = await ste.hunt(ActTxt.WRITE_TEXT, { idx: 'txt1',  src:'cvs2', dat: { txt:"world", clr: Color.BLACK, x:xPos }, })
-
-  }, 11)
 
 
   //bit = await ste.hunt(ActChc.OPEN_CHOICE, { dat: screen, lst: ['alligator0', 'alligator1', 'alligator2', 'alligator3', 'alligator4', 'alligator5'] })

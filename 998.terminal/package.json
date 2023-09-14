@@ -1,7 +1,8 @@
 {
   "name": "998.terminal",
   "scripts": {
-    "test": "ava"
+    "test": "ava",
+    "build": "tsc -b 998.terminal"
   },
   "main": "main.js",
   "devDependencies": {

@@ -1,6 +1,8 @@
 import * as ActTrm from "../../00.terminal.unit/terminal.action";
 import * as ActCol from "../../97.collect.unit/collect.action";
 import * as ActCvs from "../../02.canvas.unit/canvas.action";
+import * as ActTxt from "../../14.text.unit/text.action";
+
 
 var lst, bit, dat;
 
@@ -9,7 +11,31 @@ export const initCanvas = (cpy: CanvasModel, bal: CanvasBit, ste: State) => {
     return cpy;
 };
 
+export const updateCanvas = async (cpy: CanvasModel, bal: CanvasBit, ste: State) => {
+
+    bit = await ste.hunt(ActCvs.READ_CANVAS, { idx: bal.idx })
+    let dat:FrameBit = bit.cvsBit.dat
+
+    let canvas = dat.bit;
+    let ctx = canvas.ctx;
+    
+
+    dat.txtLst.forEach( (a)=>{
+        
+        ste.hunt( ActTxt.UPDATE_TEXT, {idx:a})
+        
+    })
+
+    
+
+    if (bal.slv != null) bal.slv({ cvsBit: { idx: "update-canvas", dat } });
+
+    return cpy;
+};
+
 export const createCanvas = async (cpy: CanvasModel, bal: CanvasBit, ste: State) => {
+
+    
 
     let termMod: TerminalModel = ste.value.terminal;
 
@@ -82,16 +108,6 @@ export const createCanvas = async (cpy: CanvasModel, bal: CanvasBit, ste: State)
     return cpy;
 };
 
-
-export const updateCanvas = async (cpy: CanvasModel, bal: CanvasBit, ste: State) => {
-
-    bit = await ste.hunt(ActCvs.READ_CANVAS, { idx: bal.idx })
-    dat = bit.cvsBit.dat
-
-    if (bal.slv != null) bal.slv({ cvsBit: { idx: "update-canvas", dat } });
-
-    return cpy;
-};
 
 
 export const readCanvas = async (cpy: CanvasModel, bal: CanvasBit, ste: State) => {

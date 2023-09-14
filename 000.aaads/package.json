@@ -1,7 +1,8 @@
 {
     "name": "000.aaads",
     "scripts": {
-        "test": "ava"
+        "test": "ava",
+        "build": "tsc -b 000.aaads"
     },
     "main": "main.js",
     "devDependencies": {
@@ -11,6 +12,7 @@
     "dependencies": {
         "aedes": "^0.48.1",
         "async-mqtt": "2.2.1",
+        "build": "^0.1.4",
         "clone-deep": "^4.0.1",
         "commander": "^9.4.0",
         "dot": "^1.1.3",

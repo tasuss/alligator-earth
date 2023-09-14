@@ -2,13 +2,12 @@
     "name": "002.space",
     "scripts": {
         "test": "ava",
-        "start": "electron ."
+        "build": "tsc -b 002.space"
     },
     "main": "main.js",
     "devDependencies": {
         "@types/node": "^18.7.23",
-        "ava": "^4.3.3",
-        "electron": "^22.1.0"
+        "ava": "^4.3.3"
     },
     "dependencies": {
         "aedes": "^0.48.1",

@@ -1,12 +1,11 @@
-var path = require("path");
-var absolutePath = path.resolve("./vrt.wrk.bat");
+const {execSync} = require('child_process')
+execSync("pnpm run build")
 
-const spawn = require("child_process").spawn;
-const bat = spawn("cmd.exe", ["/c", absolutePath]);
+var FS = require('fs-extra');
+var value = FS.readFileSync("./data/count.txt").toString()
 
-bat.stdout.on("data", (data) => console.info(String.fromCharCode.apply(null, data)));
-bat.stderr.on("data", (data) => console.error(String.fromCharCode.apply(null, data)));
-bat.on("exit", (code) => process.nextTick(init));
+var val = Number( value )
+val += 1;
 
 var init = async () => {
 
@@ -36,9 +35,9 @@ var open = async ( prt ) =>{
 
  var localBit = { idx: 'local', src: local }
 
- debugger
+
  bit = await TERMINAL.hunt(TERMINAL.ActTrm.INIT_TERMINAL , {dat: MQTT, src:local} );
- debugger
+ 
  bit = await AAADS.hunt( AAADS.ActAaa.INIT_AAADS , { val: 1, dat: MQTT, src:  [localBit]  });
  
 }
@@ -54,3 +53,4 @@ var command_line = () => {
 };
 
 
+process.nextTick(init)
