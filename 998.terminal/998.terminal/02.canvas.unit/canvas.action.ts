@@ -45,9 +45,16 @@ export const CREATE_CANVAS = "[Create action] Create Canvas";
  constructor(public bale: CanvasBit) {}
  }
  
+export const NEST_CANVAS = "[Nest action] Nest Canvas";
+ export class NestCanvas implements Action {
+ readonly type = NEST_CANVAS;
+ constructor(public bale: CanvasBit) {}
+ }
+ 
 export type Actions = | InitCanvas | UpdateCanvas 
 | ReadCanvas
 | WriteCanvas
 | DeleteCanvas
 | RemoveCanvas
 | CreateCanvas
+| NestCanvas

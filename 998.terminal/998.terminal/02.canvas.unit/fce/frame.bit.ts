@@ -14,4 +14,6 @@ export default interface FrameBit {
     gphLst?: string[];
     txtLst?: string[];
     sprLst?: string[];
+    hexLst?: string[];
+    bit?: any;
 }

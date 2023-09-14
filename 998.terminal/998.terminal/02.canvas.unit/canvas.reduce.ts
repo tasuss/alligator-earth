@@ -28,6 +28,9 @@ case Act.REMOVE_CANVAS:
 case Act.CREATE_CANVAS:
  return Buzz.createCanvas(clone(model), act.bale, state);
  
+case Act.NEST_CANVAS:
+ return Buzz.nestCanvas(clone(model), act.bale, state);
+ 
  default:
  return model;
  }
