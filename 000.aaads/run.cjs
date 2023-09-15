@@ -1,56 +1,60 @@
-const {execSync} = require('child_process')
-execSync("pnpm run build")
+//GILLIAN - i put the build in the scripts. "play" is an 'executable'
+const path = require('path');
+const fs = require('fs');
+const MQTT = require('async-mqtt');
+const { program } = require('commander');
 
-var FS = require('fs-extra');
-var value = FS.readFileSync("./data/count.txt").toString()
+const PORT = 1014;
+const value = fs.readFileSync('./data/count.txt').toString();
 
-var val = Number( value )
+let val = Number(value);
 val += 1;
 
-var init = async () => {
+//IDK what kind of prefix or name convention you could use , but i thought but generic function names like  open() and command_line were system functions???
+const func_open = async (prt) => {
+  var bit;
+  ///USE PATH.RESOLVE (not files in node_modules tho - local package files) FOR CROSS PLATFORM FILES .   a '.' refers to the current directory . text me if it doesnt work.
+  ///GILLIAN: WHY IS THIS REFERRING TO THE INSIDE OF ABOTHR PACKAGE???? also, thee should RETURN SOMETHING - dont set global variables
+  require(path.resolve('./../998.terminal/998.terminal/000.quest.terminal'));
+  // GOT RID OF THIS FILE ITS WIERD require(path.resolve("./dist/000.quest.aaads.js"));
+  //gillian: switched these all to  const . they should all be available in global scope?
+  const AAADS = require(path.resolve('./dist/hunt'));
+  //gillian :: WHY ARE YOU ASSIGNING THIS AS A SUB PROPERTY?  const is available in this context
+  const AAADS_ACTION = require(path.resolve(
+    './dist/00.aaads.unit/aaads.action',
+  ));
 
- const aedes = require("aedes")();
- const server = require("net").createServer(aedes.handle);
- const port = 1012;
+  const title = func_command_line();
+  const local = 'mqtt://localhost:' + prt;
+  const localBit = { idx: 'local', src: local };
 
- server.listen(port, function () {
- console.log("server started and listening on port ", port);
- open(port)
- });
- 
+  //do these need to share a variable?
+  bit = await TERMINAL.hunt(TERMINAL.ActTrm.INIT_TERMINAL, {
+    dat: MQTT,
+    src: local,
+  });
+  bit = await AAADS.hunt(AAADS_ACTION.INIT_AAADS, {
+    val: 1,
+    dat: MQTT,
+    src: [localBit],
+  });
+};
+const func_command_line = () => {
+  var idx;
+  program.option('--first').option('-t, --separator <char>');
+  program.parse(process.argv);
+  const options = program.opts();
+  if (options['separator'] != null) idx = options['separator'];
+  return idx;
 };
 
-var open = async ( prt ) =>{
+const init = async () => {
+  const aedes = require('aedes')();
+  const server = require('net').createServer(aedes.handle);
 
- var bit;
-
- require("../998.terminal/998.terminal/000.quest.terminal");
- require("../000.aaads/000.aaads/000.quest.aaads");
-
- const MQTT = require("async-mqtt");
-
- var title = command_line();
-
- var local = 'mqtt://localhost:' + prt;
-
- var localBit = { idx: 'local', src: local }
-
-
- bit = await TERMINAL.hunt(TERMINAL.ActTrm.INIT_TERMINAL , {dat: MQTT, src:local} );
- 
- bit = await AAADS.hunt( AAADS.ActAaa.INIT_AAADS , { val: 1, dat: MQTT, src:  [localBit]  });
- 
-}
-
-var command_line = () => {
- var idx;
- const { program } = require("commander");
- program.option("--first").option("-t, --separator <char>");
- program.parse(process.argv);
- const options = program.opts();
- if (options["separator"] != null) idx = options["separator"];
- return idx;
+  server.listen(PORT, () => {
+    console.log('server started and listening on port ', PORT);
+    func_open(PORT);
+  });
 };
-
-
-process.nextTick(init)
+process.nextTick(init);

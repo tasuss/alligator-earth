@@ -1,7 +1,7 @@
 {
- "extends": "../tsconfig-base.json",
+ "extends": "./../tsconfig-base.json",
  "compilerOptions": {
- "outDir": "../dist/000.aaads",
+ "outDir": "./../dist",
  "composite": true,
  "skipLibCheck": true
  },
