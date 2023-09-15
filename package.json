@@ -1,10 +1,11 @@
 {
-  "name": "@elliotbradley/root",
+  "name": "All-American-Alligator-Delivery-System",
   "version": "0.0.0",
   "private": true,
   "description": "This is the root package. Do not build individual packages here",
   "scripts": {
     "play": "pnpm --filter=aaads play",
+    "aaads": "cd 000.aaads && node run.cjs", 
     "build": "pnpm -r build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-space": "cd 002.space && pnpm run build",
@@ -13,14 +14,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/BrockHerion/ultimate-typescript-monorepo.git"
+    "url": "git+https://github.com/tasuss/a.a.a.d.s.git"
   },
   "author": "T>A>S>U>S>S",
   "license": "None",
   "bugs": {
-    "url": "https://github.com/BrockHerion/ultimate-typescript-monorepo/issues"
+    "url": "https://github.com/tasuss/a.a.a.d.s/issues"
   },
-  "homepage": "https://github.com/BrockHerion/ultimate-typescript-monorepo#readme",
+  "homepage": "https://github.com/tasuss",
   "workspaces": [
     "002.space/*",
     "998.terminal/*",

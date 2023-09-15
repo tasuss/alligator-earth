@@ -9,6 +9,7 @@ import * as ActBus from "../../99.bus.unit/bus.action";
 
 import * as ActTrm from "../terminal.action";
 
+
 import * as ActVrt from "../../act/vurt.action";
 import * as ActDsk from "../../act/disk.action";
 
@@ -16,7 +17,7 @@ var bit, val, idx, dex, lst, dat;
 
 export const initTerminal = async (cpy: TerminalModel, bal: TerminalBit, ste: State) => {
 
-  if (bal.dat != null) bit = await ste.hunt(ActBus.INIT_BUS, { idx: cpy.idx, lst: [ActTrm, ActTxt, ActCvs ], dat: bal.dat, src: bal.src })
+  if (bal.dat != null) bit = await ste.hunt(ActBus.INIT_BUS, { idx: cpy.idx, lst: [ActTrm, ActChc, ActTxt, ActCvs ], dat: bal.dat, src: bal.src })
 
   let blessed = cpy.blessed = require('blessed');
   let contrib = cpy.contrib = require('blessed-contrib');
