@@ -2,7 +2,8 @@
     "name": "999.pivot",
     "scripts": {
         "test": "ava",
-        "build": "tsc -b 999.pivot"
+        "build": "tsc -b 999.pivot",
+        "watch": "tsc -b 999.pivot -w"
     },
     "main": "main.js",
     "devDependencies": {

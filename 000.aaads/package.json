@@ -22,7 +22,8 @@
         "clean:ts": "tsc --build --clean src",
         "clean:build": "rm -rf dist",
         "\n========== FIX >> ==========": "",
-        "fix": "prettier --write ./run.cjs"
+        "fix": "prettier --write ./run.cjs",
+        "watch": "tsc -b src -w"
     },
     "main": "main.js",
     "devDependencies": {
