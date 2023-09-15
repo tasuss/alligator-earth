@@ -7,17 +7,35 @@ const sfx2 = '../sfx/02.mp3';
 const sfx3 = '../sfx/03.mp3';
 const sfx4 = '../sfx/04.mp3';
 
+var power = true;
+
+
+var sound = ( src ) =>{
+  if ( power == false ) return
+  player.play( src, (err) => {if (err) throw err })
+  power = false;
+  setTimeout( ()=> power = true , 3333)
+}
+
+
+/// AAADS Pivot
+
 process.chdir("../../../000.aaads");
 var aaads = exec("pnpm run watch")
 console.log("building 000.aaads complete!!!")
 
 aaads.stdout.on('data', function (data) {
 
-  if (data.includes('error.')) {
+  if ( data.includes('File change detected')) return
+  if ( data.length < 3) return
+
+
+  if (data.includes('Found 0 errors')) {
     
     console.log("aaads error...!!!!")
-    player.play( sfx0, (err) => {if (err) throw err })
+    sound(sfx4)
   }
+  sound(sfx0)
 
   console.log('aaads stdout: ' + data.toString());
 });
@@ -33,11 +51,13 @@ var terminal = exec("pnpm run watch")
 
 terminal.stdout.on('data', function (data) {
 
-  if (data.includes('error.')) {
-  
+  if ( data.includes('File change detected')) return
+  if ( data.length < 3) return
+
+  if (data.includes('Found 0 errors')) {
     console.log("terminal error...!!!!")
-    player.play( sfx1, (err) => {if (err) throw err })
-  }
+    sound(sfx4)
+  }  else sound(sfx1)
 
   console.log('terminal stdout: ' + data.toString());
 });
@@ -56,11 +76,15 @@ var space = exec("pnpm run watch")
 
 space.stdout.on('data', function (data) {
 
-  if (data.includes('error.')) {
+  if ( data.includes('File change detected')) return
+  if ( data.length < 3) return
+
+
+  if (data.includes('Found 0 errors')) {
     console.log("space error...!!!!")
-    player.play( sfx4, (err) => {if (err) throw err })
+    sound(sfx4)
     
-  }
+  }  else sound(sfx3)
 
   console.log('space stdout: ' + data.toString());
 });
@@ -78,12 +102,16 @@ var pivot = exec("pnpm run watch")
 
 pivot.stdout.on('data', function (data) {
 
-  if (data.includes('error.')) {
+  if ( data.includes('File change detected')) return
+  if ( data.length < 3) return
+
+
+  if (data.includes('Found 0 errors')) {
     
     console.log("pivot error...!!!!")
-    player.play( sfx3, (err) => {if (err) throw err })
+    sound(sfx4)
     
-  }
+  }  else sound(sfx2)
 
   console.log('pivot stdout: ' + data.toString());
 });
@@ -96,8 +124,6 @@ console.log("building 999.pivot complete!!!")
 
 
 process.chdir("./data/hand/");
-
-
 
 console.log("WATCHING>>")
 
