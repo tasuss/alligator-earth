@@ -10,7 +10,7 @@
         "test": "ava",
         "play": "pnpm build && node ./run.cjs",
         "\n========== BUILD >> ==========": "",
-        "build": "pnpm build:dir && pnpm build:ts",
+        "build": "pnpm build:ts",
         "build:ts": "tsc --build src",
         "build:dir": "mkdir -p ./dist",
         "\n========== CLEAN >> ==========": "",
