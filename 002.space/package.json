@@ -2,7 +2,8 @@
     "name": "002.space",
     "scripts": {
         "test": "ava",
-        "build": "tsc -b 002.space"
+        "build": "tsc -b 002.space",
+        "watch": "tsc -b 002.space -w"
     },
     "main": "main.js",
     "devDependencies": {

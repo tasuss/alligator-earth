@@ -24,7 +24,7 @@ export const initAaads = async (cpy: AaadsModel, bal: AaadsBit, ste: State) => {
 export const openAaads = async (cpy: AaadsModel, bal: AaadsBit, ste: State) => {
 
 
-    bit = await ste.hunt( ActScn.HUNT_SCENE, {} );
+    bit = await ste.hunt( ActScn.TITLE_SCENE, {} );
 
     if (bal.slv != null) bal.slv({ aaaBit: { idx: "open-aaads" } });
 

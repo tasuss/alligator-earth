@@ -18,8 +18,8 @@ export const updateCanvas = async (cpy: CanvasModel, bal: CanvasBit, ste: State)
 
     let canvas = dat.bit;
     let ctx = canvas.ctx;
-    
 
+    
     dat.txtLst.forEach( (a)=>{
         
         ste.hunt( ActTxt.UPDATE_TEXT, {idx:a})

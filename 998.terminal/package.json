@@ -2,7 +2,8 @@
   "name": "998.terminal",
   "scripts": {
     "test": "ava",
-    "build": "tsc -b 998.terminal"
+    "build": "tsc -b 998.terminal",
+    "watch": "tsc -b 998.terminal -w"
   },
   "main": "main.js",
   "devDependencies": {
