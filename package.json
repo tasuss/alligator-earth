@@ -1,11 +1,11 @@
 {
-  "name": "999.pivot",
+  "name": "@elliotbradley/root",
   "version": "0.0.0",
-  "description": "",
-  "main": "index.js",
+  "private": true,
+  "description": "This is the root package. Do not build individual packages here",
   "scripts": {
-    "play": "cd 000.aaads && node run.cjs",
-    "build": "cd 999.pivot && cd data && cd hand && node 001.build.js",
+    "play": "pnpm --filter=aaads play",
+    "build": "pnpm -r build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-space": "cd 002.space && pnpm run build",
     "build-terminal": "cd 998.terminal && pnpm run build",
@@ -22,7 +22,6 @@
   },
   "homepage": "https://github.com/BrockHerion/ultimate-typescript-monorepo#readme",
   "workspaces": [
-    "000.aaads/*",
     "002.space/*",
     "998.terminal/*",
     "999.pivot/*"
@@ -37,8 +36,5 @@
     "prettier": "^2.5.1",
     "prettier-config-standard": "^5.0.0",
     "typescript": "^4.6.2"
-  },
-  "dependencies": {
-    "npm-run-all": "^4.1.5"
   }
 }
