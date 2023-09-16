@@ -172,7 +172,7 @@ export const openChoice = (cpy: ChoiceModel, bal: ChoiceBit, ste: State) => {
   let screen = ste.value.terminal.screen;
 
   var form = blessed.form({
-    parent: bal.dat,
+    parent: screen,
     keys: true,
     left: 0,
     top: 0,

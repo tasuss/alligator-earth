@@ -11,9 +11,10 @@ export const updateInput = (cpy: InputModel, bal: InputBit, ste: State) => {
 export const openInput = (cpy: InputModel, bal: InputBit, ste: State) => {
 
     let blessed = ste.value.terminal.blessed;
+    let screen = ste.value.terminal.screen
 
     var input = blessed.textbox({
-        parent:bal.dat,
+        parent:screen,
         name: 'input',
         input: true,
         keys: true,
