@@ -9,11 +9,14 @@ var bit, val, idx, dex, lst, dat;
 
 export const initAaads = async (cpy: AaadsModel, bal: AaadsBit, ste: State) => {
 
+    console.log("live alligators")
+
     if (bal.dat != null) bit = await ste.hunt(ActBus.INIT_BUS, { idx: cpy.idx, lst: [ActAaa], dat: bal.dat, src: bal.src })
 
     //if (bal.val == 1) patch(ste, ActMnu.INIT_MENU, bal);
 
-    patch(ste, ActAaa.OPEN_AAADS, bal);
+    
+    openAaads( cpy, bal, ste )
 
     if (bal.slv != null) bal.slv({ intBit: { idx: "init-aaads" } });
 
@@ -22,6 +25,8 @@ export const initAaads = async (cpy: AaadsModel, bal: AaadsBit, ste: State) => {
 
 
 export const openAaads = async (cpy: AaadsModel, bal: AaadsBit, ste: State) => {
+
+    debugger
 
 
     bit = await ste.hunt( ActScn.TITLE_SCENE, {} );
@@ -34,7 +39,7 @@ export const openAaads = async (cpy: AaadsModel, bal: AaadsBit, ste: State) => {
 export const closeAaads = async (cpy: AaadsModel, bal: AaadsBit, ste: State) => {
 
 
-    debugger
+    
     //bit = await ste.hunt( ActScn.TITLE_SCENE, {} );
 
     if (bal.slv != null) bal.slv({ aaaBit: { idx: "close-aaads" } });

@@ -2,8 +2,12 @@ const path = require('path');
 const fs = require('fs');
 const MQTT = require('async-mqtt');
 const { program } = require('commander');
+const importFresh = require('import-fresh');
 
 const PORT = 1014;
+
+let AAADS, AAADS_ACTION;
+let TERMINAL;
 
 var idx;
 program.option('--first').option('-t, --separator <char>');
@@ -17,52 +21,58 @@ let dev = false
 
 if (title == 'development') dev = true
 
-const init = async () => {
-  const aedes = require('aedes')();
-  const server = require('net').createServer(aedes.handle);
+const aedes = require('aedes')();
+const server = require('net').createServer(aedes.handle);
 
-  server.listen(PORT, () => {
-    console.log('server started and listening on port ', PORT);
-    open(PORT);
-  });
-};
+server.listen(PORT, async () => {
+  console.log('server started and listening on port ', PORT);
+  init(PORT);
+});
 
 
-let AAADS = require(path.resolve('./dist/hunt'));
-let AAADS_ACTION = require(path.resolve('./dist/00.aaads.unit/aaads.action'));
+const init = async (prt) => {
 
+  console.log("inits")
 
-const open = async (prt) => {
-  var bit;
-
-  require(path.resolve('./../998.terminal/998.terminal/000.quest.terminal'));
-  
   const local = 'mqtt://localhost:' + prt;
   const localBit = { idx: 'local', src: local };
 
-  //do these need to share a variable?
-  bit = await TERMINAL.hunt(TERMINAL.ActTrm.INIT_TERMINAL, {
-    dat: MQTT,
-    src: local,
-  });
-  bit = await AAADS.hunt(AAADS_ACTION.INIT_AAADS, {
-    val: 1,
-    dat: MQTT,
-    src: [localBit],
-  });
+  //delete require.cache[require.resolve('../998.terminal/dist/998.terminal/hunt')]
+  //delete require.cache[require.resolve('../998.terminal/dist/998.terminal/00.terminal.unit/terminal.action')]
+
+  AAADS = importFresh('./dist/hunt');
+  AAADS_ACTION = importFresh('./dist/00.aaads.unit/aaads.action');
+
+  TERMINAL = importFresh('../998.terminal/dist/998.terminal/hunt');
+  TERMINAL_ACTION = importFresh('../998.terminal/dist/998.terminal/00.terminal.unit/terminal.action');
+
+  //TERMINAL_ACTION = importFresh(path.resolve('../998.terminal/dist/998.terminal/00.terminal.unit/terminal.action'));
+
+
+  await TERMINAL.hunt( TERMINAL_ACTION.INIT_TERMINAL, { dat: MQTT, src: local });
+  await AAADS.hunt(AAADS_ACTION.INIT_AAADS, {  dat: MQTT, src: localBit });
+
 };
 
-const close = async ()=>{
+
+const close = async () => {
 
   bit = await AAADS.hunt(AAADS_ACTION.CLOSE_AAADS, {});
 
+  AAADS = null;
+  AAADS_ACTION = null;
+
+  TERMINAL = null;
+  TERMINAL_ACTION = null;
 
   
 
 
+  //bit = await TERMINAL.hunt( TERMINAL_ACTION.CLOSE_TERMINAL, {});
+  
+
 }
 
-process.nextTick(init);
 
 if (dev == false) return
 
@@ -80,32 +90,42 @@ pivot.stderr.on('data', function (data) {
 });
 
 let errored = false
-let working = true 
+let working = false
 
-pivot.stdout.on('data', async (data)=> {
-  if ( data.length < 3 ) return 
+pivot.stdout.on('data', async (data) => {
+  if (data.length < 3) return
 
   if (data.includes('Watching for file changes.') == false) return
-  if (data.includes('Found 0 errors.') == true ) {
+  if (data.includes('Found 0 errors.') == true) {
 
-    if ( errored == false ){
+    if (errored == false) {
+
+      if (working == false) {
+        working = true
+        return
+      }
+
+      bit = await close()
+      bit = await init( PORT)
+
       return
     }
 
     errored = false
 
     //now reset the game
-    bit = await close() 
+    bit = await close()
+    bit = await init( PORT )
 
     return
 
   }
-  
-  
-  if (data.includes('Debugger') == true ) return
+
+
+  if (data.includes('Debugger') == true) return
   data
   errored = true;
-  
+
 
 });
 

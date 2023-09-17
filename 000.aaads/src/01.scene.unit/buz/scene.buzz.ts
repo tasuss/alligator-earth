@@ -20,6 +20,7 @@ export const updateScene = (cpy: SceneModel, bal: SceneBit, ste: State) => {
 export const titleScene = async (cpy: SceneModel, bal: SceneBit, ste: State) => {
    
     
+    debugger
     bit = await ste.bus(  ActChc.OPEN_CHOICE, { } )
     
 
@@ -32,6 +33,8 @@ export const titleScene = async (cpy: SceneModel, bal: SceneBit, ste: State) => 
 
     //bit = await ste.bus(ActTxt.WRITE_TEXT, { idx: 'txt0', src: 'cvs0', dat: { txt: "let us go", clr: Color.BLACK, x: 10 }, })
     //bit = await ste.bus(ActTxt.WRITE_TEXT, { idx: 'txt1', src: 'cvs2', dat: { txt: "horld", clr: Color.BLACK, x: 10 }, })
+
+    if (bal.slv != null) bal.slv({ scnBit: { idx: "title-scene" } });
 
     return cpy;
 };

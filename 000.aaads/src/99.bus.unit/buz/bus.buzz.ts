@@ -32,6 +32,8 @@ export const initBus = (cpy: BusModel, bal: BusBit, ste: State) => {
 
     if (bal.src != null) cpy.host = bal.src
     cpy.client = cpy.MQTT.connect(cpy.host);
+
+  
     cpy.client.on('message', (tpc, msg) => { messageBus(cpy, { idx: tpc, src: msg }, ste) })
     cpy.client.on('connect', () => {
       console.log(bal.idx + " connected " + cpy.host)

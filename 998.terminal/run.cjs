@@ -1,5 +1,3 @@
-const {execSync} = require('child_process')
-execSync("pnpm run build")
 
 var FS = require('fs-extra');
 var value = FS.readFileSync("./data/count.txt").toString()

@@ -17,24 +17,13 @@ export const initTerminal = async (cpy: TerminalModel, bal: TerminalBit, ste: St
 
   if (bal.dat != null) bit = await ste.hunt(ActBus.INIT_BUS, { idx: cpy.idx, lst: [ActTrm, ActChc, ActTxt, ActCvs, ActPut ], dat: bal.dat, src: bal.src })
 
-  let blessed = cpy.blessed = require('blessed')
-  let contrib = cpy.contrib = require('blessed-contrib');
-  let screen = cpy.screen = cpy.blessed.screen();
 
-  
-  //var grid = new contrib.grid({rows: 12, cols: 12, screen: screen})
+  console.log("rock n roolll 004")
 
-  //bit = await ste.hunt(ActChc.OPEN_CHOICE, { dat: screen, lst: ['alligator0', 'alligator1', 'alligator2', 'alligator3', 'alligator4', 'alligator5'] })
-  //bit = await ste.hunt(ActPut.OPEN_INPUT, { dat: screen })
-
-
-  cpy.screen.key(['escape', 'q', 'C-c'], function (ch, key) {
-    return process.exit(0);
-  });
-
-  cpy.screen.render()
 
   //if (bal.val == 1) patch(ste, ActMnu.INIT_MENU, bal);
+
+  //openTerminal( cpy, bal, ste)
 
 
   if (bal.slv != null) bal.slv({ intBit: { idx: "init-terminal" } });
@@ -47,6 +36,39 @@ export const updateTerminal = (cpy: TerminalModel, bal: TerminalBit, ste: State)
 };
 
 export const openTerminal = async (cpy: TerminalModel, bal: TerminalBit, ste: State) => {
+
+  let blessed = cpy.blessed = require('blessed')
+  let contrib = cpy.contrib = require('blessed-contrib');
+  let screen = cpy.screen = cpy.blessed.screen();
+
+  
+  //var grid = new contrib.grid({rows: 12, cols: 12, screen: screen})
+
+  //bit = await ste.hunt(ActChc.OPEN_CHOICE, { dat: screen, lst: ['alligator0', 'alligator1', 'alligator2', 'alligator3', 'alligator4', 'alligator5'] })
+  //bit = await ste.hunt(ActPut.OPEN_INPUT, { dat: screen })
+
+
+  //cpy.screen.key(['escape', 'q', 'C-c'], function (ch, key) {
+  //  return process.exit(0);
+  //});
+
+  cpy.screen.render()
+
+
+  return cpy;
+};
+
+export const closeTerminal = (cpy: TerminalModel, bal: TerminalBit, ste: State) => {
+
+  if ( cpy.screen != null ) cpy.screen.destroy()
+
+  cpy.blessed = null
+  cpy.contrib = null
+  cpy.screen = null
+
+  //cpy.term.processExit();
+  if (bal.slv != null) bal.slv({ trmBit: { idx: "close-terminal" } });
+
   return cpy;
 };
 
@@ -60,54 +82,9 @@ export const editTerminal = (cpy: TerminalModel, bal: TerminalBit, ste: State) =
 };
 
 
-var patch = (ste, type, bale) => ste.dispatch({ type, bale });
 
 export const printTerminal = (cpy: TerminalModel, bal: TerminalBit, ste: State) => {
-
-  if (bal == null) bal = { idx: "write-terminal" };
-
-  if (bal.val == null) bal.val = 0;
-
-  switch (bal.val) {
-    case 9:
-      cpy.term.italic.yellow(bal.src + "\n");
-      break;
-
-    case 8:
-      cpy.term.yellow(bal.src + "\n");
-      break;
-
-    case 7:
-      cpy.term.underline.yellow(bal.src + "\n");
-      break;
-
-    case 6:
-      cpy.term.bold.white(bal.src + "\n");
-      break;
-
-    case 5:
-      cpy.term.bold.magenta(bal.src + "\n");
-      break;
-
-    case 4:
-      cpy.term.bold.blue(bal.src + "\n");
-      break;
-
-    case 3:
-      cpy.term.bold.yellow(bal.src + "\n");
-      break;
-
-    case 2:
-      cpy.term.bold.red(bal.src + "\n");
-      break;
-
-    case 1:
-      cpy.term.bold.cyan(bal.src + "\n");
-      break;
-
-    default:
-      cpy.term.bold.green(bal.src + "\n");
-  }
+  
 
   if (bal.slv != null) bal.slv({ trmBit: { idx: "write-terminal" } });
 
@@ -116,56 +93,11 @@ export const printTerminal = (cpy: TerminalModel, bal: TerminalBit, ste: State) 
 
 
 
-export const closeTerminal = (cpy: TerminalModel, bal: TerminalBit, ste: State) => {
-
-  cpy.term.processExit();
-  if (bal.slv != null) bal.slv({ trmBit: { idx: "close-terminal" } });
-
-  return cpy;
-};
-
-
 
 export const optionTerminal = (cpy: TerminalModel, bal: TerminalBit, ste: State) => {
 
-  if (bal == null) bal = { idx: '' };
-  if (bal.lst == null) bal.lst = ["000", "001"];
-  if (bal.val == null) bal.val = 0;
-  if (cpy.rootIDX != null) bal.lst.push(cpy.rootIDX);
 
-  bal.lst.push(ActTrm.CLOSE_TERMINAL);
-
-  var list = [];
-  var options = {};
-
-  bal.lst.forEach((a) => {
-    if (a != "---") {
-      if (options[a] != null) return;
-    }
-
-    options[a] = 1;
-    list.push(a);
-  });
-
-  //here we have something special
-
-  cpy.term.singleColumnMenu(list, { selectedIndex: bal.val }, (err, rsp) => {
-    if (cpy.rootDAT != null) {
-      if (rsp.selectedIndex == bal.lst.length - 2) {
-        cpy.rootDAT();
-        return;
-      }
-    }
-
-    if (rsp.selectedIndex == bal.lst.length - 1) {
-      closeTerminal(cpy, bal, ste);
-      return;
-    }
-
-    if (bal.slv != null) bal.slv({ trmBit: { idx: "update-terminal", lst: list, val: rsp.selectedIndex } });
-  });
-
-
+  if (bal.slv != null) bal.slv({ trmBit: { idx: "option-terminal" } });
 
   return cpy;
 };
@@ -174,16 +106,7 @@ export const optionTerminal = (cpy: TerminalModel, bal: TerminalBit, ste: State)
 
 export const inputTerminal = async (cpy: TerminalModel, bal: TerminalBit, ste: State) => {
 
-
-  if (bal == null) bal = { idx: null };
-  if (bal.lst == null) bal.lst = [];
-
-  bal.lst.forEach((a) => cpy.term(a + "\n"));
-
-  var input = await cpy.term.inputField({ selectedIndex: bal.val }).promise;
-  bal.slv({ trmBit: { idx: "input-terminal", src: input } });
-  //cpy.term.green(input);
-
+  bal.slv({ trmBit: { idx: "input-terminal" } });
 
   return cpy;
 };
@@ -212,6 +135,8 @@ export const layoutTerminal = (cpy: TerminalModel, bal: TerminalBit, ste: State)
   return cpy;
 };
 
+
+var patch = (ste, type, bale) => ste.dispatch({ type, bale });
 
 import { TerminalModel } from "../terminal.model";
 import TerminalBit from "../fce/terminal.bit";
