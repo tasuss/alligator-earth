@@ -7,7 +7,7 @@
     "play": "pnpm --filter=aaads play",
     "aaads": "cd 000.aaads && node run.cjs", 
     "build": "pnpm -r build",
-    "dev": "cd 999.pivot/data/hand/ && node 000.dev.js",
+    "dev": "cd 000.aaads/ && node run.cjs -t development",
     "watch": "cd 999.pivot/data/hand/ && node 000.watch.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-space": "cd 002.space && pnpm run build",

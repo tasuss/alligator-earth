@@ -17,7 +17,7 @@ export const initTerminal = async (cpy: TerminalModel, bal: TerminalBit, ste: St
 
   if (bal.dat != null) bit = await ste.hunt(ActBus.INIT_BUS, { idx: cpy.idx, lst: [ActTrm, ActChc, ActTxt, ActCvs, ActPut ], dat: bal.dat, src: bal.src })
 
-  let blessed = cpy.blessed = require('blessed');
+  let blessed = cpy.blessed = require('blessed')
   let contrib = cpy.contrib = require('blessed-contrib');
   let screen = cpy.screen = cpy.blessed.screen();
 

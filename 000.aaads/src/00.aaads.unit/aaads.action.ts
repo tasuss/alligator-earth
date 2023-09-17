@@ -37,10 +37,16 @@ export const PATCH_AAADS = "[Patch action] Patch Aaads";
  readonly type = PATCH_AAADS;
  constructor(public bale: AaadsBit) {}
  }
+
+ export const CLOSE_AAADS = "[Patch action] Close Aaads";
+ export class CloseAaads implements Action {
+ readonly type = CLOSE_AAADS;
+ constructor(public bale: AaadsBit) {}
+ }
  
 export type Actions = | InitAaads | UpdateAaads 
 | OpenAaads
 | RunAaads
 | EditAaads
 | PatchAaads
-
+| CloseAaads

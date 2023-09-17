@@ -31,6 +31,17 @@ export const openAaads = async (cpy: AaadsModel, bal: AaadsBit, ste: State) => {
     return cpy;
 };
 
+export const closeAaads = async (cpy: AaadsModel, bal: AaadsBit, ste: State) => {
+
+
+    debugger
+    //bit = await ste.hunt( ActScn.TITLE_SCENE, {} );
+
+    if (bal.slv != null) bal.slv({ aaaBit: { idx: "close-aaads" } });
+
+    return cpy;
+};
+
 
 export const updateAaads = (cpy: AaadsModel, bal: AaadsBit, ste: State) => {
 

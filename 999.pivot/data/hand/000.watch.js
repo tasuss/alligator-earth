@@ -28,11 +28,10 @@ aaads.stdout.on('data', function (data) {
 
   if ( data.includes('File change detected')) return
   if ( data.length < 3) return
+  if (data.includes('Debugger') == true ) return
 
 
   if (data.includes('Found 0 errors')) {
-    
-    console.log("aaads error...!!!!")
     sound(sfx4)
   }
   sound(sfx0)
@@ -53,9 +52,9 @@ terminal.stdout.on('data', function (data) {
 
   if ( data.includes('File change detected')) return
   if ( data.length < 3) return
+  if (data.includes('Debugger') == true ) return
 
   if (data.includes('Found 0 errors')) {
-    console.log("terminal error...!!!!")
     sound(sfx4)
   }  else sound(sfx1)
 
@@ -78,12 +77,11 @@ space.stdout.on('data', function (data) {
 
   if ( data.includes('File change detected')) return
   if ( data.length < 3) return
+  if (data.includes('Debugger') == true ) return
 
 
   if (data.includes('Found 0 errors')) {
-    console.log("space error...!!!!")
     sound(sfx4)
-    
   }  else sound(sfx3)
 
   console.log('space stdout: ' + data.toString());
@@ -104,13 +102,10 @@ pivot.stdout.on('data', function (data) {
 
   if ( data.includes('File change detected')) return
   if ( data.length < 3) return
-
+  if (data.includes('Debugger') == true ) return
 
   if (data.includes('Found 0 errors')) {
-    
-    console.log("pivot error...!!!!")
     sound(sfx4)
-    
   }  else sound(sfx2)
 
   console.log('pivot stdout: ' + data.toString());
