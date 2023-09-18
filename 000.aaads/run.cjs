@@ -37,14 +37,14 @@ const init = async (prt) => {
   const local = 'mqtt://localhost:' + prt;
   const localBit = { idx: 'local', src: local };
 
-  //delete require.cache[require.resolve('../998.terminal/dist/998.terminal/hunt')]
-  //delete require.cache[require.resolve('../998.terminal/dist/998.terminal/00.terminal.unit/terminal.action')]
+  delete require.cache[require.resolve('./dist/hunt')]
+  delete require.cache[require.resolve('./dist/00.aaads.unit/aaads.action')]
 
-  AAADS = importFresh('./dist/hunt');
-  AAADS_ACTION = importFresh('./dist/00.aaads.unit/aaads.action');
+  AAADS = importFresh( path.resolve( './dist/hunt')  );
+  AAADS_ACTION = importFresh( path.resolve( './dist/00.aaads.unit/aaads.action')  );
 
-  TERMINAL = importFresh('../998.terminal/dist/998.terminal/hunt');
-  TERMINAL_ACTION = importFresh('../998.terminal/dist/998.terminal/00.terminal.unit/terminal.action');
+  TERMINAL = importFresh( path.resolve( '../998.terminal/dist/998.terminal/hunt')  );
+  TERMINAL_ACTION = importFresh( path.resolve( '../998.terminal/dist/998.terminal/00.terminal.unit/terminal.action' )  );
 
   //TERMINAL_ACTION = importFresh(path.resolve('../998.terminal/dist/998.terminal/00.terminal.unit/terminal.action'));
 
@@ -77,7 +77,8 @@ const close = async () => {
 if (dev == false) return
 
 console.log("deving...")
-const { exec } = require('child_process')
+const { exec } = require('child_process');
+const { resolve } = require('path');
 
 process.chdir("../");
 
