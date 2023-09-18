@@ -23,12 +23,14 @@
         "clean:build": "rm -rf dist",
         "\n========== FIX >> ==========": "",
         "fix": "prettier --write ./run.cjs",
-        "watch": "tsc -b src -w"
+        "watch": "tsc -b src -w",
+        "restart": "touch ./run.cjs"
     },
     "main": "main.js",
     "devDependencies": {
         "@types/node": "^18.7.23",
-        "ava": "^4.3.3"
+        "ava": "^4.3.3",
+        "nodemon": "^3.0.1"
     },
     "dependencies": {
         "aedes": "^0.48.1",

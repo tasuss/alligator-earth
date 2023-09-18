@@ -6,6 +6,8 @@ var lst, idx, bit, src, dat, dex;
 
 export const initBus = (cpy: BusModel, bal: BusBit, ste: State) => {
 
+  
+
   cpy.actList = []
 
   if (bal == null) bal = { idx: null }
@@ -31,14 +33,20 @@ export const initBus = (cpy: BusModel, bal: BusBit, ste: State) => {
   if (lst == null) {
 
     if (bal.src != null) cpy.host = bal.src
-    cpy.client = cpy.MQTT.connect(cpy.host);
 
-  
+    if ( cpy.host['src'] != null ) cpy.host = cpy.host['src']
+    
+    cpy.client = cpy.MQTT.connect(cpy.host);
+    
+
     cpy.client.on('message', (tpc, msg) => { messageBus(cpy, { idx: tpc, src: msg }, ste) })
     cpy.client.on('connect', () => {
       console.log(bal.idx + " connected " + cpy.host)
+      
       openBus(cpy, { idx: 'init-bus', lst: cpy.actList }, ste)
+      
       if (bal.slv != null) bal.slv({ intBit: { idx: "init-bus" } })
+      
     })
   } else {
 
@@ -179,9 +187,13 @@ export const messageBus = async (cpy: BusModel, bal: BusBit, ste: State) => {
 //has to return a promise
 export const updateBus = async (cpy: BusModel, bal: BusBit, ste: State) => {
 
+  
+
 
   //how does one create an error message here when bit should be used
   var client = cpy.client;
+
+  
 
   if (bal.bit != null) {
     bit = await ste.hunt(ActCol.READ_COLLECT, { idx: bal.bit, bit: ActBus.CREATE_BUS })
@@ -214,6 +226,7 @@ export const updateBus = async (cpy: BusModel, bal: BusBit, ste: State) => {
   //if (bal.dat.bit != null) bal.dat.bit = null;
 
   client.publish(bal.idx, JSON.stringify(bal.dat))
+  
 
   return promo;
 };

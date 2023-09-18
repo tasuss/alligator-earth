@@ -20,13 +20,12 @@ export const updateScene = (cpy: SceneModel, bal: SceneBit, ste: State) => {
 export const titleScene = async (cpy: SceneModel, bal: SceneBit, ste: State) => {
    
     
-    debugger
-    bit = await ste.bus(  ActChc.OPEN_CHOICE, { } )
     
+     
 
-    //bit = await ste.bus(ActCvs.WRITE_CANVAS, { idx: 'cvs0', dat: { fill: Grid.TOP_FULL_IDX, clr: Color.CYAN }, })
-    //bit = await ste.bus(ActCvs.WRITE_CANVAS, { idx: 'cvs1', dat: { fill: Grid.MID_FULL_IDX, clr: Color.CYAN }, })
-    //bit = await ste.bus(ActCvs.WRITE_CANVAS, { idx: 'cvs2', dat: { fill: Grid.BOT_FULL_IDX, clr: Color.YELLOW }, })
+    bit = await ste.bus(ActCvs.WRITE_CANVAS, { idx: 'cvs0', dat: { fill: Grid.TOP_FULL_IDX, clr: Color.CYAN }, })
+    bit = await ste.bus(ActCvs.WRITE_CANVAS, { idx: 'cvs1', dat: { fill: Grid.MID_FULL_IDX, clr: Color.CYAN }, })
+    bit = await ste.bus(ActCvs.WRITE_CANVAS, { idx: 'cvs2', dat: { fill: Grid.BOT_FULL_IDX, clr: Color.YELLOW }, })
 
     //var grid = {x:0, y:0, xSpan:3, ySpan:12}
 

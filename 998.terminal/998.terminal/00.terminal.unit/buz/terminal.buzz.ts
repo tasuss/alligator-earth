@@ -18,12 +18,12 @@ export const initTerminal = async (cpy: TerminalModel, bal: TerminalBit, ste: St
   if (bal.dat != null) bit = await ste.hunt(ActBus.INIT_BUS, { idx: cpy.idx, lst: [ActTrm, ActChc, ActTxt, ActCvs, ActPut ], dat: bal.dat, src: bal.src })
 
 
-  console.log("rock n roolll 000")
+  console.log("rock n roolll 002")
 
 
   //if (bal.val == 1) patch(ste, ActMnu.INIT_MENU, bal);
 
-  //openTerminal( cpy, bal, ste)
+  openTerminal( cpy, bal, ste)
 
 
   if (bal.slv != null) bal.slv({ intBit: { idx: "init-terminal" } });

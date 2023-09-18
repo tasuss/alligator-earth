@@ -167,6 +167,8 @@ export const updateChoice = (cpy: ChoiceModel, bal: ChoiceBit, ste: State) => {
 
 export const openChoice = (cpy: ChoiceModel, bal: ChoiceBit, ste: State) => {
 
+  
+
 
   let blessed = ste.value.terminal.blessed;
   let screen = ste.value.terminal.screen;
@@ -194,7 +196,7 @@ export const openChoice = (cpy: ChoiceModel, bal: ChoiceBit, ste: State) => {
     left: 0,
     top: 0,
     name: 'submit',
-    content: 'submit',
+    content: 'roll tide',
     style: {
       bg: 'blue',
       focus: {

@@ -2,9 +2,8 @@ const path = require('path');
 const fs = require('fs');
 const MQTT = require('async-mqtt');
 const { program } = require('commander');
-const importFresh = require('import-fresh');
 
-const PORT = 1014;
+const PORT = 1001;
 
 let AAADS, AAADS_ACTION;
 let TERMINAL;
@@ -37,39 +36,29 @@ const init = async (prt) => {
   const local = 'mqtt://localhost:' + prt;
   const localBit = { idx: 'local', src: local };
 
-  delete require.cache[require.resolve('./dist/hunt')]
-  delete require.cache[require.resolve('./dist/00.aaads.unit/aaads.action')]
+  AAADS = require(path.resolve('./dist/hunt'));
+  AAADS_ACTION = require(path.resolve('./dist/00.aaads.unit/aaads.action'));
 
-  AAADS = importFresh( path.resolve( './dist/hunt')  );
-  AAADS_ACTION = importFresh( path.resolve( './dist/00.aaads.unit/aaads.action')  );
-
-  TERMINAL = importFresh( path.resolve( '../998.terminal/dist/998.terminal/hunt')  );
-  TERMINAL_ACTION = importFresh( path.resolve( '../998.terminal/dist/998.terminal/00.terminal.unit/terminal.action' )  );
+  TERMINAL = require(path.resolve('../998.terminal/dist/998.terminal/hunt'));
+  TERMINAL_ACTION = require(path.resolve('../998.terminal/dist/998.terminal/00.terminal.unit/terminal.action'));
 
   //TERMINAL_ACTION = importFresh(path.resolve('../998.terminal/dist/998.terminal/00.terminal.unit/terminal.action'));
 
 
-  await TERMINAL.hunt( TERMINAL_ACTION.INIT_TERMINAL, { dat: MQTT, src: local });
-  await AAADS.hunt(AAADS_ACTION.INIT_AAADS, {  dat: MQTT, src: localBit });
+  await TERMINAL.hunt(TERMINAL_ACTION.INIT_TERMINAL, { dat: MQTT, src: local });
+  await AAADS.hunt(AAADS_ACTION.INIT_AAADS, { dat: MQTT, src: localBit });
+  
+
 
 };
 
 
+
 const close = async () => {
 
-  bit = await AAADS.hunt(AAADS_ACTION.CLOSE_AAADS, {});
 
-  AAADS = null;
-  AAADS_ACTION = null;
-
-  TERMINAL = null;
-  TERMINAL_ACTION = null;
-
-  
-
-
-  //bit = await TERMINAL.hunt( TERMINAL_ACTION.CLOSE_TERMINAL, {});
-  
+  var run = fs.readFileSync("./run.cjs").toString()
+  fs.writeFileSync("./run.cjs", run)
 
 }
 
@@ -102,12 +91,14 @@ pivot.stdout.on('data', async (data) => {
     if (errored == false) {
 
       if (working == false) {
-        working = true
+
+        setTimeout( ()=> working = true, 3333)
+
         return
       }
 
       bit = await close()
-      bit = await init( PORT)
+      bit = await init(PORT)
 
       return
     }
@@ -116,7 +107,7 @@ pivot.stdout.on('data', async (data) => {
 
     //now reset the game
     bit = await close()
-    bit = await init( PORT )
+    bit = await init(PORT)
 
     return
 
