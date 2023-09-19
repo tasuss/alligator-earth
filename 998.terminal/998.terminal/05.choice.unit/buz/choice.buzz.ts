@@ -97,16 +97,18 @@ export const openChoice = (cpy: ChoiceModel, bal: ChoiceBit, ste: State) => {
 
 export const keyChoice = (cpy: ChoiceModel, bal: ChoiceBit, ste: State) => {
 
-
   let blessed = ste.value.terminal.blessed;
   let screen = ste.value.terminal.screen;
+
+  let net: NetBit = bal.net;
 
   let menubar = blessed.listbar({
     parent: screen,
     keys: true,
-    bottom: 0,
-    left: 0,
-    height: 1,
+    left: net.left,
+    top: net.top,
+    width: net.width,
+    height: net.height,
     style: { item: { fg: "yellow" }, selected: { fg: "yellow" } },
     commands: {
       Login: {
@@ -148,6 +150,8 @@ export const keyChoice = (cpy: ChoiceModel, bal: ChoiceBit, ste: State) => {
 
 
   screen.render();
+  
+  if (bal.slv != null) bal.slv({ scnBit: { idx: "key-choice"}});
 
 
   return cpy;
