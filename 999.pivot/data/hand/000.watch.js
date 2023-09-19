@@ -1,5 +1,5 @@
 const { exec } = require('child_process')
-var player = require('play-sound')(opts = {})
+const player = require('play-sound')(opts = {})
 
 const sfx0 = '../sfx/00.mp3';
 const sfx1 = '../sfx/01.mp3';
@@ -16,12 +16,9 @@ var sound = ( src ) =>{
   power = false;
   setTimeout( ()=> power = true , 3333)
 }
-
-
 /// AAADS Pivot
-
-process.chdir("../../../000.aaads");
-var aaads = exec("pnpm run watch")
+//  BUG:::: NO DIRECTORY?. THIS process.chdir("../../../000.aaads");
+const aaads = exec("pnpm --filter=aaads watch:ts")
 console.log("building 000.aaads complete!!!")
 
 aaads.stdout.on('data', function (data) {
@@ -46,7 +43,7 @@ aaads.stderr.on('data', function (data) {
 /// Terminal Pivot
 
 process.chdir("../998.terminal");
-var terminal = exec("pnpm run watch")
+var terminal = exec("pnpm run watch:ts")
 
 terminal.stdout.on('data', function (data) {
 
@@ -71,7 +68,7 @@ console.log("building 998.terminal complete!!!")
 ///SPACE PIVOT
 
 process.chdir("../002.space");
-var space = exec("pnpm run watch")
+var space = exec("pnpm run watch:ts")
 
 space.stdout.on('data', function (data) {
 
@@ -96,7 +93,7 @@ console.log("building 002.space complete!!!")
 //PIVOT PIVOT
 process.chdir("../999.pivot");
 
-var pivot = exec("pnpm run watch")
+const pivot = exec("pnpm run watch:ts")
 
 pivot.stdout.on('data', function (data) {
 
