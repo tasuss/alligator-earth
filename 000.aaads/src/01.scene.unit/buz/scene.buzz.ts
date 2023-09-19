@@ -5,7 +5,7 @@ import * as ActGrd from "../../act/grid.action";
 import * as ActTxt from "../../act/text.action";
 import * as ActPut from "../../act/input.action";
 
-var bit, val, idx, dex, lst, dat;
+let bit, val, idx, dex, lst, dat;
 
 export const initScene = (cpy: SceneModel, bal: SceneBit, ste: State) => {
     debugger
@@ -28,10 +28,34 @@ export const titleScene = async (cpy: SceneModel, bal: SceneBit, ste: State) => 
     bit = await ste.bus(ActGrd.UPDATE_GRID, { x:0, y:4, xSpan:2, ySpan:12  })
     bit = await ste.bus( ActChc.OPEN_CHOICE, { dat:{clr0: Color.BLACK, clr1: Color.YELLOW }  , src:Align.VERTICAL, lst, net: bit.grdBit.dat })
 
-    bit = await ste.bus(ActGrd.UPDATE_GRID, { x:3, y:11, xSpan:2, ySpan:2  })
-    bit = await ste.bus( ActChc.KEY_CHOICE, { dat:{clr0: Color.BLACK, clr1: Color.YELLOW }  , src:Align.VERTICAL, lst, net: bit.grdBit.dat })
+    val = bit.chcBit.val
+
+    switch( val){
+
+        case 1:
+
+        break
+
+        case 2:
+
+        break
+
+        case 3:
+
+        break
+
+        case 4:
+
+        break
+
+    }
 
     
+    
+
+
+    //bit = await ste.bus(ActGrd.UPDATE_GRID, { x:3, y:11, xSpan:2, ySpan:2  })
+    //bit = await ste.bus( ActChc.KEY_CHOICE, { dat:{clr0: Color.BLACK, clr1: Color.YELLOW }  , src:Align.VERTICAL, lst, net: bit.grdBit.dat })
 
     //bit = await ste.bus(ActGrd.UPDATE_GRID, { x:4, y:0, xSpan:8, ySpan:0  })
     //bit = await ste.bus(ActCvs.WRITE_CANVAS, { idx: 'cvs0', dat: { clr: Color.CYAN, net: bit.grdBit.dat }, })
