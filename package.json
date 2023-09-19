@@ -14,8 +14,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "\n========== DEPENDENCIES >> ==========": "",
     "deps:list": "pnpm -r list",
-    "deps:outdated": "pnpm -r outdated",
-    "dev": "cd 000.aaads/ && nodemon -I run.cjs -t development"
+    "deps:outdated": "pnpm -r outdated"
   },
   "repository": {
     "type": "git",
