@@ -15,136 +15,81 @@ export const openChoice = (cpy: ChoiceModel, bal: ChoiceBit, ste: State) => {
   let blessed = ste.value.terminal.blessed;
   let screen = ste.value.terminal.screen;
 
+  var dat = { idx: 'choice-bit', clr0 : Color.GREEN, clr1: Color.CYAN }
+  for ( var key in bal.dat ){ dat[key] = bal.dat[key]}
+
+  let net: NetBit = bal.net;
+
   var form = blessed.form({
     parent: screen,
     keys: true,
-    left: 0,
-    top: 0,
-    width: 30,
-    height: 1,
-    bg: 'green',
+    left: net.left,
+    top: net.top,
+    width: net.width,
+    height: net.height,
+    bg: dat.clr0,
     content: ''
   });
 
-  if ( bal.lst == null) bal.lst = [];
+  if (bal.lst == null) bal.lst = [];
 
-  bal.lst = []
+  var output = [];
 
-  bal.lst.forEach( (a)=>{
+  bal.lst.forEach((a, b) => {
 
+    let btn = blessed.button({
+      parent: form,
+      mouse: true,
+      keys: true,
+      shrink: true,
+      padding: {
+        left: 10,
+        right: 1
+      },
+      left: 0,
+      top: b,
+      height:1,
+      width:'100%',
+      name: a,
+      content: a,
+      style: {
+        bg: dat.clr1,
+        focus: {
+          bg: 'red'
+        },
+        hover: {
+          bg: 'red'
+        }
+      }
+    });
+
+    btn.on('press', function () {
+      form.submit();
+    });
+
+    output.push( btn)
+  
   })
-
-  var submit = blessed.button({
-    parent: form,
-    mouse: true,
-    keys: true,
-    shrink: true,
-    padding: {
-      left: 1,
-      right: 1
-    },
-    left: 0,
-    top: 0,
-    name: 'so la la la la',
-    content: 'soooo',
-    style: {
-      bg: 'blue',
-      focus: {
-        bg: 'red'
-      },
-      hover: {
-        bg: 'red'
-      }
-    }
-  });
-
-  var cancel = blessed.button({
-    parent: form,
-    mouse: true,
-    keys: true,
-    shrink: true,
-    padding: {
-      left: 1,
-      right: 1
-    },
-    left: 10,
-    top: 0,
-    name: 'cancel',
-    content: 'cancel',
-    style: {
-      bg: 'blue',
-      focus: {
-        bg: 'red'
-      },
-      hover: {
-        bg: 'red'
-      }
-    }
-  });
-
-  var next = blessed.button({
-    parent: form,
-    mouse: true,
-    keys: true,
-    shrink: true,
-    padding: {
-      left: 1,
-      right: 1
-    },
-    left: 20,
-    top: 0,
-    name: 'next',
-    content: 'next',
-    style: {
-      bg: 'blue',
-      focus: {
-        bg: 'red'
-      },
-      hover: {
-        bg: 'red'
-      }
-    }
-  });
-
-  submit.on('press', function () {
-    form.submit();
-  });
-
-  cancel.on('press', function () {
-    form.submit();
-  });
-
-  next.on('press', function () {
-    form.submit();
-  });
-
-
-
-  form.on('submit', function (data) {
-    form.setContent('Submitted.');
-
-    debugger
-    screen.render();
-  });
-
-  form.on('next', function (data) {
-    form.setContent('Submitted.');
-
-    debugger
-    screen.render();
-  });
-
-  form.on('reset', function (data) {
-    form.setContent('Canceled.');
-    screen.render();
-  });
-
-  submit.focus();
 
   screen.key('left', () => form.focusPrevious())
   screen.key('right', () => form.focusNext())
 
+  output[0].focus();
+
   screen.render();
+
+  form.on('submit', function (data) {
+    
+    //form.setContent('Submitted.');
+
+    let selected = form._selected;
+    let src = selected.content;
+    let val = selected.index - 1;
+
+    screen.render();
+    if (bal.slv != null) bal.slv({ scnBit: { idx: "open-choice", src, val } });
+
+  });
 
   return cpy;
 };
@@ -209,10 +154,15 @@ export const keyChoice = (cpy: ChoiceModel, bal: ChoiceBit, ste: State) => {
 };
 
 
-export const towerChoice = (cpy: ChoiceModel, bal:ChoiceBit, ste: State) => {
- 
- return cpy;
- };
+export const towerChoice = (cpy: ChoiceModel, bal: ChoiceBit, ste: State) => {
+
+  return cpy;
+};
+
+
 import { ChoiceModel } from "../choice.model";
 import ChoiceBit from "../fce/choice.bit";
 import State from "../../99.core/state";
+import NetBit from "998.terminal/01.grid.unit/fce/net.bit";
+import * as Align from '../../val/align'
+import * as Color from '../../val/console-color';
