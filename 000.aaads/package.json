@@ -8,13 +8,15 @@
     },
     "scripts": {
         "test": "ava",
+        "\n========== PLAY >> ==========": "",
         "play": "pnpm build && node ./run.cjs",
+        "\n========== WATCH >> ==========": "",
+        "watch:play": "nodemon -I ./run.cjs -t development",
+        "watch:ts": "tsc -b src -w",
         "\n========== BUILD >> ==========": "",
         "build": "pnpm build:ts",
         "build:ts": "tsc --build src",
         "build:dir": "mkdir -p ./dist",
-        "\n========== DEV >> ==========": "",
-        "dev": "pnpm exec tsc --build --watch src",
         "\n========== TEST >> ==========": "",
         "test:ts:version": "pnpm exec tsc -v && tsc -v ",
         "\n========== CLEAN >> ==========": "",
@@ -23,14 +25,14 @@
         "clean:build": "rm -rf dist",
         "\n========== FIX >> ==========": "",
         "fix": "prettier --write ./run.cjs",
-        "watch": "tsc -b src -w",
         "restart": "touch ./run.cjs"
     },
     "main": "main.js",
     "devDependencies": {
         "@types/node": "^18.7.23",
         "ava": "^4.3.3",
-        "nodemon": "^3.0.1"
+        "nodemon": "^3.0.1",
+        "typescript": "^4.6.2"
     },
     "dependencies": {
         "aedes": "^0.48.1",

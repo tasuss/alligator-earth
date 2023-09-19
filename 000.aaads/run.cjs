@@ -47,7 +47,7 @@ const init = async (prt) => {
 
   await TERMINAL.hunt(TERMINAL_ACTION.INIT_TERMINAL, { dat: MQTT, src: local });
   await AAADS.hunt(AAADS_ACTION.INIT_AAADS, { dat: MQTT, src: localBit });
-  
+
 
 
 };
@@ -117,7 +117,4 @@ pivot.stdout.on('data', async (data) => {
   if (data.includes('Debugger') == true) return
   data
   errored = true;
-
-
 });
-
