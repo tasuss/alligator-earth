@@ -2,6 +2,7 @@ import * as ActPut from "../../04.input.unit/input.action";
 import * as ActChc from "../../05.choice.unit/choice.action";
 import * as ActCvs from "../../02.canvas.unit/canvas.action";
 import * as ActTxt from "../../14.text.unit/text.action";
+import * as ActGrd from "../../01.grid.unit/grid.action";
 
 import * as ActMnu from "../../98.menu.unit/menu.action";
 import * as ActBus from "../../99.bus.unit/bus.action";
@@ -15,10 +16,7 @@ var bit, val, idx, dex, lst, dat;
 
 export const initTerminal = async (cpy: TerminalModel, bal: TerminalBit, ste: State) => {
 
-  if (bal.dat != null) bit = await ste.hunt(ActBus.INIT_BUS, { idx: cpy.idx, lst: [ActTrm, ActChc, ActTxt, ActCvs, ActPut ], dat: bal.dat, src: bal.src })
-
-
-  console.log("rock n roolll 002")
+  if (bal.dat != null) bit = await ste.hunt(ActBus.INIT_BUS, { idx: cpy.idx, lst: [ActTrm, ActChc, ActTxt, ActCvs, ActPut, ActGrd ], dat: bal.dat, src: bal.src })
 
 
   //if (bal.val == 1) patch(ste, ActMnu.INIT_MENU, bal);

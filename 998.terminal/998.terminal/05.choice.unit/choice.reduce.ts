@@ -19,6 +19,9 @@ case Act.OPEN_CHOICE:
 case Act.KEY_CHOICE:
  return Buzz.keyChoice(clone(model), act.bale, state);
  
+case Act.TOWER_CHOICE:
+ return Buzz.towerChoice(clone(model), act.bale, state);
+ 
  default:
  return model;
  }

@@ -1,6 +1,7 @@
 import Model from "./99.core/interface/model.interface";
 
 import TerminalUnit from "./00.terminal.unit/terminal.unit";
+import GridUnit from "./01.grid.unit/grid.unit";
 import CanvasUnit from "./02.canvas.unit/canvas.unit";
 import InputUnit from "./04.input.unit/input.unit";
 import ChoiceUnit from "./05.choice.unit/choice.unit";
@@ -16,6 +17,8 @@ import BusUnit from "./99.bus.unit/bus.unit";
 
 import Terminal from "./00.terminal.unit/fce/terminal.interface";
 import { TerminalModel } from "./00.terminal.unit/terminal.model";
+import Grid from "./01.grid.unit/fce/grid.interface";
+import { GridModel } from "./01.grid.unit/grid.model";
 import Canvas from "./02.canvas.unit/fce/canvas.interface";
 import { CanvasModel } from "./02.canvas.unit/canvas.model";
 import Input from "./04.input.unit/fce/input.interface";
@@ -40,9 +43,10 @@ import Bus from "./99.bus.unit/fce/bus.interface";
 import { BusModel } from "./99.bus.unit/bus.model";
 
 
-export const list: Array<any> = [TerminalUnit,CanvasUnit,InputUnit,ChoiceUnit,ContainerUnit,GraphicUnit,HexagonUnit,SpriteUnit,TextUnit,CollectUnit,MenuUnit,BusUnit];
+export const list: Array<any> = [TerminalUnit,GridUnit,CanvasUnit,InputUnit,ChoiceUnit,ContainerUnit,GraphicUnit,HexagonUnit,SpriteUnit,TextUnit,CollectUnit,MenuUnit,BusUnit];
 
 import * as reduceFromTerminal from "./00.terminal.unit/terminal.reduce";
+import * as reduceFromGrid from "./01.grid.unit/grid.reduce";
 import * as reduceFromCanvas from "./02.canvas.unit/canvas.reduce";
 import * as reduceFromInput from "./04.input.unit/input.reduce";
 import * as reduceFromChoice from "./05.choice.unit/choice.reduce";
@@ -58,6 +62,7 @@ import * as reduceFromBus from "./99.bus.unit/bus.reduce";
 
 export const reducer: any = {
  terminal : reduceFromTerminal.reducer, 
+grid : reduceFromGrid.reducer, 
 canvas : reduceFromCanvas.reducer, 
 input : reduceFromInput.reducer, 
 choice : reduceFromChoice.reducer, 
@@ -75,6 +80,7 @@ bus : reduceFromBus.reducer,
 export default class UnitData implements Model {
  
  terminal : Terminal = new TerminalModel();
+grid : Grid = new GridModel();
 canvas : Canvas = new CanvasModel();
 input : Input = new InputModel();
 choice : Choice = new ChoiceModel();

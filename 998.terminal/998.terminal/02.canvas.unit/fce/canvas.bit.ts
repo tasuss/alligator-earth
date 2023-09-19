@@ -1,3 +1,4 @@
+import NetBit from "998.terminal/01.grid.unit/fce/net.bit";
 
 export default interface CanvasBit {
     idx:string;
@@ -6,4 +7,5 @@ export default interface CanvasBit {
     val?:number;
     dat?:any;
     slv?:Function;
+    net?:NetBit
 }

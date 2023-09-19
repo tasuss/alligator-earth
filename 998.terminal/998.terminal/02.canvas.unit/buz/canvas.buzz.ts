@@ -14,19 +14,19 @@ export const initCanvas = (cpy: CanvasModel, bal: CanvasBit, ste: State) => {
 export const updateCanvas = async (cpy: CanvasModel, bal: CanvasBit, ste: State) => {
 
     bit = await ste.hunt(ActCvs.READ_CANVAS, { idx: bal.idx })
-    let dat:FrameBit = bit.cvsBit.dat
+    let dat: FrameBit = bit.cvsBit.dat
 
     let canvas = dat.bit;
     let ctx = canvas.ctx;
 
-    
-    dat.txtLst.forEach( (a)=>{
-        
-        ste.hunt( ActTxt.UPDATE_TEXT, {idx:a})
-        
+
+    dat.txtLst.forEach((a) => {
+
+        ste.hunt(ActTxt.UPDATE_TEXT, { idx: a })
+
     })
 
-    
+
 
     if (bal.slv != null) bal.slv({ cvsBit: { idx: "update-canvas", dat } });
 
@@ -34,8 +34,6 @@ export const updateCanvas = async (cpy: CanvasModel, bal: CanvasBit, ste: State)
 };
 
 export const createCanvas = async (cpy: CanvasModel, bal: CanvasBit, ste: State) => {
-
-    
 
     let termMod: TerminalModel = ste.value.terminal;
 
@@ -55,44 +53,14 @@ export const createCanvas = async (cpy: CanvasModel, bal: CanvasBit, ste: State)
     dat.sprLst = [];
     dat.hexLst = [];
 
-    let filBit: GridFill = GRID[dat.fill]
-
-    let margin = 0;
-    let cols = termMod.cols;
-    let rows = termMod.rows;
-
-    dat;
-
-    bit = await ste.hunt(ActTrm.LAYOUT_TERMINAL, { src: dat.fill })
-
-    let layoutDat: GridFill = bit.trmBit.dat;
-
-    var colNow = layoutDat.x;
-    var rowNow = layoutDat.y;
-
-    let colSpan = layoutDat.xSpan;
-    let rowSpan = layoutDat.ySpan;
-
-    let spacing = 0;
-
-    let cellWidth = ((100 - margin * 2) / cols);
-    let cellHeight = ((100 - margin * 2) / rows);
-
-    let top: any = rowNow * cellHeight + margin;
-    let left: any = colNow * cellWidth + margin;
-
-    top = top + '%';
-    left = left + '%';
-
-    let width = (cellWidth * colSpan - spacing) + '%';
-    let height = (cellHeight * rowSpan - spacing) + '%';
+    let net:NetBit = dat.net;
 
     dat.bit = contrib.canvas({
-        left,
-        top,
+        left: net.left,
+        top: net.top,
         bg: dat.clr,
-        width,
-        height
+        width: net.width,
+        height: net.height
     });
 
     for (var key in bal.dat) { dat[key] = bal.dat[key] }
@@ -170,7 +138,7 @@ export const nestCanvas = async (cpy: CanvasModel, bal: CanvasBit, ste: State) =
     bit = await ste.hunt(ActCvs.READ_CANVAS, { idx: bal.src })
     var dat: FrameBit = bit.cvsBit.dat;
 
-    
+
 
     switch (bal.dat.typ) {
 
@@ -187,7 +155,7 @@ export const nestCanvas = async (cpy: CanvasModel, bal: CanvasBit, ste: State) =
             break
 
         case SHADE.TEXT:
-            
+
             dat.txtLst.push(bal.dat.idx)
             break
 
@@ -216,4 +184,5 @@ import * as COLOR from '../../val/console-color'
 import { GridFill } from "998.terminal/val/grid";
 import * as GRID from '../../val/grid'
 import * as SHADE from '../../val/shade'
+import NetBit from "998.terminal/01.grid.unit/fce/net.bit";
 
