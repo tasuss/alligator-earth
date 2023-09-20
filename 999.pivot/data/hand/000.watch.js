@@ -1,5 +1,5 @@
 const { exec } = require('child_process')
-const player = require('play-sound')(opts = {})
+var player = require('play-sound')(opts = {})
 
 const sfx0 = '../sfx/00.mp3';
 const sfx1 = '../sfx/01.mp3';
@@ -10,22 +10,25 @@ const sfx4 = '../sfx/04.mp3';
 var power = true;
 
 
-var sound = ( src ) =>{
-  if ( power == false ) return
-  player.play( src, (err) => {if (err) throw err })
+var sound = (src) => {
+  if (power == false) return
+  player.play(src, (err) => { if (err) throw err })
   power = false;
-  setTimeout( ()=> power = true , 3333)
+  setTimeout(() => power = true, 3333)
 }
+
+
 /// AAADS Pivot
-//  BUG:::: NO DIRECTORY?. THIS process.chdir("../../../000.aaads");
-const aaads = exec("pnpm --filter=aaads watch:ts")
+
+process.chdir("../../../000.aaads");
+var aaads = exec("pnpm run watch")
 console.log("building 000.aaads complete!!!")
 
 aaads.stdout.on('data', function (data) {
 
-  if ( data.includes('File change detected')) return
-  if ( data.length < 3) return
-  if (data.includes('Debugger') == true ) return
+  if (data.includes('File change detected')) return
+  if (data.length < 3) return
+  if (data.includes('Debugger') == true) return
 
 
   if (data.includes('Found 0 errors')) {
@@ -43,17 +46,17 @@ aaads.stderr.on('data', function (data) {
 /// Terminal Pivot
 
 process.chdir("../998.terminal");
-var terminal = exec("pnpm run watch:ts")
+const terminal = exec("pnpm run watch")
 
 terminal.stdout.on('data', function (data) {
 
-  if ( data.includes('File change detected')) return
-  if ( data.length < 3) return
-  if (data.includes('Debugger') == true ) return
+  if (data.includes('File change detected')) return
+  if (data.length < 3) return
+  if (data.includes('Debugger') == true) return
 
   if (data.includes('Found 0 errors')) {
     sound(sfx4)
-  }  else sound(sfx1)
+  } else sound(sfx1)
 
   console.log('terminal stdout: ' + data.toString());
 });
@@ -68,18 +71,18 @@ console.log("building 998.terminal complete!!!")
 ///SPACE PIVOT
 
 process.chdir("../002.space");
-var space = exec("pnpm run watch:ts")
+const space = exec("pnpm run watch")
 
 space.stdout.on('data', function (data) {
 
-  if ( data.includes('File change detected')) return
-  if ( data.length < 3) return
-  if (data.includes('Debugger') == true ) return
+  if (data.includes('File change detected')) return
+  if (data.length < 3) return
+  if (data.includes('Debugger') == true) return
 
 
   if (data.includes('Found 0 errors')) {
     sound(sfx4)
-  }  else sound(sfx3)
+  } else sound(sfx3)
 
   console.log('space stdout: ' + data.toString());
 });
@@ -93,17 +96,17 @@ console.log("building 002.space complete!!!")
 //PIVOT PIVOT
 process.chdir("../999.pivot");
 
-const pivot = exec("pnpm run watch:ts")
+const pivot = exec("pnpm run watch")
 
 pivot.stdout.on('data', function (data) {
 
-  if ( data.includes('File change detected')) return
-  if ( data.length < 3) return
-  if (data.includes('Debugger') == true ) return
+  if (data.includes('File change detected')) return
+  if (data.length < 3) return
+  if (data.includes('Debugger') == true) return
 
   if (data.includes('Found 0 errors')) {
     sound(sfx4)
-  }  else sound(sfx2)
+  } else sound(sfx2)
 
   console.log('pivot stdout: ' + data.toString());
 });

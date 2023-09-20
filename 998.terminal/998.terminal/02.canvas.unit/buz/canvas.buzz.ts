@@ -69,6 +69,57 @@ export const createCanvas = async (cpy: CanvasModel, bal: CanvasBit, ste: State)
     let screen = terminal.screen
     screen.append(dat.bit)
 
+    //curve
+    var ctx;
+    if (dat.bit.ctx) ctx = dat.bit.ctx;
+  
+    ctx.font = '60pt Calibri';
+    ctx.fillStyle = 'red';   
+    ctx.fillText("Alligator Earth", 15, 14)
+  
+    var hmm = new Bezier(100,25 , 10,29 , 110,30 , 150,39);
+    var LUT = hmm.getLUT(3);
+  
+    ctx.fill();
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = COLOR.RED;
+  
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+  
+    LUT.forEach( (a) =>{
+      
+      ctx
+      
+      ctx.lineTo( a.x, a.y);
+  
+      //ctx.fillRect( a.x, a.y, 1, 1 );
+    } )
+  
+    ctx.moveTo(110, 0);
+  
+    LUT.forEach( (a) =>{
+      ctx
+      ctx.lineTo( a.x + 40, a.y);
+  
+      //ctx.fillRect( a.x, a.y, 1, 1 );
+    } )
+  
+    ctx.moveTo(150, 0);
+  
+    LUT.forEach( (a) =>{
+      ctx
+      ctx.lineTo( a.x + 90, a.y);
+  
+      //ctx.fillRect( a.x, a.y, 1, 1 );
+    } )
+  
+  
+  
+    ctx.stroke();
+
+
+
     screen.render()
 
     if (bal.slv != null) bal.slv({ cvsBit: { idx: "create-canvas", dat } });
@@ -186,3 +237,4 @@ import * as GRID from '../../val/grid'
 import * as SHADE from '../../val/shade'
 import NetBit from "998.terminal/01.grid.unit/fce/net.bit";
 
+import { Bezier } from "bezier-js";

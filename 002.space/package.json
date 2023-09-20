@@ -3,7 +3,7 @@
     "scripts": {
         "test": "ava",
         "build": "tsc -b 002.space",
-        "watch:ts": "tsc -b 002.space -w"
+        "watch": "tsc -b 002.space -w"
     },
     "main": "main.js",
     "devDependencies": {

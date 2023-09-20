@@ -5,7 +5,7 @@ import * as ActGrd from "../../act/grid.action";
 import * as ActTxt from "../../act/text.action";
 import * as ActPut from "../../act/input.action";
 
-let bit, val, idx, dex, lst, dat;
+var bit, val, idx, dex, lst, dat;
 
 export const initScene = (cpy: SceneModel, bal: SceneBit, ste: State) => {
     debugger
@@ -19,47 +19,23 @@ export const updateScene = (cpy: SceneModel, bal: SceneBit, ste: State) => {
 
 
 export const titleScene = async (cpy: SceneModel, bal: SceneBit, ste: State) => {
-    
-    lst = [ 'new', 'load', 'settings', 'quit']
-    
-    bit = await ste.bus(ActGrd.UPDATE_GRID, {x:2, y:0, xSpan:12, ySpan:12})
-    bit = await ste.bus(ActCvs.WRITE_CANVAS, { idx: 'cvs1', dat: { clr: Color.CYAN, net:bit.grdBit.dat }, })
-  
-    bit = await ste.bus(ActGrd.UPDATE_GRID, { x:0, y:4, xSpan:2, ySpan:12  })
-    bit = await ste.bus( ActChc.OPEN_CHOICE, { dat:{clr0: Color.BLACK, clr1: Color.YELLOW }  , src:Align.VERTICAL, lst, net: bit.grdBit.dat })
 
-    val = bit.chcBit.val
+    lst = ['new', 'load', 'settings', 'quit']
 
-    switch( val){
+    bit = await ste.bus(ActGrd.UPDATE_GRID, { x: 2, y: 0, xSpan: 12, ySpan: 12 })
+    bit = await ste.bus(ActCvs.WRITE_CANVAS, { idx: 'cvs1', dat: { clr: Color.CYAN, net: bit.grdBit.dat }, })
 
-        case 1:
+    bit = await ste.bus(ActGrd.UPDATE_GRID, { x: 0, y: 4, xSpan: 2, ySpan: 12 })
+    bit = await ste.bus(ActChc.OPEN_CHOICE, { dat: { clr0: Color.BLACK, clr1: Color.YELLOW }, src: Align.VERTICAL, lst, net: bit.grdBit.dat })
 
-        break
-
-        case 2:
-
-        break
-
-        case 3:
-
-        break
-
-        case 4:
-
-        break
-
-    }
-
-    
-    
+    bit = await ste.bus(ActGrd.UPDATE_GRID, { x: 3, y: 11, xSpan: 2, ySpan: 2 })
+    bit = await ste.bus(ActChc.KEY_CHOICE, { dat: { clr0: Color.BLACK, clr1: Color.YELLOW }, src: Align.VERTICAL, lst, net: bit.grdBit.dat })
 
 
-    //bit = await ste.bus(ActGrd.UPDATE_GRID, { x:3, y:11, xSpan:2, ySpan:2  })
-    //bit = await ste.bus( ActChc.KEY_CHOICE, { dat:{clr0: Color.BLACK, clr1: Color.YELLOW }  , src:Align.VERTICAL, lst, net: bit.grdBit.dat })
 
     //bit = await ste.bus(ActGrd.UPDATE_GRID, { x:4, y:0, xSpan:8, ySpan:0  })
     //bit = await ste.bus(ActCvs.WRITE_CANVAS, { idx: 'cvs0', dat: { clr: Color.CYAN, net: bit.grdBit.dat }, })
-    
+
     //bit = await ste.bus(ActGrd.UPDATE_GRID, { x:0, y:8, xSpan:12, ySpan:4  })
     //bit = await ste.bus(ActCvs.WRITE_CANVAS, { idx: 'cvs2', dat: { clr: Color.YELLOW, net:bit.grdBit.dat }, })
 
@@ -71,7 +47,7 @@ export const titleScene = async (cpy: SceneModel, bal: SceneBit, ste: State) => 
 
 export const huntScene = async (cpy: SceneModel, bal: SceneBit, ste: State) => {
 
-  
+
 
     //let xPos = 0
 

@@ -85,10 +85,9 @@ export const openChoice = (cpy: ChoiceModel, bal: ChoiceBit, ste: State) => {
     let selected = form._selected;
     let src = selected.content;
     let val = selected.index - 1;
-    
 
     screen.render();
-    if (bal.slv != null) bal.slv({ chcBit: { idx: "open-choice", src, val } });
+    if (bal.slv != null) bal.slv({ scnBit: { idx: "open-choice", src, val } });
 
   });
 
