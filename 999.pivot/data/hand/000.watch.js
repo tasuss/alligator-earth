@@ -20,9 +20,9 @@ var sound = (src) => {
 
 /// AAADS Pivot
 
-process.chdir("../../../000.aaads");
+process.chdir("../../../000.game");
 var aaads = exec("pnpm run watch")
-console.log("building 000.aaads complete!!!")
+console.log("building 000.game complete!!!")
 
 aaads.stdout.on('data', function (data) {
 
@@ -36,11 +36,11 @@ aaads.stdout.on('data', function (data) {
   }
   sound(sfx0)
 
-  console.log('aaads stdout: ' + data.toString());
+  console.log('game stdout: ' + data.toString());
 });
 
 aaads.stderr.on('data', function (data) {
-  console.log('aaads stderr: ' + data.toString());
+  console.log('game stderr: ' + data.toString());
 });
 
 /// Terminal Pivot

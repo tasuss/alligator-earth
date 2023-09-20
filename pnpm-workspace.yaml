@@ -1,5 +1,5 @@
 packages:
- - "000.aaads/**"
+ - "000.game/**"
  - "002.space/**"
  - "998.terminal/**"
  - "999.pivot/**"
