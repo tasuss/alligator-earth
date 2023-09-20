@@ -28,7 +28,7 @@ export const initGame = async (cpy: GameModel, bal: GameBit, ste: State) => {
 export const openGame = async (cpy: GameModel, bal: GameBit, ste: State) => {
 
 
-    bit = await ste.hunt( ActScn.TITLE_SCENE, {} );
+    bit = await ste.hunt( ActScn.SPACE_SCENE, {} );
 
     if (bal.slv != null) bal.slv({ aaaBit: { idx: "open-Game" } });
 

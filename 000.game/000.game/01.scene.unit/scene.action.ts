@@ -33,7 +33,14 @@ export const PROLOGUE_SCENE = "[Prologue action] Prologue Scene";
  constructor(public bale: SceneBit) {}
  }
  
+export const SPACE_SCENE = "[Space action] Space Scene";
+ export class SpaceScene implements Action {
+ readonly type = SPACE_SCENE;
+ constructor(public bale: SceneBit) {}
+ }
+ 
 export type Actions = | InitScene | UpdateScene 
 | HuntScene
 | TitleScene
 | PrologueScene
+| SpaceScene

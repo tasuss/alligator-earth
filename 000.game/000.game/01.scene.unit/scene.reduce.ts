@@ -22,6 +22,9 @@ case Act.TITLE_SCENE:
 case Act.PROLOGUE_SCENE:
  return Buzz.prologueScene(clone(model), act.bale, state);
  
+case Act.SPACE_SCENE:
+ return Buzz.spaceScene(clone(model), act.bale, state);
+ 
  default:
  return model;
  }
