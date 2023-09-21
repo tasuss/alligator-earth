@@ -1,13 +1,5 @@
-const {execSync} = require('child_process')
-execSync("pnpm run build")
+const path = require('path');
 
-var FS = require('fs-extra');
-var value = FS.readFileSync("./data/count.txt").toString()
-
-var val = Number( value )
-val += 1;
-
-//end compile source code
 
 var init = async () => {
 
@@ -27,8 +19,11 @@ var bit;
 
 var open = async (prt) => {
 
-  require("../998.terminal/998.terminal/000.quest.terminal");
-  require("../002.space/002.space/000.quest.space");
+  TERMINAL = require(path.resolve('../998.terminal/dist/998.terminal/hunt'));
+  TERMINAL_ACTION = require(path.resolve('../998.terminal/dist/998.terminal/00.terminal.unit/terminal.action'));
+
+  SPACE = require(path.resolve('./dist/002.space/hunt'));
+  SPACE_ACTION = require(path.resolve('./dist/002.space/00.space.unit/space.action'));
 
   const MQTT = require("async-mqtt");
 
@@ -39,9 +34,9 @@ var open = async (prt) => {
   var remoteBit = { idx: 'remote', src: 'ws://gatorsocket.herokuapp.com/' }
 
 
-  bit = await TERMINAL.hunt(TERMINAL.ActTrm.INIT_TERMINAL, { dat: MQTT, src: local });
+  bit = await TERMINAL.hunt( TERMINAL_ACTION.INIT_TERMINAL, { dat: MQTT, src: local });
   //bit = await SPACE.hunt(SPACE.ActSpc.INIT_SPACE, { val: 1, dat: MQTT, src:  [localBit, remoteBit] });
-  bit = await SPACE.hunt(SPACE.ActSpc.INIT_SPACE, { val: 1, dat: MQTT, src:  [localBit] });
+  bit = await SPACE.hunt( SPACE_ACTION.INIT_SPACE, { val: 1, dat: MQTT, src:  [localBit] });
 
 }
 

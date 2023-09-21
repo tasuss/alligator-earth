@@ -1,7 +1,8 @@
 {
-    "name": "002.space",
+    "name": "space",
     "scripts": {
         "test": "ava",
+        "play": "pnpm build && node ./run.cjs",
         "build": "tsc -b 002.space",
         "watch": "tsc -b 002.space -w"
     },
