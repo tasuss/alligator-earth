@@ -4,6 +4,7 @@ import * as ActFoc from "../../01.focus.unit/focus.action";
 import * as ActPvt from "../../96.pivot.unit/pivot.action";
 
 import * as ActTrm from "../../act/terminal.action";
+import * as ActChc from "../../act/choice.action";
 
 var bit, lst, dex, idx, dat;
 

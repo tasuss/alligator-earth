@@ -1,8 +1,6 @@
 import * as ActMnu from "../menu.action";
 import * as ActTrm from "../../00.terminal.unit/terminal.action";
-
 import * as ActVrt from "../../act/vurt.action"
-
 
 var bit, lst, dex
 
@@ -18,6 +16,8 @@ export const initMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
 };
 
 export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
+
+    debugger
 
     //bit = await ste.hunt(ActTrm.PRINT_TERMINAL, { src: "-----------", bit: 'local' })
     //bit = await ste.hunt(ActTrm.PRINT_TERMINAL, { src: "TERMINAL PIVOT V0", bit: 'local' })

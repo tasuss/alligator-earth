@@ -10,6 +10,7 @@
     "watch": "cd 999.pivot/data/hand/ && node 000.watch.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "run-space": "pnpm --filter=space play",
+    "dev-terminal": "pnpm --filter=terminal dev",
     "build-space": "cd 002.space && pnpm run build",
     "build-terminal": "cd 998.terminal && pnpm run build",
     "build-pivot": "cd 999.pivot && pnpm run build"

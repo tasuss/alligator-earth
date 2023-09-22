@@ -1,9 +1,11 @@
 {
-  "name": "998.terminal",
+  "name": "terminal",
   "scripts": {
     "test": "ava",
+    "play": "pnpm build && node ./run.cjs",
     "build": "tsc -b 998.terminal",
-    "watch": "tsc -b 998.terminal -w"
+    "watch": "tsc -b 998.terminal -w",
+    "dev": "nodemon -I run.cjs -t development"
   },
   "main": "main.js",
   "devDependencies": {

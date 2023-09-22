@@ -16,13 +16,16 @@ var bit, val, idx, dex, lst, dat;
 
 export const initTerminal = async (cpy: TerminalModel, bal: TerminalBit, ste: State) => {
 
+  debugger
+
+
   if (bal.dat != null) bit = await ste.hunt(ActBus.INIT_BUS, { idx: cpy.idx, lst: [ActTrm, ActChc, ActTxt, ActCvs, ActPut, ActGrd ], dat: bal.dat, src: bal.src })
-
-
-  //if (bal.val == 1) patch(ste, ActMnu.INIT_MENU, bal);
-
+  
   openTerminal( cpy, bal, ste)
 
+  if (bal.val == 1) patch(ste, ActMnu.INIT_MENU, bal);  
+
+  debugger
 
   if (bal.slv != null) bal.slv({ intBit: { idx: "init-terminal" } });
 
