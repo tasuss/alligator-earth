@@ -56,6 +56,12 @@ export const LAYOUT_TERMINAL = "[Layout action] Layout Terminal";
  readonly type = LAYOUT_TERMINAL;
  constructor(public bale: TerminalBit) {}
  }
+
+ export const OPEN_TERMINAL = "[Layout action] Open Terminal";
+ export class OpenTerminal implements Action {
+ readonly type = OPEN_TERMINAL;
+ constructor(public bale: TerminalBit) {}
+ }
  
 export type Actions = | InitTerminal | UpdateTerminal 
 | RunTerminal
@@ -65,3 +71,4 @@ export type Actions = | InitTerminal | UpdateTerminal
 | OptionTerminal
 | InputTerminal
 | LayoutTerminal
+| OpenTerminal

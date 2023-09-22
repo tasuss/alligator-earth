@@ -14,18 +14,26 @@ import * as ActDsk from "../../act/disk.action";
 
 var bit, val, idx, dex, lst, dat;
 
+let firstLoad = false; 
+
 export const initTerminal = async (cpy: TerminalModel, bal: TerminalBit, ste: State) => {
+
+  if ( firstLoad == true ) return
+  firstLoad = true
 
   debugger
 
-
   if (bal.dat != null) bit = await ste.hunt(ActBus.INIT_BUS, { idx: cpy.idx, lst: [ActTrm, ActChc, ActTxt, ActCvs, ActPut, ActGrd ], dat: bal.dat, src: bal.src })
+
+  debugger
   
-  openTerminal( cpy, bal, ste)
+  bit = await ste.hunt( ActTrm.OPEN_TERMINAL, {} ) 
+
+debugger
 
   if (bal.val == 1) patch(ste, ActMnu.INIT_MENU, bal);  
 
-  debugger
+
 
   if (bal.slv != null) bal.slv({ intBit: { idx: "init-terminal" } });
 
@@ -54,6 +62,8 @@ export const openTerminal = async (cpy: TerminalModel, bal: TerminalBit, ste: St
   //});
 
   cpy.screen.render()
+
+  if (bal.slv != null) bal.slv({ trmBit: { idx: "open-terminal" } });
 
 
   return cpy;

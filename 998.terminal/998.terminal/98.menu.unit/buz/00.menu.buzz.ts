@@ -1,14 +1,20 @@
 import * as ActMnu from "../menu.action";
 import * as ActTrm from "../../00.terminal.unit/terminal.action";
+import * as ActGrd from "../../01.grid.unit/grid.action";
+import * as ActCvs from "../../02.canvas.unit/canvas.action"
+import * as ActCns from "../../03.console.unit/console.action"
+import * as ActChc from "../../05.choice.unit/choice.action"
+
 import * as ActVrt from "../../act/vurt.action"
 
 var bit, lst, dex
 
 export const initMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
 
+
+
     if (bal == null) bal = { idx: null }
 
-    bit = await ste.bus(ActTrm.INIT_TERMINAL, {})
 
     updateMenu(cpy, bal, ste);
 
@@ -17,7 +23,21 @@ export const initMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
 
 export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
 
-    debugger
+
+
+    lst = ['spin clkwse', 'spin counter', 'backward', 'forwards']
+
+    bit = await ste.hunt(ActGrd.UPDATE_GRID, { x: 2, y: 0, xSpan: 6, ySpan: 12 })
+    bit = await ste.hunt(ActCvs.WRITE_CANVAS, { idx: 'cvs1', dat: { clr: Color.CYAN, net: bit.grdBit.dat }, })
+
+    bit = await ste.hunt(ActGrd.UPDATE_GRID, { x: 0, y: 4, xSpan: 2, ySpan: 12 })
+    bit = await ste.hunt(ActChc.OPEN_CHOICE, { dat: { clr0: Color.BLACK, clr1: Color.YELLOW }, src: Align.VERTICAL, lst, net: bit.grdBit.dat })
+
+    bit = await ste.hunt(ActGrd.UPDATE_GRID, { x: 3, y: 11, xSpan: 2, ySpan: 2 })
+    bit = await ste.hunt(ActChc.KEY_CHOICE, { dat: { clr0: Color.BLACK, clr1: Color.YELLOW }, src: Align.VERTICAL, lst, net: bit.grdBit.dat })
+
+
+
 
     //bit = await ste.hunt(ActTrm.PRINT_TERMINAL, { src: "-----------", bit: 'local' })
     //bit = await ste.hunt(ActTrm.PRINT_TERMINAL, { src: "TERMINAL PIVOT V0", bit: 'local' })
@@ -97,3 +117,8 @@ export const visageMenu = (cpy: MenuModel, bal: MenuBit, ste: State) => {
 import { MenuModel } from "../menu.model";
 import MenuBit from "../fce/menu.bit";
 import State from "../../99.core/state";
+
+
+import * as Grid from '../../val/grid';
+import * as Align from '../../val/align'
+import * as Color from '../../val/console-color';

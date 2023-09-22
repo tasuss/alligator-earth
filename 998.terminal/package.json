@@ -5,7 +5,7 @@
     "play": "pnpm build && node ./run.cjs",
     "build": "tsc -b 998.terminal",
     "watch": "tsc -b 998.terminal -w",
-    "dev": "nodemon -I run.cjs -t development"
+    "dev": "tsc -b 998.terminal && nodemon -I run.cjs -t development"
   },
   "main": "main.js",
   "devDependencies": {
