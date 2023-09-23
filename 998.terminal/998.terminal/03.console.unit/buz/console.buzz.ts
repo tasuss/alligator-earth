@@ -54,16 +54,6 @@ export const createConsole = (cpy: ConsoleModel, bal: ConsoleBit, ste: State) =>
         })
 
 
-        
-
-   
-
-    dat.bit.log("new log line")
-    dat.bit.log("new log line")
-    dat.bit.log("sixteenth-century natural magic was indistinguishable from true experimental science in its investigation of effects of mysterious forces by means of observation and experiment. natural magic and experimental science finally parted company when the later was allied to that particular form of natural philosophy known as the mechanical which endeavored to understand both the effects of such mysterious forces and their cause in truly rational terms. natural magic lost its importance and became conjuring. but they did not part until well into the middle of the seventeenth century")
-
-  
-
     let terminal: TerminalModel = ste.value.terminal;
     let screen = terminal.screen;
     screen.append(dat.bit)

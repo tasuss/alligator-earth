@@ -15,4 +15,39 @@ export class UpdateHexagon implements Action {
  constructor(public bale: HexagonBit) {}
 }
 
-export type Actions = | InitHexagon | UpdateHexagon ;
+export const READ_HEXAGON = "[Read action] Read Hexagon";
+ export class ReadHexagon implements Action {
+ readonly type = READ_HEXAGON;
+ constructor(public bale: HexagonBit) {}
+ }
+ 
+export const WRITE_HEXAGON = "[Write action] Write Hexagon";
+ export class WriteHexagon implements Action {
+ readonly type = WRITE_HEXAGON;
+ constructor(public bale: HexagonBit) {}
+ }
+ 
+export const REMOVE_HEXAGON = "[Remove action] Remove Hexagon";
+ export class RemoveHexagon implements Action {
+ readonly type = REMOVE_HEXAGON;
+ constructor(public bale: HexagonBit) {}
+ }
+ 
+export const DELETE_HEXAGON = "[Delete action] Delete Hexagon";
+ export class DeleteHexagon implements Action {
+ readonly type = DELETE_HEXAGON;
+ constructor(public bale: HexagonBit) {}
+ }
+ 
+export const CREATE_HEXAGON = "[Create action] Create Hexagon";
+ export class CreateHexagon implements Action {
+ readonly type = CREATE_HEXAGON;
+ constructor(public bale: HexagonBit) {}
+ }
+ 
+export type Actions = | InitHexagon | UpdateHexagon 
+| ReadHexagon
+| WriteHexagon
+| RemoveHexagon
+| DeleteHexagon
+| CreateHexagon

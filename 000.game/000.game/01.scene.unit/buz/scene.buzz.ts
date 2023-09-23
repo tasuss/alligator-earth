@@ -58,7 +58,9 @@ export const spaceScene = async (cpy: SceneModel, bal: SceneBit, ste: State) => 
 
     src = bit.chcBit.src;
 
-    bit = await ste.bus(ActCns.WRITE_CONSOLE, { idx:'cns00', src:'alligator1', dat:{src:'alligator1'}  })
+    bit = await ste.bus(ActCns.UPDATE_CONSOLE, { idx:'cns00', src  })
+
+
 
 
 
