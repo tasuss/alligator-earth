@@ -25,6 +25,7 @@
     "fs-extra": "^10.1.0",
     "rx-lite": "^4.0.8",
     "string": "^3.3.3",
-    "typescript-ioc": "^3.2.2"
+    "typescript-ioc": "^3.2.2",
+    "honeycomb-grid": "^3.1.8"
   }
 }

@@ -100,6 +100,8 @@ export const readDisk = async (cpy: DiskModel, bal: DiskBit, ste: State) => {
 
 export const indexDisk = async (cpy: DiskModel, bal: DiskBit, ste: State) => {
 
+  debugger
+
   if ((bal.src == null) && (bal.slv != null)) bal.slv({ dskBit: { idx: "list-disk-error", src: 'no src present' } });
   if (bal.val == null) bal.val = 1;
 

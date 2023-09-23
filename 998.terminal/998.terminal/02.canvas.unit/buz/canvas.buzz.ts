@@ -187,3 +187,4 @@ import * as SHADE from '../../val/shade'
 import NetBit from "998.terminal/01.grid.unit/fce/net.bit";
 
 import { Bezier } from "bezier-js";
+import * as Honeycomb from "honeycomb-grid";

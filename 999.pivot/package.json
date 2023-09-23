@@ -1,9 +1,10 @@
 {
-    "name": "999.pivot",
+    "name": "pivot",
     "scripts": {
         "test": "ava",
         "build": "tsc -b 999.pivot",
-        "watch": "tsc -b 999.pivot -w"
+        "watch": "tsc -b 999.pivot -w",
+        "dev": "tsc -b 999.pivot && nodemon -I run.cjs -t development"
     },
     "main": "main.js",
     "devDependencies": {

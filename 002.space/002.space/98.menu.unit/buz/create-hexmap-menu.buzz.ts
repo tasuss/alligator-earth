@@ -57,25 +57,50 @@ export const createHexmapMenu = async (cpy: MenuModel, bal: MenuBit, ste: State)
 
   switch (src) {
 
+    //load geojson data from inside the network
     case ActMap.GEOJSON_HEXMAP:
 
-      bit = await ste.bus(ActDsk.INDEX_DISK, { src: './data/geojson/' })
-      lst = bit.dskBit.lst
+      lst = FS.readdirSync('./data/geojson/')
 
-      bit = await ste.bus(ActTrm.UPDATE_TERMINAL, { lst })
-      bit = bit.trmBit;
-      src = lst[bit.val];
+      //bit = await ste.bus(ActDsk.INDEX_DISK, { src: './data/geojson/' })
+      //lst = bit.dskBit.lst
 
-      idx = src.replace('.json', '');
+      bit = await ste.bus(ActGrd.UPDATE_GRID, { x: 0, y: 4, xSpan: 2, ySpan: 12 })
+      bit = await ste.bus(ActChc.OPEN_CHOICE, { dat: { clr0: Color.BLACK, clr1: Color.YELLOW }, src: Align.VERTICAL, lst, net: bit.grdBit.dat })
+      src = bit.chcBit.src;
 
-      bit = await ste.bus(ActDsk.READ_DISK, { src: './data/geojson/' + src, val: 1 })
-      dat = bit.dskBit.dat
+      src = FS.readFileSync('./data/geojson/' + src).toString()
+      dat = JSON.parse(src)
+
+      // idx = src.replace('.json', '');
+      //bit = await ste.bus(ActDsk.READ_DISK, { src: './data/geojson/' + src, val: 1 })
+      //dat = bit.dskBit.dat
 
       cpy.geoJsonNow = dat;
 
       bit = await ste.hunt(ActMnu.CREATE_HEXMAP_MENU, {})
       break;
 
+    case ActMap.ATLAS_HEXMAP:
+
+      lst = ['05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15']
+
+      bit = await ste.bus(ActGrd.UPDATE_GRID, { x: 0, y: 4, xSpan: 2, ySpan: 12 })
+      bit = await ste.bus(ActChc.OPEN_CHOICE, { dat: { clr0: Color.BLACK, clr1: Color.YELLOW }, src: Align.VERTICAL, lst, net: bit.grdBit.dat })
+      src = bit.chcBit.src;
+      
+      val = Number(src);
+
+      dat = cpy.geoJsonNow
+
+      bit = await ste.hunt(ActMap.ATLAS_HEXMAP, { dat, val: Number(val) })
+      dat = bit.mapBit.dat;
+
+      cpy.atlasNow = dat
+      debugger
+  
+      bit = await ste.hunt(ActMnu.CREATE_HEXMAP_MENU, {})
+      break;
 
 
     case ActMnu.HEXMAP_MENU:
@@ -128,26 +153,7 @@ export const createHexmapMenu = async (cpy: MenuModel, bal: MenuBit, ste: State)
 
 
 
-    case ActMap.ATLAS_HEXMAP:
 
-      lst = ['05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15']
-
-      bit = await ste.bus(ActTrm.UPDATE_TERMINAL, { lst })
-      bit = bit.trmBit;
-      src = lst[bit.val];
-
-      val = Number(src);
-
-      dat = cpy.geoJsonNow
-
-      bit = await ste.hunt(ActMap.ATLAS_HEXMAP, { dat, val: Number(val) })
-      dat = bit.mapBit.dat;
-
-      cpy.atlasNow = dat
-
-
-      bit = await ste.hunt(ActMnu.CREATE_HEXMAP_MENU, {})
-      break;
 
     case ActMap.SAVE_HEXMAP:
 
@@ -195,3 +201,4 @@ import * as SPACE from '../../val/space'
 
 import * as Color from '../../val/console-color';
 import * as Align from '../../val/align';
+import * as FS from 'fs';

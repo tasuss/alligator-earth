@@ -348,7 +348,7 @@ export const atlasHexmap = async (cpy: HexmapModel, bal: HexmapBit, ste: State) 
 
     dat.width = grid.pointWidth();
     dat.height = grid.pointHeight();
-    debugger
+    
 
     //what the heck juice
 

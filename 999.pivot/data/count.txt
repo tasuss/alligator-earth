@@ -1,5 +1,5 @@
-{"now":"sep-23-2023-4-19-pm","total":8719,"snow":3945}
-{"now":"sep-23-2023-3-32-pm","total":8669,"snow":3933}
+{"now":"sep-23-2023-6-29-pm","total":8752,"snow":3965}
+{"now":"sep-23-2023-5-31-pm","total":8724,"snow":3946}
 {"now":"sep-22-2023-9-50-pm","total":8717,"snow":3950}
 {"now":"sep-20-2023-7-28-pm","total":8506,"snow":3825}
 {"now":"sep-14-2023-1-17-am","total":8457,"snow":3749}

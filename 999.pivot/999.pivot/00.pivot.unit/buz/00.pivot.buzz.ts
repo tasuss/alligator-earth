@@ -10,7 +10,7 @@ var bit, val, idx, dex, lst, dat;
 
 export const initPivot = async (cpy: PivotModel, bal: PivotBit, ste: State) => {
 
-    if (bal.dat != null) bit = await ste.hunt(ActBus.INIT_BUS, { idx: cpy.idx, lst: [ActPvt], dat: bal.dat, src: bal.src })
+    if (bal.dat != null) bit = await ste.hunt(ActBus.INIT_BUS, { idx: cpy.idx, lst: [ ActPvt, ActDsk  ], dat: bal.dat, src: bal.src })
 
     if (bal.val == 1) patch(ste, ActMnu.INIT_MENU, bal)
 
