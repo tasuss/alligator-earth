@@ -19,8 +19,9 @@ export const updateConsole = async (cpy: ConsoleModel, bal: ConsoleBit, ste: Sta
    
     if ( bal.src == null ) bal.src = ''
 
+    dat.bit
     bal.src
-    debugger
+    
     
     dat.bit.log(bal.src)
 
@@ -87,7 +88,7 @@ export const readConsole = async (cpy: ConsoleModel, bal: ConsoleBit, ste: State
 export const writeConsole = async (cpy: ConsoleModel, bal: ConsoleBit, ste: State) => {
     
     bit = await ste.hunt(ActCol.WRITE_COLLECT, { idx: bal.idx, src: bal.src, dat: bal.dat, bit: ActCns.CREATE_CONSOLE })
-    ste.hunt(ActCns.UPDATE_CONSOLE, { idx: bal.idx })
+    ste.hunt(ActCns.UPDATE_CONSOLE, { idx: bal.idx, src: bal.src })
  
     if (bal.slv != null) bal.slv({ cnsBit: { idx: "write-console", dat: bit.clcBit.dat } });
     return cpy;

@@ -47,14 +47,18 @@ export const spaceScene = async (cpy: SceneModel, bal: SceneBit, ste: State) => 
     bit = await ste.bus(ActCvs.WRITE_CANVAS, { idx: 'cvs1', dat: { clr: Color.CYAN, net: bit.grdBit.dat }, })
 
     bit = await ste.bus(ActGrd.UPDATE_GRID, { x: 8, y: 0, xSpan: 2, ySpan: 12 })
-    bit = await ste.bus(ActCns.WRITE_CONSOLE, { idx:'cns00',  dat: {net: bit.grdBit.dat}  })
+    bit = await ste.bus(ActCns.WRITE_CONSOLE, { idx:'cns00', src:"alligator0", dat: {net: bit.grdBit.dat, src:"alligaor0"}  })
+    //bit = await ste.bus(ActCns.WRITE_CONSOLE, { idx:'cns00', src:"alligator1"})
+    //bit = await ste.bus(ActCns.WRITE_CONSOLE, { idx:'cns00', src:"alligator2"})
+    //bit = await ste.bus(ActCns.WRITE_CONSOLE, { idx:'cns00', src:"alligator3"})
+
 
     bit = await ste.bus(ActGrd.UPDATE_GRID, { x: 0, y: 4, xSpan: 2, ySpan: 12 })
     bit = await ste.bus(ActChc.OPEN_CHOICE, { dat: { clr0: Color.BLACK, clr1: Color.YELLOW }, src: Align.VERTICAL, lst, net: bit.grdBit.dat })
 
     src = bit.chcBit.src;
 
-    bit = await ste.bus(ActCns.WRITE_CONSOLE, { idx:'cns00', dat:{src}  })
+    bit = await ste.bus(ActCns.WRITE_CONSOLE, { idx:'cns00', src:'alligator1', dat:{src:'alligator1'}  })
 
 
 
