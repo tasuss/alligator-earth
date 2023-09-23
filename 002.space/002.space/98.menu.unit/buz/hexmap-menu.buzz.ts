@@ -65,6 +65,12 @@ export const hexmapMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
 
   switch (src) {
 
+    case ActMnu.CREATE_HEXMAP_MENU:
+      bit = await ste.hunt(ActMnu.CREATE_HEXMAP_MENU)
+      bit = await ste.hunt(ActMnu.HEXMAP_MENU)
+      break;
+
+
     case ActMap.OPEN_HEXMAP:
 
       //bit = await ste.bus(ActDsk.INDEX_DISK, { src: './data/hexmap/' })
@@ -179,10 +185,7 @@ export const hexmapMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
       bit = await ste.hunt(ActMnu.UPDATE_MENU)
       break;
 
-    case ActMnu.CREATE_HEXMAP_MENU:
-      bit = await ste.hunt(ActMnu.CREATE_HEXMAP_MENU)
-      bit = await ste.hunt(ActMnu.HEXMAP_MENU)
-      break;
+   
 
     case ActGeo.LOAD_GEOJSON:
 
@@ -245,8 +248,7 @@ import { HexmapModel } from "../../03.hexmap.unit/hexmap.model";
 import * as SHAPE from '../../val/shape'
 import MapBit from "../../03.hexmap.unit/fce/map.bit";
 
+import * as Color from '../../val/console-color';
 import * as Align from '../../val/align';
 
 import * as SPACE from '../../val/space'
-
-import * as Color from '../../val/console-color';

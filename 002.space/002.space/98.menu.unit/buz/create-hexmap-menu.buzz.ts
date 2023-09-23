@@ -4,27 +4,29 @@ import * as ActSpc from "../../00.space.unit/space.action";
 import * as ActFoc from "../../01.focus.unit/focus.action";
 import * as ActMap from "../../03.hexmap.unit/hexmap.action";
 import * as ActGeo from "../../02.geojson.unit/geojson.action";
+import * as ActChc from "../../act/choice.action";
+
 
 import * as ActDsk from "../../act/disk.action";
 import * as ActTrm from "../../act/terminal.action";
+
+import * as ActCns from "../../act/console.action";
+import * as ActGrd from "../../act/grid.action";
 
 var bit, lst, dex, idx, dat, src, val;
 export const createHexmapMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
 
   var mapMod: HexmapModel = ste.value.hexmap;
 
-  bit = await ste.bus(ActTrm.CLEAR_TERMINAL, { src: "-----------" })
+  bit = await ste.bus(ActCns.UPDATE_CONSOLE, { idx: 'cns00', src: "-----------" })
+  bit = await ste.bus(ActCns.UPDATE_CONSOLE, { idx: 'cns00', src: "Create Hexmap Menu" })
+  bit = await ste.bus(ActCns.UPDATE_CONSOLE, { idx: 'cns00', src: "-----------" })
+
+  bit = await ste.bus(ActCns.UPDATE_CONSOLE, { idx: 'cns00', src: "CURRENT:" + cpy.mapNomNow })
+  bit = await ste.bus(ActCns.UPDATE_CONSOLE, { idx: 'cns00', src: "SHAPE:" + cpy.mapShape })
 
 
-  bit = await ste.bus(ActTrm.WRITE_TERMINAL, { src: "-----------" })
-  bit = await ste.bus(ActTrm.WRITE_TERMINAL, { src: "Create Hexmap Menu" })
-  bit = await ste.bus(ActTrm.WRITE_TERMINAL, { src: "-----------" })
-
-  bit = await ste.bus(ActTrm.WRITE_TERMINAL, { src: "CURRENT:" + cpy.mapNomNow })
-
-  bit = await ste.bus(ActTrm.WRITE_TERMINAL, { src: "SHAPE:" + cpy.mapShape })
-
-  if ( cpy.shapeBit == null ){
+  if (cpy.shapeBit == null) {
 
     cpy.shapeBit = {}
 
@@ -36,25 +38,44 @@ export const createHexmapMenu = async (cpy: MenuModel, bal: MenuBit, ste: State)
     cpy.atlasNow = { size: 0 }
   }
 
-  bit = await ste.bus(ActTrm.WRITE_TERMINAL, { src: "SIZE:" + cpy.atlasNow.size })
+  bit = await ste.bus(ActCns.UPDATE_CONSOLE, { idx: 'cns00', src: "SIZE:" + cpy.atlasNow.size })
 
   if (cpy.geoJsonNow == null) {
     cpy.geoJsonNow = []
     cpy.geoJsonNow.coordinates = []
   }
 
-  bit = await ste.bus(ActTrm.WRITE_TERMINAL, { src: "GEOJSON:" + cpy.geoJsonNow.coordinates.length })
+  bit = await ste.bus(ActCns.UPDATE_CONSOLE, { idx: 'cns00', src: "GEOJSON:" + cpy.geoJsonNow.coordinates.length })
+  bit = await ste.bus(ActCns.UPDATE_CONSOLE, { idx: 'cns00', src: "SHAPE:" + JSON.stringify(cpy.shapeBit) })
 
-  bit = await ste.bus(ActTrm.WRITE_TERMINAL, { src: "SHAPE:" + JSON.stringify( cpy.shapeBit)  })
+  lst = [ActMap.NAME_HEXMAP, ActMap.SHAPE_HEXMAP, ActMap.GEOJSON_HEXMAP, ActMap.ATLAS_HEXMAP, ActMap.SAVE_HEXMAP, ActMap.STORE_HEXMAP, ActMap.TOOL_HEXMAP, ActMnu.HEXMAP_MENU]
 
-  var lst = [ActMap.NAME_HEXMAP, ActMap.SHAPE_HEXMAP, ActMap.GEOJSON_HEXMAP, ActMap.ATLAS_HEXMAP, ActMap.SAVE_HEXMAP, ActMap.STORE_HEXMAP, ActMap.TOOL_HEXMAP, ActMnu.HEXMAP_MENU]
+  bit = await ste.bus(ActGrd.UPDATE_GRID, { x: 0, y: 4, xSpan: 2, ySpan: 12 })
+  bit = await ste.bus(ActChc.OPEN_CHOICE, { dat: { clr0: Color.BLACK, clr1: Color.YELLOW }, src: Align.VERTICAL, lst, net: bit.grdBit.dat })
 
-  bit = await ste.bus(ActTrm.UPDATE_TERMINAL, { lst })
+  src = bit.chcBit.src;
 
-  bit = bit.trmBit;
-  var idx = lst[bit.val];
+  switch (src) {
 
-  switch (idx) {
+    case ActMap.GEOJSON_HEXMAP:
+
+      bit = await ste.bus(ActDsk.INDEX_DISK, { src: './data/geojson/' })
+      lst = bit.dskBit.lst
+
+      bit = await ste.bus(ActTrm.UPDATE_TERMINAL, { lst })
+      bit = bit.trmBit;
+      src = lst[bit.val];
+
+      idx = src.replace('.json', '');
+
+      bit = await ste.bus(ActDsk.READ_DISK, { src: './data/geojson/' + src, val: 1 })
+      dat = bit.dskBit.dat
+
+      cpy.geoJsonNow = dat;
+
+      bit = await ste.hunt(ActMnu.CREATE_HEXMAP_MENU, {})
+      break;
+
 
 
     case ActMnu.HEXMAP_MENU:
@@ -100,30 +121,12 @@ export const createHexmapMenu = async (cpy: MenuModel, bal: MenuBit, ste: State)
       cpy.shapeBit = dat;
       cpy.sizeNow = dat.length
 
-      bit = await ste.bus(ActTrm.WRITE_TERMINAL, { va:7, src: "SHAPE:" + JSON.stringify( cpy.shapeBit ) })
+      bit = await ste.bus(ActTrm.WRITE_TERMINAL, { va: 7, src: "SHAPE:" + JSON.stringify(cpy.shapeBit) })
 
       bit = await ste.hunt(ActMnu.CREATE_HEXMAP_MENU, {})
       break;
 
 
-    case ActMap.GEOJSON_HEXMAP:
-
-      bit = await ste.bus(ActDsk.INDEX_DISK, { src: './data/geojson/' })
-      lst = bit.dskBit.lst
-
-      bit = await ste.bus(ActTrm.UPDATE_TERMINAL, { lst })
-      bit = bit.trmBit;
-      src = lst[bit.val];
-
-      idx = src.replace('.json', '');
-
-      bit = await ste.bus(ActDsk.READ_DISK, { src: './data/geojson/' + src, val: 1 })
-      dat = bit.dskBit.dat
-
-      cpy.geoJsonNow = dat;
-
-      bit = await ste.hunt(ActMnu.CREATE_HEXMAP_MENU, {})
-      break;
 
     case ActMap.ATLAS_HEXMAP:
 
@@ -157,7 +160,7 @@ export const createHexmapMenu = async (cpy: MenuModel, bal: MenuBit, ste: State)
 
     case ActMap.STORE_HEXMAP:
 
-      bit = await ste.hunt(ActMap.STORE_HEXMAP, { dat:cpy.shapeBit })
+      bit = await ste.hunt(ActMap.STORE_HEXMAP, { dat: cpy.shapeBit })
 
       bit = await ste.bus(ActTrm.WRITE_TERMINAL, { src: JSON.stringify(bit) })
       break;
@@ -189,5 +192,6 @@ import * as SHAPE from '../../val/shape'
 import MapBit from "../../03.hexmap.unit/fce/map.bit";
 
 import * as SPACE from '../../val/space'
-import { cp } from "fs"; import { json } from "stream/consumers";
 
+import * as Color from '../../val/console-color';
+import * as Align from '../../val/align';
