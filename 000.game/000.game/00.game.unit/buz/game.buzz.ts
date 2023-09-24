@@ -10,14 +10,14 @@ var bit, val, idx, dex, lst, dat;
 export const initGame = async (cpy: GameModel, bal: GameBit, ste: State) => {
 
     console.log("live alligators 00013")
-    
+
     if (bal.dat != null) bit = await ste.hunt(ActBus.INIT_BUS, { idx: cpy.idx, lst: [ActGam], dat: bal.dat, src: bal.src })
-    
+
 
     //if (bal.val == 1) patch(ste, ActMnu.INIT_MENU, bal);
 
-    
-    openGame( cpy, bal, ste )
+
+    openGame(cpy, bal, ste)
 
     if (bal.slv != null) bal.slv({ intBit: { idx: "init-Game" } });
 
@@ -27,8 +27,65 @@ export const initGame = async (cpy: GameModel, bal: GameBit, ste: State) => {
 
 export const openGame = async (cpy: GameModel, bal: GameBit, ste: State) => {
 
+    //open saved games
 
-    bit = await ste.hunt( ActScn.SPACE_SCENE, {} );
+    const sqlite3 = require('sqlite3').verbose();
+
+    let db = new sqlite3.Database('./data/sqlite.db', (err) => {
+        if (err) {
+            console.error(err.message);
+            debugger
+        }
+        console.log('Connected to the my database.');
+
+        let sql = `SELECT 
+        name
+    FROM 
+        sqlite_schema
+    WHERE 
+        type ='table' AND 
+        name NOT LIKE 'sqlite_%';
+        `;
+
+        db.all(sql, [], (err, rows) => {
+            if (err) {
+                throw err;
+            }
+            rows.forEach((row) => {
+                console.log(row.name);
+                
+            });
+        });
+
+        // close the database connection
+        db.close();
+
+    });
+
+
+
+    //const db = new sqlite3.Database(':memory:');
+
+    //db.serialize(() => {
+    //    db.run("CREATE TABLE lorem (info TEXT)");
+    //    debugger
+
+    //    const stmt = db.prepare("INSERT INTO lorem VALUES (?)");
+    //    for (let i = 0; i < 10; i++) {
+    //        stmt.run("Ipsum " + i);
+    //    }
+    //    stmt.finalize();
+
+    //    db.each("SELECT rowid AS id, info FROM lorem", (err, row) => {
+    //        console.log(row.id + ": " + row.info);
+    //    });
+    //});
+
+    //db.close();
+    //if ( key == null) localStorage.setItem('myFirstKey', 'myFirstValue');
+
+
+    bit = await ste.hunt(ActScn.TITLE_SCENE, {});
 
     if (bal.slv != null) bal.slv({ aaaBit: { idx: "open-Game" } });
 
@@ -39,7 +96,7 @@ export const closeGame = async (cpy: GameModel, bal: GameBit, ste: State) => {
 
 
     console.log("closing Game")
-    
+
     //bit = await ste.hunt( ActScn.TITLE_SCENE, {} );
 
     if (bal.slv != null) bal.slv({ aaaBit: { idx: "close-Game" } });
@@ -84,3 +141,4 @@ import { GameModel } from "../game.model";
 import GameBit from "../fce/game.bit";
 import State from "../../99.core/state";
 
+import { LocalStorage } from "node-localstorage";

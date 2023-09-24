@@ -1,0 +1,9 @@
+export const VISAGE: string = "visage";
+export const SURFACE: string = "surface";
+export const CONTAINER: string = "container";
+export const GRAPHIC: string = "graphic";
+export const TEXT: string = "text";
+export const SPRITE: string = "sprite";
+export const HEXAGON: string = "hexagon";
+export const VIDEO: string = "video";
+export const LOOP: string = "loop";

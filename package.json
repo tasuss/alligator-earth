@@ -1,7 +1,7 @@
 {
   "name": "all-american-alligator-delivery-system",
   "version": "0.0.0",
-  "private": true,
+  "private": false,
   "description": "This is the root package. Do not build individual packages here",
   "scripts": {
     "play": "pnpm --filter=game play",
@@ -28,6 +28,7 @@
   "homepage": "https://github.com/tasuss",
   "workspaces": [
     "011.earth/*",
+    "001.store/*",
     "002.space/*",
     "998.terminal/*",
     "999.pivot/*"
