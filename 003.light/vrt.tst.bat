@@ -1,0 +1,1 @@
+npm test --match='*light'
