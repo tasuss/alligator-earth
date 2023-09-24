@@ -27,9 +27,8 @@
   },
   "homepage": "https://github.com/tasuss",
   "workspaces": [
-    "001.time/*",
+    "011.earth/*",
     "002.space/*",
-    "003.light/*",
     "998.terminal/*",
     "999.pivot/*"
   ],

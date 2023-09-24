@@ -1,0 +1,72 @@
+ACHROMATIC LIGHT: 
+bright genesis specktrum batch bit
+ACHROMATIC BLOOD: 
+red first specktrum batch bit
+CHROMATIC VIRID: 
+green third specktrum batch bit
+CHROMATIC MARINE:  
+blue second specktrum batch bit
+CHROMATIC STRAW: 
+yellow fourth specktrum batch bit
+CHROMATIC INK:
+black fifth specktrum batch bit
+CHROMATIC NOBEL:
+purple sixth specktrum batch bit
+CHROMATIC AMBER:
+orange seventh specktrum batch bit
+CHROMATIC PEACH:
+pink eight specktrum batch bit
+CHROMATIC COFFEE:
+brown ninth specktrum batch bit
+ASYMMETRICAL ACHROMATIC:
+light grey tenth specktrum batch bit
+BOOTLEGGED  ACHROMATIC:
+grey eleventh specktrum batch bit
+CRIMINAL ACHROMATIC:
+grey twelfth specktrum batch bit
+DEFUNCT ACHROMATIC:
+grey thirteenth specktrum batch bit
+EXECRABLE ACHROMATIC:
+grey fourteenth specktrum batch bit
+FALLACIOUS ACHROMATIC:
+grey fifteen specktrum batch bit
+GROTESQUE ACHROMATIC:
+grey sixteenth specktrum batch bit
+HORRIBLE ACHROMATIC:
+grey seventeenth specktrum batch bit
+IRRATIONAL ACHROMATIC:
+grey eighteenth specktrum batch bit
+JEJUNE ACHROMATIC:
+grey nineteenth specktrum batch bit
+KLEPTOMANIACAL ACHROMATIC:
+grey twentieth specktrum batch bit
+LOATHSOME ACHROMATIC:
+grey twenty first specktrum batch bit
+MORDANT ACHROMATIC:
+grey twenty second specktrum batch bit
+NASTY ACHROMATIC:
+grey twenty first specktrum batch bit
+ODIOUS ACHROMATIC:
+grey twenty second specktrum batch bit
+PROFANE ACHROMATIC:
+grey twenty third specktrum batch bit
+QUIXOTIC ACHROMATIC:
+grey twenty fourth specktrum batch bit
+RAPACIOUS ACHROMATIC:
+grey twenty fifth specktrum batch bit
+SLANDEROUS ACHROMATIC:
+grey twenty sixth specktrum batch bit
+TYRANNICAL ACHROMATIC:
+grey twenty eight specktrum batch bit
+UNBORN ACHROMATIC:
+grey twenty ninth specktrum batch bit
+VEHEMENT ACHROMATIC:
+grey thirtieth specktrum batch bit
+WORTHLESS ACHROMATIC:
+grey thirty first specktrum batch bit
+XENOPHOBIC ACHROMATIC:
+grey thirty second specktrum batch bit
+YUCKY ACHROMATIC:
+grey thirty third specktrum batch bit
+ZERONIC ACHROMATIC:
+grey thirty fourth specktrum batch bit

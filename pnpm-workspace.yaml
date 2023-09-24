@@ -1,7 +1,6 @@
 packages:
  - "000.game/**"
- - "001.time/**"
+ - "011.earth/**"
  - "002.space/**"
- - "003.light/**"
  - "998.terminal/**"
  - "999.pivot/**"

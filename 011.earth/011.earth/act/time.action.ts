@@ -1,0 +1,10 @@
+export const INIT_TIME = "[Time action] Init Time";
+export const UPDATE_TIME = "[Time action] Update Time";
+export const FORMAT_TIME = "[Format action] Format Time";
+export const NOW_TIME = "[Now action] Now Time";
+export const WRITE_TIME = "[Write action] Write Time";
+export const READ_TIME = "[Read action] Read Time";
+export const CREATE_TIME = "[Create action] Create Time";
+export const COMPARE_TIME = "[Compare action] Compare Time";
+export const REDUCE_TIME = "[Reduce action] Reduce Time";
+export const PUSH_TIME = "[Progress action] Push Time";
