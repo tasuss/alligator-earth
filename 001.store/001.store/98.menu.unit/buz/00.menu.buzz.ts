@@ -1,88 +1,105 @@
 import * as ActMnu from "../menu.action";
-import * as ActStr from "../../00.store.unit/store.action";
-import * as ActVrt from "../../act/vurt.action"
-
 import * as ActTrm from "../../act/terminal.action";
+import * as ActGrd from "../../act/grid.action";
+import * as ActCvs from "../../act/canvas.action"
+import * as ActCns from "../../act/console.action"
+import * as ActChc from "../../act/choice.action"
+
+import * as ActVrt from "../../act/vurt.action"
 
 var bit, lst, dex
 
 export const initMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
 
- if (bal == null) bal = { idx: null }
+    debugger
 
- bit = await ste.bus(ActTrm.INIT_TERMINAL, {})
+    if (bal == null) bal = { idx: null }
 
- updateMenu(cpy, bal, ste);
+    bit = await ste.bus(ActGrd.UPDATE_GRID, { x: 2, y: 0, xSpan: 6, ySpan: 12 })
+    bit = await ste.bus(ActCvs.WRITE_CANVAS, { idx: 'cvs1', dat: { clr: Color.CYAN, net: bit.grdBit.dat }, })
 
- return cpy;
+    bit = await ste.bus(ActGrd.UPDATE_GRID, { x: 8, y: 0, xSpan: 2, ySpan: 12 })
+    bit = await ste.bus(ActCns.WRITE_CONSOLE, { idx:'cns00',  dat: {net: bit.grdBit.dat}  })
+
+    updateMenu(cpy, bal, ste);
+
+    return cpy;
 };
 
 export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
 
- bit = await ste.bus(ActTrm.WRITE_TERMINAL, { src: "-----------", bit: 'local' })
+    lst = [ActTrm.INPUT_TERMINAL, ActTrm.UPDATE_TERMINAL, ActTrm.EDIT_TERMINAL]
 
- bit = await ste.bus(ActTrm.WRITE_TERMINAL, { src: "STORE PIVOT V0", bit: 'local' })
- bit = await ste.bus(ActTrm.WRITE_TERMINAL, { src: "-----------", bit: "local" })
-
- var lst = [ ActStr.UPDATE_STORE, ActStr.OPEN_STORE, ActStr.EDIT_STORE ]
-
- bit = await ste.bus(ActTrm.UPDATE_TERMINAL, { lst })
-
- bit = bit.trmBit;
- var idx = lst[bit.val];
-
- switch (idx) {
+    bit = await ste.bus(ActGrd.UPDATE_GRID, { x: 0, y: 4, xSpan: 2, ySpan: 12 })
+    bit = await ste.bus(ActChc.OPEN_CHOICE, { dat: { clr0: Color.BLACK, clr1: Color.YELLOW }, src: Align.VERTICAL, lst, net: bit.grdBit.dat })
 
 
- case ActStr.OPEN_STORE:
- bit = await ste.hunt(ActStr.OPEN_STORE, {})
- break;
 
+    //bit = await ste.hunt(ActTrm.PRINT_TERMINAL, { src: "-----------", bit: 'local' })
+    //bit = await ste.hunt(ActTrm.PRINT_TERMINAL, { src: "TERMINAL PIVOT V0", bit: 'local' })
+    //bit = await ste.hunt(ActTrm.PRINT_TERMINAL, { src: "-----------", bit: "local" })
 
- case ActStr.UPDATE_STORE:
- bit = await ste.hunt( ActStr.UPDATE_STORE, {})
- break;
+    //var lst = [ActTrm.INPUT_TERMINAL, ActTrm.UPDATE_TERMINAL, ActTrm.EDIT_TERMINAL]
 
+    //bit = await ste.bus(ActTrm.OPTION_TERMINAL, { lst })
 
- case ActStr.EDIT_STORE:
+    //bit = bit.trmBit;
+    //var idx = lst[bit.val];
 
- bit = await ste.hunt( ActStr.EDIT_STORE, {})
- bit = await ste.bus(ActTrm.WRITE_TERMINAL, { src: "PATCHING...", bit: 'local' })
- bit = await ste.bus(ActTrm.WRITE_TERMINAL, { src: "-----------", bit: "local" })
+   // switch (idx) {
 
- lst = [ActStr.PATCH_STORE]
+     //   case ActTrm.UPDATE_TERMINAL:
+       //     bit = await ste.hunt(ActTrm.UPDATE_TERMINAL, {})
+         //   break;
 
- bit = await ste.bus(ActTrm.UPDATE_TERMINAL, { lst })
+    
 
- bit = await ste.hunt( ActStr.PATCH_STORE, {})
+      //  case ActTrm.INPUT_TERMINAL:
 
- break;
+        //    bit = await ste.hunt(ActTrm.INPUT_TERMINAL, { lst: ["", "", "Input..."] });
+        //    idx = bit.trmBit.src;
 
- default:
- bit = await await ste.bus(ActTrm.CLOSE_TERMINAL, {})
- break;
- }
+        //    bit = await ste.hunt(ActTrm.PRINT_TERMINAL, { src: "" })
+        //    bit = await ste.hunt(ActTrm.PRINT_TERMINAL, { src: "" })
+        //    bit = await ste.hunt(ActTrm.PRINT_TERMINAL, { src: "-input-" + idx })
 
- updateMenu(cpy, bal, ste);
+            //bit = await ste.hunt(ActTrm.EDIT_TERMINAL, {})
+            // bit = await ste.bus(ActTrm.WRITE_TERMINAL, { src: "PATCHING...", bit: 'local' })
+            // bit = await ste.bus(ActTrm.WRITE_TERMINAL, { src: "-----------", bit: "local" })
 
- return cpy;
+            //lst = [ActTrm.PATCH_TERMINAL]
+
+            //bit = await ste.bus(ActTrm.UPDATE_TERMINAL, { lst })
+
+            //bit = await ste.hunt( ActTrm.PATCH_TERMINAL, {})
+
+        //    break;
+
+       // default:
+            //bit = await await ste.bus(ActTrm.CLOSE_TERMINAL, {})
+         //   break;
+    //}
+
+   // updateMenu(cpy, bal, ste);
+
+    return cpy;
 };
 
 export const testMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
- return cpy;
+    return cpy;
 };
 
 export const closeMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
 
- await ste.bus(ActTrm.CLOSE_TERMINAL, {})
+    //await ste.bus(ActTrm.CLOSE_TERMINAL, {})
 
- return cpy;
+    return cpy;
 };
 
 export const shadeMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
 
 
- return cpy;
+    return cpy;
 };
 
 
@@ -90,9 +107,14 @@ var patch = (ste, type, bale) => ste.dispatch({ type, bale });
 
 
 export const visageMenu = (cpy: MenuModel, bal: MenuBit, ste: State) => {
- debugger
- return cpy;
+    debugger
+    return cpy;
 };
 import { MenuModel } from "../menu.model";
 import MenuBit from "../fce/menu.bit";
 import State from "../../99.core/state";
+
+
+import * as Grid from '../../val/grid';
+import * as Align from '../../val/align'
+import * as Color from '../../val/console-color';

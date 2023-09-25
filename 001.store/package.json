@@ -3,8 +3,9 @@
     "scripts": {
         "test": "ava",
         "play": "pnpm build && node ./run.cjs",
-        "build": "tsc -b 002.space",
-        "watch": "tsc -b 002.space -w"
+        "build": "tsc -b 001.store",
+        "watch": "tsc -b 001.store -w",
+        "dev": "tsc -b 001.store && nodemon -I run.cjs -t development"
     },
     "main": "main.js",
     "devDependencies": {

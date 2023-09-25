@@ -1,55 +1,122 @@
-var path = require("path");
-var absolutePath = path.resolve("./vrt.wrk.bat");
+const path = require('path');
+const fs = require('fs');
+const MQTT = require('async-mqtt');
+const { program } = require('commander');
 
-const spawn = require("child_process").spawn;
-const bat = spawn("cmd.exe", ["/c", absolutePath]);
+const PORT = 1001;
 
-bat.stdout.on("data", (data) => console.info(String.fromCharCode.apply(null, data)));
-bat.stderr.on("data", (data) => console.error(String.fromCharCode.apply(null, data)));
-bat.on("exit", (code) => process.nextTick(init));
+let TERMINAL;
+let STORE;
 
-var init = async () => {
+var idx;
+program.option('--first').option('-t, --separator <char>');
+program.parse(process.argv);
+const options = program.opts();
+if (options['separator'] != null) idx = options['separator'];
 
- const aedes = require("aedes")();
- const server = require("net").createServer(aedes.handle);
- const port = 1012;
+const title = idx;
 
- server.listen(port, function () {
- console.log("server started and listening on port ", port);
- open(port)
- });
- 
+let dev = false
+
+if (title == 'development') dev = true
+
+const aedes = require('aedes')();
+const server = require('net').createServer(aedes.handle);
+
+server.listen(PORT, async () => {
+    console.log('server started and listening on port ', PORT);
+    init(PORT);
+});
+
+
+const init = async (prt) => {
+
+    console.log("inits")
+
+    const local = 'mqtt://localhost:' + prt;
+    const localBit = { idx: 'local', src: local };
+
+    
+
+    STORE = require(path.resolve('./dist/001.store/hunt'));
+    STORE_ACTION = require(path.resolve('./dist/001.store/00.store.unit/store.action'));
+
+    TERMINAL = require(path.resolve('../998.terminal/dist/998.terminal/hunt'));
+    TERMINAL_ACTION = require(path.resolve('../998.terminal/dist/998.terminal/00.terminal.unit/terminal.action'));
+
+    debugger
+    
+    await TERMINAL.hunt(TERMINAL_ACTION.INIT_TERMINAL, { dat: MQTT, src: local });
+    await STORE.hunt(STORE_ACTION.INIT_STORE, { val: 1, dat: MQTT, src: localBit });
+
 };
 
-var open = async ( prt ) =>{
 
- var bit;
 
- 
- require("../998.work/work/999.vurt");
- require("../001.store/001.store/000.quest.store");
+const close = async () => {
 
- const MQTT = require("async-mqtt");
 
- var title = command_line();
+    var run = fs.readFileSync("./run.cjs").toString()
+    fs.writeFileSync("./run.cjs", run)
 
- var local = 'mqtt:**localhost:' + prt;
-
- var localBit = { idx: 'local', src: local }
-
- bit = await VURT.hunt(VURT.ActVrt.INIT_VURT , {dat: MQTT, src:local} );
- bit = await STORE.hunt( STORE.ActStr.INIT_STORE , { val: 1, dat: MQTT, src:  [localBit]  });
- 
 }
 
-var command_line = () => {
- var idx;
- const { program } = require("commander");
- program.option("--first").option("-t, --separator <char>");
- program.parse(process.argv);
- const options = program.opts();
- if (options["separator"] != null) idx = options["separator"];
- return idx;
-};
 
+if (dev == false) return
+
+console.log("deving...")
+const { exec } = require('child_process');
+const { resolve } = require('path');
+
+process.chdir("../");
+
+var pivot = exec("pnpm watch")
+
+process.chdir("./000.game");
+
+pivot.stderr.on('data', function (data) {
+    //console.log('aaads stderr: ' + data.toString());
+});
+
+let errored = false
+let working = false
+
+pivot.stdout.on('data', async (data) => {
+    if (data.length < 3) return
+
+    if (data.includes('Watching for file changes.') == false) return
+    if (data.includes('Found 0 errors.') == true) {
+
+        if (errored == false) {
+
+            if (working == false) {
+
+                setTimeout(() => working = true, 3333)
+
+                return
+            }
+
+            bit = await close()
+            bit = await init(PORT)
+
+            return
+        }
+
+        errored = false
+
+        //now reset the game
+        bit = await close()
+        bit = await init(PORT)
+
+        return
+
+    }
+
+
+    if (data.includes('Debugger') == true) return
+    data
+    errored = true;
+
+
+});
 
