@@ -1,4 +1,6 @@
 import * as ActMnu from "../menu.action";
+import * as ActStr from "../../00.store.unit/store.action";
+
 import * as ActTrm from "../../act/terminal.action";
 import * as ActGrd from "../../act/grid.action";
 import * as ActCvs from "../../act/canvas.action"
@@ -8,14 +10,14 @@ import * as ActBlk from "../../act/block.action"
 
 import * as ActVrt from "../../act/vurt.action"
 
-var bit, lst, dex
+let bit, lst, dex, src
 
 export const initMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
 
     if (bal == null) bal = { idx: null }
 
     bit = await ste.bus(ActGrd.UPDATE_GRID, { x: 2, y: 3, xSpan: 2, ySpan: 1 })
-    bit = await ste.bus(ActBlk.WRITE_BLOCK, { idx: 'blk0', src:'Store Menu...', dat: {  clr: Color.CYAN, net: bit.grdBit.dat }, })
+    bit = await ste.bus(ActBlk.WRITE_BLOCK, { idx: 'blk0', src: 'Store Menu...', dat: { clr: Color.CYAN, net: bit.grdBit.dat }, })
 
     updateMenu(cpy, bal, ste);
 
@@ -24,11 +26,17 @@ export const initMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
 
 export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
 
-    lst = [ActTrm.INPUT_TERMINAL, ActTrm.UPDATE_TERMINAL, ActTrm.EDIT_TERMINAL]
+    lst = [ActStr.OPEN_STORE ]
 
     bit = await ste.bus(ActGrd.UPDATE_GRID, { x: 2, y: 4, xSpan: 4, ySpan: 8 })
     bit = await ste.bus(ActChc.OPEN_CHOICE, { dat: { clr0: Color.BLACK, clr1: Color.YELLOW }, src: Align.VERTICAL, lst, net: bit.grdBit.dat })
 
+    src = bit.chcBit.src
+
+    bit = await ste.hunt(ActBlk.WRITE_BLOCK, { idx: 'blk0', src })
+
+
+    updateMenu(cpy, bal, ste);
 
 
     //bit = await ste.hunt(ActTrm.PRINT_TERMINAL, { src: "-----------", bit: 'local' })
@@ -42,41 +50,41 @@ export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
     //bit = bit.trmBit;
     //var idx = lst[bit.val];
 
-   // switch (idx) {
+    // switch (idx) {
 
-     //   case ActTrm.UPDATE_TERMINAL:
-       //     bit = await ste.hunt(ActTrm.UPDATE_TERMINAL, {})
-         //   break;
+    //   case ActTrm.UPDATE_TERMINAL:
+    //     bit = await ste.hunt(ActTrm.UPDATE_TERMINAL, {})
+    //   break;
 
-    
 
-      //  case ActTrm.INPUT_TERMINAL:
 
-        //    bit = await ste.hunt(ActTrm.INPUT_TERMINAL, { lst: ["", "", "Input..."] });
-        //    idx = bit.trmBit.src;
+    //  case ActTrm.INPUT_TERMINAL:
 
-        //    bit = await ste.hunt(ActTrm.PRINT_TERMINAL, { src: "" })
-        //    bit = await ste.hunt(ActTrm.PRINT_TERMINAL, { src: "" })
-        //    bit = await ste.hunt(ActTrm.PRINT_TERMINAL, { src: "-input-" + idx })
+    //    bit = await ste.hunt(ActTrm.INPUT_TERMINAL, { lst: ["", "", "Input..."] });
+    //    idx = bit.trmBit.src;
 
-            //bit = await ste.hunt(ActTrm.EDIT_TERMINAL, {})
-            // bit = await ste.bus(ActTrm.WRITE_TERMINAL, { src: "PATCHING...", bit: 'local' })
-            // bit = await ste.bus(ActTrm.WRITE_TERMINAL, { src: "-----------", bit: "local" })
+    //    bit = await ste.hunt(ActTrm.PRINT_TERMINAL, { src: "" })
+    //    bit = await ste.hunt(ActTrm.PRINT_TERMINAL, { src: "" })
+    //    bit = await ste.hunt(ActTrm.PRINT_TERMINAL, { src: "-input-" + idx })
 
-            //lst = [ActTrm.PATCH_TERMINAL]
+    //bit = await ste.hunt(ActTrm.EDIT_TERMINAL, {})
+    // bit = await ste.bus(ActTrm.WRITE_TERMINAL, { src: "PATCHING...", bit: 'local' })
+    // bit = await ste.bus(ActTrm.WRITE_TERMINAL, { src: "-----------", bit: "local" })
 
-            //bit = await ste.bus(ActTrm.UPDATE_TERMINAL, { lst })
+    //lst = [ActTrm.PATCH_TERMINAL]
 
-            //bit = await ste.hunt( ActTrm.PATCH_TERMINAL, {})
+    //bit = await ste.bus(ActTrm.UPDATE_TERMINAL, { lst })
 
-        //    break;
+    //bit = await ste.hunt( ActTrm.PATCH_TERMINAL, {})
 
-       // default:
-            //bit = await await ste.bus(ActTrm.CLOSE_TERMINAL, {})
-         //   break;
+    //    break;
+
+    // default:
+    //bit = await await ste.bus(ActTrm.CLOSE_TERMINAL, {})
+    //   break;
     //}
 
-   // updateMenu(cpy, bal, ste);
+    // updateMenu(cpy, bal, ste);
 
     return cpy;
 };

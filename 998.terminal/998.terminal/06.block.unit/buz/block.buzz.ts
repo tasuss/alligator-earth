@@ -33,8 +33,7 @@ export const updateBlock = async (cpy: BlockModel, bal: BlockBit, ste: State) =>
 
 export const createBlock = (cpy: BlockModel, bal: BlockBit, ste: State) => {
     
-    let termMod: TerminalModel = ste.value.terminal;
-
+ 
     let blessed = ste.value.terminal.blessed
 
     var dat: BoxBit = { idx: bal.idx, src:bal.src, bit:null, net:null }

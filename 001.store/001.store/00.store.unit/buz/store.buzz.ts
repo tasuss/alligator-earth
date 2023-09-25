@@ -10,11 +10,8 @@ var bit, val, idx, dex, lst, dat;
 
 export const initStore = async (cpy: StoreModel, bal: StoreBit, ste: State) => {
 
-
  if (bal.dat != null) bit = await ste.hunt(ActBus.INIT_BUS, { idx: cpy.idx, lst: [ActStr], dat: bal.dat, src: bal.src })
-
  if (bal.val == 1) patch(ste, ActMnu.INIT_MENU, bal);
-
  if (bal.slv != null) bal.slv({ intBit: { idx: "init-store" } });
 
  return cpy;
@@ -22,36 +19,7 @@ export const initStore = async (cpy: StoreModel, bal: StoreBit, ste: State) => {
 
 export const updateStore = (cpy: StoreModel, bal: StoreBit, ste: State) => {
 
- const { exec } = require('child_process');
 
- exec('tsc -b 001.store', async (err, stdout, stderr) => {
- if (err) {
- console.error(`exec error: ${err}`);
- }
-
- process.chdir("../999.vurt");
- bit = await ste.bus(ActVrt.BUNDLE_VURT, { src: "001.store" });
- process.chdir("../001.store");
-
- bit = await ste.bus(ActDsk.READ_DISK, { src: './work/001.store.js' })
- var store = bit.dskBit.dat;
-
- bit = await ste.bus(ActDsk.WRITE_DISK, { src: '../gillisse/public/jsx/001.store.js', dat: store })
-
- bit = await ste.bus(ActDsk.READ_DISK, { src: './index.html' })
- var html = bit.dskBit.dat;
-
- bit = await ste.bus(ActDsk.READ_DISK, { src: './index.js' })
- var index = bit.dskBit.dat;
-
- bit = await ste.bus(ActDsk.WRITE_DISK, { src: '../gillisse/public/jsx/index.js', dat: index })
- bit = await ste.bus(ActDsk.WRITE_DISK, { src: '../gillisse/index.html', dat: html })
-
- setTimeout(() => {
- if (bal.slv != null) bal.slv({ strBit: { idx: "update-store" } });
- }, 3);
-
- });
 
  return cpy;
 };
@@ -62,7 +30,7 @@ export const openStore = async (cpy: StoreModel, bal: StoreBit, ste: State) => {
     
     const sqlite3 = require('sqlite3').verbose();
 
-    let db = new sqlite3.Database('./data/sqlite.db', (err) => {
+    let db = new sqlite3.Database('./data/alligator-earth.db', (err) => {
         if (err) {
             console.error(err.message);
             debugger

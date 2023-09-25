@@ -20,17 +20,21 @@ let firstLoad = false;
 
 export const initTerminal = async (cpy: TerminalModel, bal: TerminalBit, ste: State) => {
 
+  
+
   if ( firstLoad == true ) return
   firstLoad = true
 
 
+  
 
   if (bal.dat != null) bit = await ste.hunt(ActBus.INIT_BUS, { idx: cpy.idx, lst: [ActTrm, ActChc, ActTxt, ActCvs, ActPut, ActGrd, ActCns, ActBlk ], dat: bal.dat, src: bal.src })
 
-  
-  
-  bit = await ste.hunt( ActTrm.OPEN_TERMINAL, {} ) 
 
+  
+
+  //sets up the initial libraries tasked with responsive layouts
+  bit = await ste.hunt( ActTrm.OPEN_TERMINAL, {} ) 
 
 
   if (bal.val == 1) patch(ste, ActMnu.INIT_MENU, bal);  

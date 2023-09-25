@@ -7,6 +7,8 @@ import ConsoleUnit from "./03.console.unit/console.unit";
 import InputUnit from "./04.input.unit/input.unit";
 import ChoiceUnit from "./05.choice.unit/choice.unit";
 import BlockUnit from "./06.block.unit/block.unit";
+import LabelUnit from "./07.label.unit/label.unit";
+import LcdUnit from "./08.lcd.unit/lcd.unit";
 import ContainerUnit from "./10.container.unit/container.unit";
 import GraphicUnit from "./11.graphic.unit/graphic.unit";
 import HexagonUnit from "./12.hexagon.unit/hexagon.unit";
@@ -31,6 +33,10 @@ import Choice from "./05.choice.unit/fce/choice.interface";
 import { ChoiceModel } from "./05.choice.unit/choice.model";
 import Block from "./06.block.unit/fce/block.interface";
 import { BlockModel } from "./06.block.unit/block.model";
+import Label from "./07.label.unit/fce/label.interface";
+import { LabelModel } from "./07.label.unit/label.model";
+import Lcd from "./08.lcd.unit/fce/lcd.interface";
+import { LcdModel } from "./08.lcd.unit/lcd.model";
 import Container from "./10.container.unit/fce/container.interface";
 import { ContainerModel } from "./10.container.unit/container.model";
 import Graphic from "./11.graphic.unit/fce/graphic.interface";
@@ -49,7 +55,7 @@ import Bus from "./99.bus.unit/fce/bus.interface";
 import { BusModel } from "./99.bus.unit/bus.model";
 
 
-export const list: Array<any> = [TerminalUnit,GridUnit,CanvasUnit,ConsoleUnit,InputUnit,ChoiceUnit,BlockUnit,ContainerUnit,GraphicUnit,HexagonUnit,SpriteUnit,TextUnit,CollectUnit,MenuUnit,BusUnit];
+export const list: Array<any> = [TerminalUnit,GridUnit,CanvasUnit,ConsoleUnit,InputUnit,ChoiceUnit,BlockUnit,LabelUnit,LcdUnit,ContainerUnit,GraphicUnit,HexagonUnit,SpriteUnit,TextUnit,CollectUnit,MenuUnit,BusUnit];
 
 import * as reduceFromTerminal from "./00.terminal.unit/terminal.reduce";
 import * as reduceFromGrid from "./01.grid.unit/grid.reduce";
@@ -58,6 +64,8 @@ import * as reduceFromConsole from "./03.console.unit/console.reduce";
 import * as reduceFromInput from "./04.input.unit/input.reduce";
 import * as reduceFromChoice from "./05.choice.unit/choice.reduce";
 import * as reduceFromBlock from "./06.block.unit/block.reduce";
+import * as reduceFromLabel from "./07.label.unit/label.reduce";
+import * as reduceFromLcd from "./08.lcd.unit/lcd.reduce";
 import * as reduceFromContainer from "./10.container.unit/container.reduce";
 import * as reduceFromGraphic from "./11.graphic.unit/graphic.reduce";
 import * as reduceFromHexagon from "./12.hexagon.unit/hexagon.reduce";
@@ -76,6 +84,8 @@ console : reduceFromConsole.reducer,
 input : reduceFromInput.reducer, 
 choice : reduceFromChoice.reducer, 
 block : reduceFromBlock.reducer, 
+label : reduceFromLabel.reducer, 
+lcd : reduceFromLcd.reducer, 
 container : reduceFromContainer.reducer, 
 graphic : reduceFromGraphic.reducer, 
 hexagon : reduceFromHexagon.reducer, 
@@ -96,6 +106,8 @@ console : Console = new ConsoleModel();
 input : Input = new InputModel();
 choice : Choice = new ChoiceModel();
 block : Block = new BlockModel();
+label : Label = new LabelModel();
+lcd : Lcd = new LcdModel();
 container : Container = new ContainerModel();
 graphic : Graphic = new GraphicModel();
 hexagon : Hexagon = new HexagonModel();
