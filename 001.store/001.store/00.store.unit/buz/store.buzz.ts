@@ -61,18 +61,41 @@ export const updateStore = (cpy: StoreModel, bal: StoreBit, ste: State) => {
 
 export const openStore = async (cpy: StoreModel, bal: StoreBit, ste: State) => {
 
- bit = await ste.bus(ActDsk.COPY_DISK, { src: './vue', idx: '../gillisse/src' })
+    
+    const sqlite3 = require('sqlite3').verbose();
 
- bit = await ste.hunt(ActStr.RUN_STORE, {})
+    let db = new sqlite3.Database('./data/sqlite.db', (err) => {
+        if (err) {
+            console.error(err.message);
+            debugger
+        }
+        console.log('Connected to the my database.');
 
- const open = require('open')
+        let sql = `SELECT 
+        name
+    FROM 
+        sqlite_schema
+    WHERE 
+        type ='table' AND 
+        name NOT LIKE 'sqlite_%';
+        `;
 
- var loc = './vrt.opn.bat'
- bit = await open(loc)
+        db.all(sql, [], (err, rows) => {
+            if (err) {
+                throw err;
+            }
+            rows.forEach((row) => {
+                console.log(row.name);
+                
+            });
+        });
 
- setTimeout(() => {
- if (bal.slv != null) bal.slv({ strBit: { idx: "open-store" } });
- }, 33)
+        // close the database connection
+        db.close();
+
+    });
+
+
 
 
  return cpy;

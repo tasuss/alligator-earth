@@ -29,39 +29,6 @@ export const openGame = async (cpy: GameModel, bal: GameBit, ste: State) => {
 
     //open saved games
 
-    const sqlite3 = require('sqlite3').verbose();
-
-    let db = new sqlite3.Database('./data/sqlite.db', (err) => {
-        if (err) {
-            console.error(err.message);
-            debugger
-        }
-        console.log('Connected to the my database.');
-
-        let sql = `SELECT 
-        name
-    FROM 
-        sqlite_schema
-    WHERE 
-        type ='table' AND 
-        name NOT LIKE 'sqlite_%';
-        `;
-
-        db.all(sql, [], (err, rows) => {
-            if (err) {
-                throw err;
-            }
-            rows.forEach((row) => {
-                console.log(row.name);
-                
-            });
-        });
-
-        // close the database connection
-        db.close();
-
-    });
-
 
 
     //const db = new sqlite3.Database(':memory:');

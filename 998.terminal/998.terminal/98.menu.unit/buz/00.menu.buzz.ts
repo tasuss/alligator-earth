@@ -4,6 +4,7 @@ import * as ActGrd from "../../01.grid.unit/grid.action";
 import * as ActCvs from "../../02.canvas.unit/canvas.action"
 import * as ActCns from "../../03.console.unit/console.action"
 import * as ActChc from "../../05.choice.unit/choice.action"
+import * as ActBlk from "../../06.block.unit/block.action"
 
 import * as ActVrt from "../../act/vurt.action"
 
@@ -14,10 +15,10 @@ export const initMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
     if (bal == null) bal = { idx: null }
 
     bit = await ste.hunt(ActGrd.UPDATE_GRID, { x: 2, y: 0, xSpan: 6, ySpan: 12 })
-    bit = await ste.hunt(ActCvs.WRITE_CANVAS, { idx: 'cvs1', dat: { clr: Color.CYAN, net: bit.grdBit.dat }, })
+    bit = await ste.hunt(ActBlk.WRITE_BLOCK, { idx: 'blk1', dat: { clr: Color.CYAN, net: bit.grdBit.dat }, })
 
-    bit = await ste.hunt(ActGrd.UPDATE_GRID, { x: 8, y: 0, xSpan: 2, ySpan: 12 })
-    bit = await ste.hunt(ActCns.WRITE_CONSOLE, { idx:'cns00',  dat: {net: bit.grdBit.dat}  })
+    //bit = await ste.hunt(ActGrd.UPDATE_GRID, { x: 8, y: 0, xSpan: 2, ySpan: 12 })
+    //bit = await ste.hunt(ActCns.WRITE_CONSOLE, { idx:'cns00',  dat: { src:'init menu...', net:bit.grdBit.dat}  })
 
     updateMenu(cpy, bal, ste);
 
@@ -28,7 +29,7 @@ export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
 
     lst = [ActTrm.INPUT_TERMINAL, ActTrm.UPDATE_TERMINAL, ActTrm.EDIT_TERMINAL]
 
-    bit = await ste.hunt(ActGrd.UPDATE_GRID, { x: 0, y: 4, xSpan: 2, ySpan: 12 })
+    bit = await ste.hunt(ActGrd.UPDATE_GRID, { x: 2, y: 4, xSpan: 4, ySpan: 8 })
     bit = await ste.hunt(ActChc.OPEN_CHOICE, { dat: { clr0: Color.BLACK, clr1: Color.YELLOW }, src: Align.VERTICAL, lst, net: bit.grdBit.dat })
 
 
@@ -44,41 +45,41 @@ export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
     //bit = bit.trmBit;
     //var idx = lst[bit.val];
 
-   // switch (idx) {
+    // switch (idx) {
 
-     //   case ActTrm.UPDATE_TERMINAL:
-       //     bit = await ste.hunt(ActTrm.UPDATE_TERMINAL, {})
-         //   break;
+    //   case ActTrm.UPDATE_TERMINAL:
+    //     bit = await ste.hunt(ActTrm.UPDATE_TERMINAL, {})
+    //   break;
 
-    
 
-      //  case ActTrm.INPUT_TERMINAL:
 
-        //    bit = await ste.hunt(ActTrm.INPUT_TERMINAL, { lst: ["", "", "Input..."] });
-        //    idx = bit.trmBit.src;
+    //  case ActTrm.INPUT_TERMINAL:
 
-        //    bit = await ste.hunt(ActTrm.PRINT_TERMINAL, { src: "" })
-        //    bit = await ste.hunt(ActTrm.PRINT_TERMINAL, { src: "" })
-        //    bit = await ste.hunt(ActTrm.PRINT_TERMINAL, { src: "-input-" + idx })
+    //    bit = await ste.hunt(ActTrm.INPUT_TERMINAL, { lst: ["", "", "Input..."] });
+    //    idx = bit.trmBit.src;
 
-            //bit = await ste.hunt(ActTrm.EDIT_TERMINAL, {})
-            // bit = await ste.bus(ActTrm.WRITE_TERMINAL, { src: "PATCHING...", bit: 'local' })
-            // bit = await ste.bus(ActTrm.WRITE_TERMINAL, { src: "-----------", bit: "local" })
+    //    bit = await ste.hunt(ActTrm.PRINT_TERMINAL, { src: "" })
+    //    bit = await ste.hunt(ActTrm.PRINT_TERMINAL, { src: "" })
+    //    bit = await ste.hunt(ActTrm.PRINT_TERMINAL, { src: "-input-" + idx })
 
-            //lst = [ActTrm.PATCH_TERMINAL]
+    //bit = await ste.hunt(ActTrm.EDIT_TERMINAL, {})
+    // bit = await ste.bus(ActTrm.WRITE_TERMINAL, { src: "PATCHING...", bit: 'local' })
+    // bit = await ste.bus(ActTrm.WRITE_TERMINAL, { src: "-----------", bit: "local" })
 
-            //bit = await ste.bus(ActTrm.UPDATE_TERMINAL, { lst })
+    //lst = [ActTrm.PATCH_TERMINAL]
 
-            //bit = await ste.hunt( ActTrm.PATCH_TERMINAL, {})
+    //bit = await ste.bus(ActTrm.UPDATE_TERMINAL, { lst })
 
-        //    break;
+    //bit = await ste.hunt( ActTrm.PATCH_TERMINAL, {})
 
-       // default:
-            //bit = await await ste.bus(ActTrm.CLOSE_TERMINAL, {})
-         //   break;
+    //    break;
+
+    // default:
+    //bit = await await ste.bus(ActTrm.CLOSE_TERMINAL, {})
+    //   break;
     //}
 
-   // updateMenu(cpy, bal, ste);
+    // updateMenu(cpy, bal, ste);
 
     return cpy;
 };

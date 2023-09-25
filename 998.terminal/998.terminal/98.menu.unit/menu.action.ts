@@ -1,3 +1,4 @@
+import { ConsoleModel } from "998.terminal/03.console.unit/console.model";
 import { Action } from "../99.core/interface/action.interface";
 import MenuBit from "./fce/menu.bit";
 
@@ -26,15 +27,15 @@ export class CloseMenu implements Action {
   constructor(public bale: MenuBit) { }
 }
 
-export const SHADE_MENU = "[Shade action] Shade Menu";
- export class ShadeMenu implements Action {
- readonly type = SHADE_MENU;
+export const CONSOLE_MENU = "[Shade action] Console Menu";
+ export class ConsoleMenu implements Action {
+ readonly type = CONSOLE_MENU;
  constructor(public bale: MenuBit) {}
  }
  
-export const VISAGE_MENU = "[Visage action] Visage Menu";
- export class VisageMenu implements Action {
- readonly type = VISAGE_MENU;
+export const CANAVS_MENU = "[Canvas action] Canvas Menu";
+ export class CanvasMenu implements Action {
+ readonly type = CANAVS_MENU;
  constructor(public bale: MenuBit) {}
  }
 
@@ -47,6 +48,7 @@ export const VISAGE_MENU = "[Visage action] Visage Menu";
 
  
 export type Actions = InitMenu | UpdateMenu | TestMenu | CloseMenu
-| ShadeMenu
-| VisageMenu
+| ConsoleMenu
+| CanvasMenu
 | ContainerMenu
+| CanvasMenu

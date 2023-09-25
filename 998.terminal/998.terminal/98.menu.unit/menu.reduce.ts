@@ -18,9 +18,11 @@ export function reducer(model: MenuModel = new MenuModel(), act: Act.Actions, st
     case Act.CLOSE_MENU:
       return Buzz.closeMenu(clone(model), act.bale, state);
 
-    case Act.SHADE_MENU:
-      return Buzz.shadeMenu(clone(model), act.bale, state);
+    case Act.CONSOLE_MENU:
+      return Buzz.consoleMenu(clone(model), act.bale, state);
 
+    case Act.CANAVS_MENU:
+      return Buzz.canvasMenu(clone(model), act.bale, state);
 
     default:
       return model;
