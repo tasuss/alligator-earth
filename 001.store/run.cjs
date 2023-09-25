@@ -45,7 +45,7 @@ const init = async (prt) => {
 
     STORE = require(path.resolve('../001.store/dist/001.store/hunt'));
     STORE_ACTION = require(path.resolve('../001.store/dist/001.store/00.store.unit/store.action'));
-    await STORE.hunt(STORE_ACTION.INIT_STORE, { val: 1, dat: MQTT, src: localBit });
+    await STORE.hunt(STORE_ACTION.INIT_STORE, { val: 1, dat: MQTT, src: [localBit] });
 
 };
 

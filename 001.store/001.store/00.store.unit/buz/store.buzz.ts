@@ -10,12 +10,10 @@ var bit, val, idx, dex, lst, dat;
 
 export const initStore = async (cpy: StoreModel, bal: StoreBit, ste: State) => {
 
-    
 
  if (bal.dat != null) bit = await ste.hunt(ActBus.INIT_BUS, { idx: cpy.idx, lst: [ActStr], dat: bal.dat, src: bal.src })
 
  if (bal.val == 1) patch(ste, ActMnu.INIT_MENU, bal);
-
 
  if (bal.slv != null) bal.slv({ intBit: { idx: "init-store" } });
 

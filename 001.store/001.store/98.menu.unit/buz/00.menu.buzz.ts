@@ -4,6 +4,7 @@ import * as ActGrd from "../../act/grid.action";
 import * as ActCvs from "../../act/canvas.action"
 import * as ActCns from "../../act/console.action"
 import * as ActChc from "../../act/choice.action"
+import * as ActBlk from "../../act/block.action"
 
 import * as ActVrt from "../../act/vurt.action"
 
@@ -11,15 +12,10 @@ var bit, lst, dex
 
 export const initMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
 
-    debugger
-
     if (bal == null) bal = { idx: null }
 
-    bit = await ste.bus(ActGrd.UPDATE_GRID, { x: 2, y: 0, xSpan: 6, ySpan: 12 })
-    bit = await ste.bus(ActCvs.WRITE_CANVAS, { idx: 'cvs1', dat: { clr: Color.CYAN, net: bit.grdBit.dat }, })
-
-    bit = await ste.bus(ActGrd.UPDATE_GRID, { x: 8, y: 0, xSpan: 2, ySpan: 12 })
-    bit = await ste.bus(ActCns.WRITE_CONSOLE, { idx:'cns00',  dat: {net: bit.grdBit.dat}  })
+    bit = await ste.bus(ActGrd.UPDATE_GRID, { x: 2, y: 3, xSpan: 2, ySpan: 1 })
+    bit = await ste.bus(ActBlk.WRITE_BLOCK, { idx: 'blk0', src:'Store Menu...', dat: {  clr: Color.CYAN, net: bit.grdBit.dat }, })
 
     updateMenu(cpy, bal, ste);
 
@@ -30,7 +26,7 @@ export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
 
     lst = [ActTrm.INPUT_TERMINAL, ActTrm.UPDATE_TERMINAL, ActTrm.EDIT_TERMINAL]
 
-    bit = await ste.bus(ActGrd.UPDATE_GRID, { x: 0, y: 4, xSpan: 2, ySpan: 12 })
+    bit = await ste.bus(ActGrd.UPDATE_GRID, { x: 2, y: 4, xSpan: 4, ySpan: 8 })
     bit = await ste.bus(ActChc.OPEN_CHOICE, { dat: { clr0: Color.BLACK, clr1: Color.YELLOW }, src: Align.VERTICAL, lst, net: bit.grdBit.dat })
 
 
