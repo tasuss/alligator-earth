@@ -6,6 +6,7 @@ import * as ActCns from "../../03.console.unit/console.action"
 import * as ActChc from "../../05.choice.unit/choice.action"
 import * as ActBlk from "../../06.block.unit/block.action"
 import * as ActLab from "../../07.label.unit/label.action"
+import * as ActLcd from "../../08.lcd.unit/lcd.action"
 
 import * as ActVrt from "../../act/vurt.action"
 
@@ -16,18 +17,18 @@ export const initMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
     if (bal == null) bal = { idx: null }
 
     bit = await ste.hunt(ActGrd.UPDATE_GRID, { x: 2, y: 2, xSpan: 2, ySpan: 1 })
-    
-    bit = await ste.hunt(ActLab.WRITE_LABEL, { idx: 'lab0', src:'Terminal Menu...', dat: {  clr: Color.CYAN, net: bit.grdBit.dat }, })
+    bit = await ste.hunt(ActLcd.WRITE_LCD, { idx: 'lcd0', src:'earth', dat: {  clr: Color.CYAN, net: bit.grdBit.dat }, })
 
-    
+    //bit = await ste.hunt(ActGrd.UPDATE_GRID, { x: 2, y: 2, xSpan: 2, ySpan: 1 })
+    //bit = await ste.hunt(ActLab.WRITE_LABEL, { idx: 'lab0', src:'Terminal Menu...', dat: {  clr: Color.CYAN, net: bit.grdBit.dat }, })
 
-    bit = await ste.hunt(ActGrd.UPDATE_GRID, { x: 2, y: 3, xSpan: 2, ySpan: 1 })
-    bit = await ste.hunt(ActBlk.WRITE_BLOCK, { idx: 'blk0', src:'opening...', dat: {  clr: Color.CYAN, net: bit.grdBit.dat }, })
+    //bit = await ste.hunt(ActGrd.UPDATE_GRID, { x: 2, y: 3, xSpan: 2, ySpan: 1 })
+    //bit = await ste.hunt(ActBlk.WRITE_BLOCK, { idx: 'blk0', src:'opening...', dat: {  clr: Color.CYAN, net: bit.grdBit.dat }, })
 
     //bit = await ste.hunt(ActGrd.UPDATE_GRID, { x: 8, y: 0, xSpan: 2, ySpan: 12 })
     //bit = await ste.hunt(ActCns.WRITE_CONSOLE, { idx:'cns00',  dat: { src:'init menu...', net:bit.grdBit.dat}  })
 
-    updateMenu(cpy, bal, ste);
+   // updateMenu(cpy, bal, ste);
 
     return cpy;
 };
