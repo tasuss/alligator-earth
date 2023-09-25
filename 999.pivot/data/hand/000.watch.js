@@ -93,6 +93,57 @@ terminal.stderr.on('data', function (data) {
 
 console.log("building 002.space complete!!!")
 
+//STORE PIVOT
+process.chdir("../001.store");
+
+const store = exec("pnpm run watch")
+
+pivot.stdout.on('data', function (data) {
+
+  if (data.includes('File change detected')) return
+  if (data.length < 3) return
+  if (data.includes('Debugger') == true) return
+
+  if (data.includes('Found 0 errors')) {
+    sound(sfx4)
+  } else sound(sfx2)
+
+  console.log('pivot stdout: ' + data.toString());
+});
+
+pivot.stderr.on('data', function (data) {
+  console.log('pivot stderr: ' + data.toString());
+});
+
+console.log("building 001.store complete!!!")
+
+
+//EARTH PIVOT
+process.chdir("../011.earth");
+
+const earth = exec("pnpm run watch")
+
+pivot.stdout.on('data', function (data) {
+
+  if (data.includes('File change detected')) return
+  if (data.length < 3) return
+  if (data.includes('Debugger') == true) return
+
+  if (data.includes('Found 0 errors')) {
+    sound(sfx4)
+  } else sound(sfx2)
+
+  console.log('pivot stdout: ' + data.toString());
+});
+
+pivot.stderr.on('data', function (data) {
+  console.log('pivot stderr: ' + data.toString());
+});
+
+console.log("building 011.earth complete!!!")
+
+
+
 //PIVOT PIVOT
 process.chdir("../999.pivot");
 

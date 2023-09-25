@@ -10,7 +10,7 @@ let bit, val, idx, dex, lst, dat, src;
 
 export const titleScene = async (cpy: SceneModel, bal: SceneBit, ste: State) => {
 
-    lst = ['new', 'load', 'settings', 'quit']
+    lst = [ 'continue',  'new', 'load', 'settings', 'quit']
 
     bit = await ste.bus(ActGrd.UPDATE_GRID, { x: 2, y: 0, xSpan: 12, ySpan: 12 })
     bit = await ste.bus(ActCvs.WRITE_CANVAS, { idx: 'cvs1', dat: { clr: Color.BLACK, net: bit.grdBit.dat }, })
