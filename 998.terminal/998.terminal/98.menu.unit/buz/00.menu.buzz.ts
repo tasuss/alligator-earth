@@ -8,14 +8,14 @@ import * as ActBlk from "../../06.block.unit/block.action"
 
 import * as ActVrt from "../../act/vurt.action"
 
-var bit, lst, dex
+let bit, lst, dex, src
 
 export const initMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
 
     if (bal == null) bal = { idx: null }
 
-    bit = await ste.hunt(ActGrd.UPDATE_GRID, { x: 2, y: 0, xSpan: 6, ySpan: 12 })
-    bit = await ste.hunt(ActBlk.WRITE_BLOCK, { idx: 'blk1', dat: { clr: Color.CYAN, net: bit.grdBit.dat }, })
+    bit = await ste.hunt(ActGrd.UPDATE_GRID, { x: 2, y: 3, xSpan: 2, ySpan: 1 })
+    bit = await ste.hunt(ActBlk.WRITE_BLOCK, { idx: 'blk0', src:'Terminal Menu...', dat: {  clr: Color.CYAN, net: bit.grdBit.dat }, })
 
     //bit = await ste.hunt(ActGrd.UPDATE_GRID, { x: 8, y: 0, xSpan: 2, ySpan: 12 })
     //bit = await ste.hunt(ActCns.WRITE_CONSOLE, { idx:'cns00',  dat: { src:'init menu...', net:bit.grdBit.dat}  })
@@ -32,6 +32,11 @@ export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
     bit = await ste.hunt(ActGrd.UPDATE_GRID, { x: 2, y: 4, xSpan: 4, ySpan: 8 })
     bit = await ste.hunt(ActChc.OPEN_CHOICE, { dat: { clr0: Color.BLACK, clr1: Color.YELLOW }, src: Align.VERTICAL, lst, net: bit.grdBit.dat })
 
+    src = bit.chcBit.src
+
+    bit = await ste.hunt(ActBlk.WRITE_BLOCK, { idx: 'blk0', src })
+
+    updateMenu( cpy, bal, ste)
 
 
     //bit = await ste.hunt(ActTrm.PRINT_TERMINAL, { src: "-----------", bit: 'local' })
