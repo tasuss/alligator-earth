@@ -35,18 +35,16 @@ const init = async (prt) => {
 
     const local = 'mqtt://localhost:' + prt;
     const localBit = { idx: 'local', src: local };
-
     
-
-    STORE = require(path.resolve('./dist/001.store/hunt'));
-    STORE_ACTION = require(path.resolve('./dist/001.store/00.store.unit/store.action'));
+    STORE = require(path.resolve('../001.store/dist/001.store/hunt'));
+    STORE_ACTION = require(path.resolve('../001.store/dist/001.store/00.store.unit/store.action'));
 
     TERMINAL = require(path.resolve('../998.terminal/dist/998.terminal/hunt'));
     TERMINAL_ACTION = require(path.resolve('../998.terminal/dist/998.terminal/00.terminal.unit/terminal.action'));
-
-    debugger
-    
     await TERMINAL.hunt(TERMINAL_ACTION.INIT_TERMINAL, { dat: MQTT, src: local });
+
+    STORE = require(path.resolve('../001.store/dist/001.store/hunt'));
+    STORE_ACTION = require(path.resolve('../001.store/dist/001.store/00.store.unit/store.action'));
     await STORE.hunt(STORE_ACTION.INIT_STORE, { val: 1, dat: MQTT, src: localBit });
 
 };

@@ -10,7 +10,7 @@ var bit, val, idx, dex, lst, dat;
 
 export const initStore = async (cpy: StoreModel, bal: StoreBit, ste: State) => {
 
-    debugger
+    
 
  if (bal.dat != null) bit = await ste.hunt(ActBus.INIT_BUS, { idx: cpy.idx, lst: [ActStr], dat: bal.dat, src: bal.src })
 
