@@ -34,7 +34,8 @@ export const initTerminal = async (cpy: TerminalModel, bal: TerminalBit, ste: St
   
 
   //sets up the initial libraries tasked with responsive layouts
-  bit = await ste.hunt( ActTrm.OPEN_TERMINAL, {} ) 
+  //bit = await ste.hunt( ActTrm.OPEN_TERMINAL, {} ) 
+  console.log("open up a term")
 
 
   if (bal.val == 1) patch(ste, ActMnu.INIT_MENU, bal);  

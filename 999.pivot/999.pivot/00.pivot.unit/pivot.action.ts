@@ -63,6 +63,12 @@ export const PATCH_PIVOT = "[Patch action] Patch Pivot";
  readonly type = CONTAINS_PIVOT;
  constructor(public bale: PivotBit) {}
  }
+
+ export const BUNDLE_PIVOT = "[Patch action] Bundle Pivot";
+ export class BundlePivot implements Action {
+ readonly type = BUNDLE_PIVOT;
+ constructor(public bale: PivotBit) {}
+ }
  
 export type Actions = | InitPivot | UpdatePivot 
 | OpenPivot
@@ -73,4 +79,5 @@ export type Actions = | InitPivot | UpdatePivot
 | ListPivot
 | CreatePivot
 | ContainsPivot
+| BundlePivot
 

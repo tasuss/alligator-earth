@@ -10,7 +10,7 @@ var bit, val, idx, dex, lst, dat;
 
 export const initPivot = async (cpy: PivotModel, bal: PivotBit, ste: State) => {
 
-    if (bal.dat != null) bit = await ste.hunt(ActBus.INIT_BUS, { idx: cpy.idx, lst: [ ActPvt, ActDsk  ], dat: bal.dat, src: bal.src })
+    if (bal.dat != null) bit = await ste.hunt(ActBus.INIT_BUS, { idx: cpy.idx, lst: [ActPvt, ActDsk], dat: bal.dat, src: bal.src })
 
     if (bal.val == 1) patch(ste, ActMnu.INIT_MENU, bal)
 
@@ -158,9 +158,9 @@ export const containsPivot = (cpy: PivotModel, bal: PivotBit, ste: State) => {
     bal.lst.forEach((a) => {
         var dir = '../' + a + '/' + a
         var lst = FS.readdirSync(dir)
-        
+
         debugger
-        
+
         lst.forEach((b) => {
             if (b.includes(check)) out.push([a, b])
         })
@@ -170,6 +170,72 @@ export const containsPivot = (cpy: PivotModel, bal: PivotBit, ste: State) => {
 
     return cpy;
 };
+
+
+
+export const bundlePivot = async (cpy: PivotModel, bal: PivotBit, ste: State) => {
+
+    if (bal.src == null) bal.src = '999.pivot'
+
+    var root = '999.pivot';
+
+    var template = 'node ./data/hand/000.eveiefy -t ' + bal.src
+
+    bit = await FS.ensureDirSync( '../' + bal.src + '/work/')
+
+    console.log("bundling " + bal.src)
+
+    //bit = await ste.hunt(ActDsk.WRITE_DISK, { src: './002.bundle-pivot.bat', dat: template })
+
+    //bit = await ste.hunt(ActDsk.BATCH_DISK, { src: '002.bundle-pivot.bat' })
+    
+    const { execSync } = require('child_process')
+    execSync(template)
+    debugger
+
+    
+
+
+    if (bal.val == null) bal.val = 3;
+
+    //bit = await ste.bus(ActVrt.LIST_PIVOT_VURT, {})
+    //lst = bit.vrtBit.lst
+
+    //var output = []
+
+    //lst.forEach((a) => {
+
+    //  var idx = '../' + a + '/work/' + bal.src + '.js'
+    //  var flag = FS.existsSync(idx);
+    //  if (flag == false) return
+    //  output.push(idx)
+    //})
+
+    //if ( output.length == 0 ) {
+    //  bal.slv({ vrtBit: { idx: "bundle-vurt", src:bal.src } })
+    //  return
+    // }
+
+    //var source =  root + '/bundle/' + bal.src + '.js'
+
+    //debugger
+
+    //output.forEach(async (a, b) => {
+
+    //  bit = await FS.copy(source, a)
+    //  console.log("copying to " + a)
+    //  debugger
+    //  if (b < output.length - 1) return
+
+
+
+    setTimeout(() => bal.slv({ vrtBit: { idx: "bundle-vurt" } }), bal.val);
+
+    //})
+
+    return cpy;
+};
+
 
 export const patchPivot = (cpy: PivotModel, bal: PivotBit, ste: State) => {
     debugger
