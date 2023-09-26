@@ -3,5 +3,6 @@ packages:
  - "001.store/**"
  - "002.space/**"
  - "011.earth/**"
+ - "997.xterm/**"
  - "998.terminal/**"
  - "999.pivot/**"

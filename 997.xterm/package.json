@@ -1,0 +1,29 @@
+{
+    "name": "xterm",
+    "scripts": {
+      "test": "ava",
+      "play": "pnpm build && node ./run.cjs",
+      "build": "tsc -b 997.xterm",
+      "watch": "tsc -b 997.xterm -w",
+      "dev": "tsc -b 997.xterm && nodemon -I run.cjs -t development"
+    },
+    "main": "main.js",
+    "devDependencies": {
+      "@types/node": "^18.7.23",
+      "ava": "^4.3.3",
+      "typescript": "^4.6.2"
+    },
+    "dependencies": {
+      "aedes": "^0.48.1",
+      "async-mqtt": "2.2.1",
+      "bezier-js": "^6.1.4",
+      "clone-deep": "^4.0.1",
+      "commander": "^9.4.0",
+      "dot": "^1.1.3",
+      "fs-extra": "^10.1.0",
+      "rx-lite": "^4.0.8",
+      "string": "^3.3.3",
+      "typescript-ioc": "^3.2.2",
+      "honeycomb-grid": "^3.1.8"
+    }
+  }

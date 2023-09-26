@@ -1,0 +1,19 @@
+import Model from "./99.core/interface/model.interface";
+
+{{=it.unitImports}}
+
+{{=it.faceImports}}
+
+export const list: Array<any> = {{=it.unitList}}
+
+{{=it.reduceImports}}
+
+export const reducer: any = {
+  {{=it.reduceList}}
+};
+
+export default class UnitData implements Model {
+  
+  {{=it.modelList}}
+  
+}
