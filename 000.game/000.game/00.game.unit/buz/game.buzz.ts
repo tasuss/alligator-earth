@@ -1,4 +1,4 @@
-import * as ActScn from "../../01.scene.unit/scene.action";
+import * as ActCon from "../../01.console.unit/console.action";
 
 import * as ActMnu from "../../98.menu.unit/menu.action";
 import * as ActBus from "../../99.bus.unit/bus.action";
@@ -29,6 +29,8 @@ export const openGame = async (cpy: GameModel, bal: GameBit, ste: State) => {
 
     //open saved games
 
+    bit = await ste.hunt(ActCon.OPEN_CONSOLE, {});
+    debugger
 
 
     //const db = new sqlite3.Database(':memory:');
@@ -52,7 +54,7 @@ export const openGame = async (cpy: GameModel, bal: GameBit, ste: State) => {
     //if ( key == null) localStorage.setItem('myFirstKey', 'myFirstValue');
 
 
-    bit = await ste.hunt(ActScn.TITLE_SCENE, {});
+    //bit = await ste.hunt(ActScn.TITLE_SCENE, {});
 
     if (bal.slv != null) bal.slv({ aaaBit: { idx: "open-Game" } });
 

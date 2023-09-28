@@ -136,6 +136,7 @@ var eveiefy = () => {
     .exclude("terminal-kit")
     .exclude("undici")
     .exclude("pty.js")
+    .exclude("blessed")
 
   var loc = "../" + title + '/' + title + "/000.quest." + pvt + ".js";
   console.log("let see " + loc);

@@ -9,6 +9,8 @@ import * as ActCns from "../../03.console.unit/console.action";
 import * as ActMnu from "../../98.menu.unit/menu.action";
 import * as ActBus from "../../99.bus.unit/bus.action";
 
+import * as ActXrm from "../../20.xterm.unit/xterm.action";
+
 import * as ActTrm from "../terminal.action";
 
 import * as ActVrt from "../../act/vurt.action";
@@ -16,29 +18,43 @@ import * as ActDsk from "../../act/disk.action";
 
 var bit, val, idx, dex, lst, dat;
 
-let firstLoad = false; 
+let firstLoad = false;
 
 export const initTerminal = async (cpy: TerminalModel, bal: TerminalBit, ste: State) => {
 
-  
 
-  if ( firstLoad == true ) return
+
+  if (firstLoad == true) return
   firstLoad = true
 
 
-  
-
-  if (bal.dat != null) bit = await ste.hunt(ActBus.INIT_BUS, { idx: cpy.idx, lst: [ActTrm, ActChc, ActTxt, ActCvs, ActPut, ActGrd, ActCns, ActBlk ], dat: bal.dat, src: bal.src })
 
 
-  
+  if (bal.dat != null) bit = await ste.hunt(ActBus.INIT_BUS, { idx: cpy.idx, lst: [ActTrm, ActChc, ActTxt, ActCvs, ActPut, ActGrd, ActCns, ActBlk], dat: bal.dat, src: bal.src })
+
 
   //sets up the initial libraries tasked with responsive layouts
-  //bit = await ste.hunt( ActTrm.OPEN_TERMINAL, {} ) 
   console.log("open up a term")
 
 
-  if (bal.val == 1) patch(ste, ActMnu.INIT_MENU, bal);  
+  if (bal.val == 1) {
+
+    bit = await ste.hunt(ActTrm.OPEN_TERMINAL, {})
+
+    patch(ste, ActMnu.INIT_MENU, bal);
+
+  }
+
+  if ( bal.val == 2 ){
+
+    bit = await ste.hunt( ActXrm.INIT_XTERM, {})
+
+    console.log(" xterm " + JSON.stringify(bit))
+
+
+  }
+
+
 
 
 
@@ -57,7 +73,7 @@ export const openTerminal = async (cpy: TerminalModel, bal: TerminalBit, ste: St
   let contrib = cpy.contrib = require('blessed-contrib');
   let screen = cpy.screen = cpy.blessed.screen();
 
-  
+
   //var grid = new contrib.grid({rows: 12, cols: 12, screen: screen})
 
   //bit = await ste.hunt(ActChc.OPEN_CHOICE, { dat: screen, lst: ['alligator0', 'alligator1', 'alligator2', 'alligator3', 'alligator4', 'alligator5'] })
@@ -78,7 +94,7 @@ export const openTerminal = async (cpy: TerminalModel, bal: TerminalBit, ste: St
 
 export const closeTerminal = (cpy: TerminalModel, bal: TerminalBit, ste: State) => {
 
-  if ( cpy.screen != null ) cpy.screen.destroy()
+  if (cpy.screen != null) cpy.screen.destroy()
 
   cpy.blessed = null
   cpy.contrib = null
@@ -102,7 +118,7 @@ export const editTerminal = (cpy: TerminalModel, bal: TerminalBit, ste: State) =
 
 
 export const printTerminal = (cpy: TerminalModel, bal: TerminalBit, ste: State) => {
-  
+
 
   if (bal.slv != null) bal.slv({ trmBit: { idx: "write-terminal" } });
 

@@ -38,7 +38,7 @@ export const readCollect = async (cpy: CollectModel, bal: CollectBit, ste: State
 
 
       if (cabBit.bits[bal.idx] == null) {
-            bit = await ste.hunt(ActCol.WRITE_COLLECT, { idx: bal.idx, bit: bal.bit })
+            bit = await ste.hunt(ActCol.WRITE_COLLECT, { idx: bal.idx, src: bal.src, bit: bal.bit })
       } else {
             dat = cabBit.bitList[cabBit.bits[bal.idx]]
       }
@@ -49,7 +49,10 @@ export const readCollect = async (cpy: CollectModel, bal: CollectBit, ste: State
 };
 
 
+
 export const writeCollect = async (cpy: CollectModel, bal: CollectBit, ste: State) => {
+
+      dat = null
 
       //let us check see if it exists 
       var type = bal.bit.split(' ').slice(-1).pop().toLowerCase();
@@ -65,6 +68,8 @@ export const writeCollect = async (cpy: CollectModel, bal: CollectBit, ste: Stat
             bit = await ste.hunt(bal.bit, { idx: bal.idx, src: bal.src, dat: bal.dat })
             var objDat = bit[Object.keys(bit)[0]];
             dat = objDat.dat
+
+            if (dat == null) dat = {}
 
             dat.dex = cabBit.bitList.length;
             cabBit.bitList.push(dat)
@@ -88,6 +93,8 @@ export const writeCollect = async (cpy: CollectModel, bal: CollectBit, ste: Stat
             }
 
             cabBit.bitList[cabBit.bits[bal.idx]] = cabDat
+            dat = cabBit
+            //!!! SUPER IMPORTANT
       }
 
 
@@ -108,7 +115,7 @@ export const createCollect = (cpy: CollectModel, bal: CollectBit, ste: State) =>
       cpy.caboodleBitList.push(cabBit)
       cpy.caboodleBits[cabBit.idx] = cabBit.dex;
 
-      if (bal.slv != null) bal.slv({ rskBit: { idx: "create-collect", dat: cabBit } });
+      if (bal.slv != null) bal.slv({ clcBit: { idx: "create-collect", dat: cabBit } });
 
       return cpy;
 };
@@ -143,8 +150,33 @@ export const removeCollect = async (cpy: CollectModel, bal: CollectBit, ste: Sta
 
       cabBit.dex -= 1
 
-      if (bal.slv != null) bal.slv({ rskBit: { idx: "remove-collect", dat: cabBit } });
+      if (bal.slv != null) bal.slv({ clcBit: { idx: "remove-collect", dat: cabBit } });
 
+      return cpy;
+};
+
+export const putCollect = (cpy: CollectModel, bal: CollectBit, ste: State) => {
+
+      cpy.caboodleBits[bal.idx] = bal.val;
+      cpy.caboodleBitList[bal.val] = bal.dat
+
+      if (bal.slv != null) bal.slv({ clcBit: { idx: "put-collect", dat: bal.dat } });
+      return cpy;
+};
+
+export const getCollect = (cpy: CollectModel, bal: CollectBit, ste: State) => {
+
+      val = cpy.caboodleBits[bal.idx]
+      dat = cpy.caboodleBitList[val]
+
+      if (bal.slv != null) bal.slv({ clcBit: { idx: "get-collect", val, dat } });
+      return cpy;
+};
+
+export const modelCollect = (cpy: CollectModel, bal: CollectBit, ste: State) => {
+      //debugger
+
+      if (bal.slv != null) bal.slv({ clcBit: { idx: "model-collect", dat: cpy } });
       return cpy;
 };
 
@@ -159,9 +191,51 @@ export const emptyCollect = (cpy: CollectModel, bal: CollectBit, ste: State) => 
       return cpy;
 };
 
+export const dotCollect = (cpy: CollectModel, bal: CollectBit, ste: State) => {
+      
+      var gel = bal.dat;
+      var out = [];
+    
+      bal.src.split("\n").forEach((a, b) => {
+        if (a.includes('//') == true) return
+        var doTCompiled = doT.template(a);
+        var outLine = doTCompiled(gel);
+        out.push(outLine);
+      });
+    
+      if (bal.slv != null) bal.slv({ colBit: { idx: "dot-vurt", lst: out, src: out.join('\n') } });
+
+      return cpy;
+};
+
+
+export const formatCollect = (cpy: CollectModel, bal: CollectBit, ste: State) => {
+
+      lst = bal.src.split(':')
+
+      var idx = lst[0]
+
+      var out = []
+
+      idx = S(idx).collapseWhitespace().s;
+      var opt = lst[1].split(',')
+      opt.forEach((a, b) => {
+            var now = S(a).collapseWhitespace().s;
+            if (a.length < 1) return
+            out.push(now)
+      })
+
+      dat = [idx, out]
+
+      bal.slv({ colBit: { idx: "format-collect", dat } });
+      return cpy;
+};
+
 
 import { CollectModel } from "../collect.model";
 import CollectBit from "../fce/collect.bit";
 import State from "../../99.core/state";
-import CaboodleBit from "../fce/caboodle.bit"; import { read } from "fs";
+import CaboodleBit from "../fce/caboodle.bit";
+import * as S from 'string'
 
+import * as doT from "dot";

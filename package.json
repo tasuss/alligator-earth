@@ -12,6 +12,7 @@
     "run-space": "pnpm --filter=space play",
     "dev-store": "pnpm --filter=store dev",
     "dev-terminal": "pnpm --filter=terminal dev",
+    "dev-xterm": "pnpm --filter=xterm dev",
     "dev-pivot": "pnpm --filter=pivot dev",
     "build-space": "cd 002.space && pnpm run build",
     "build-terminal": "cd 998.terminal && pnpm run build",
