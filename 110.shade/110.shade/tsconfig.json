@@ -1,0 +1,15 @@
+{
+  "extends": "../tsconfig-base.json",
+  "compilerOptions": {
+    // compiler options
+    "outDir": "../dist/110.shade",
+    "composite": true,
+    "skipLibCheck": true
+  },
+  "include": [
+    "**/*"
+  ],
+  "exclude": [
+    "**/node_modules"
+  ]
+}
