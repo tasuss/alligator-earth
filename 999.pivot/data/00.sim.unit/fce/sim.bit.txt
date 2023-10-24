@@ -1,4 +1,0 @@
-
-export default interface {{=it.bitTitle}} {
-  idx:string;
-}

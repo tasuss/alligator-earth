@@ -1,2 +1,0 @@
-export { init{{=it.title}}  } from "./buz/{{=it.nom}}.buzz";
-export { update{{=it.title}}  } from "./buz/{{=it.nom}}.buzz";

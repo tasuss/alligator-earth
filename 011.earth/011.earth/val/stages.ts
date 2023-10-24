@@ -1,9 +1,0 @@
-export const INFANT: string = "infant";
-export const TODDLER: string = "toddler";
-export const CHILD: string = "child";
-export const TWEEN: string = "tween";
-export const TEENAGER: string = "teenager";
-export const SOLDIER: string = "soldier";
-export const JUDGE: string = "judge";
-export const MONARCH: string = "monarch";
-export const OLD_AGED: string = "old-aged";

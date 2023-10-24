@@ -1,3 +1,0 @@
-  @pixi/core@7.3.1                @pixi/graphics@7.3.1            @pixi/particle-container@7.3.1  @pixi/sprite@7.3.1
-  @pixi/display@7.3.1             @pixi/mesh-extras@7.3.1         @pixi/prepare@7.3.1             @pixi/text@7.3.1
-  @pixi/extract@7.3.1             @pixi/mesh@7.3.1                @pixi/sprite-tiling@7.3.1       @pixi/utils@7.3
